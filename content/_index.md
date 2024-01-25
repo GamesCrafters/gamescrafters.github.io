@@ -3,7 +3,7 @@ title: Introduction
 type: docs
 ---
 
-# Acerbo datus maxime
+# **Computational Game Theory at UC Berkeley**
 
 {{< columns >}}
 ## Astris ipse furtiva
