@@ -60,3 +60,6 @@ enableGitInfo = true
   # See https://gohugo.io/content-management/comments/#configure-disqus
   # Can be overwritten by same param in page frontmatter
   BookComments = true
+
+[markup.goldmark.extensions]
+  unsafe = true
