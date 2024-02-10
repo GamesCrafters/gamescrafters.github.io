@@ -1,5 +1,5 @@
 ---
-title: 5. Subgame-Perfect Equilibria
+title: 5. Subgame-Perfect NE
 type: docs
 weight: 5
 ---

@@ -1,7 +1,7 @@
 ---
-title: Notes
+title: Assignments
 type: docs
-weight: 2
+weight: 10
 bookCollapseSection: true
 bookFlatSection: true
 ---

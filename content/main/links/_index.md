@@ -1,7 +1,7 @@
 ---
-title: Assignments
+title: Links
 type: docs
-weight: 1
+weight: 30
 bookCollapseSection: true
 bookFlatSection: true
 ---
