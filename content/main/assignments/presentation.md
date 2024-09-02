@@ -8,6 +8,8 @@ weight: 6
 
 Due date: `11/1/2024`
 
----
+{{< hint warning >}}
 
-Present the results of your project during session with your collaborators. This can happen over a couple days. 
+**Warning:** This page is under construction.
+
+{{< /hint >}}

@@ -1,11 +1,11 @@
 ---
-title: Past Groups 
+title: Course Organizers 
 type: docs
 bookSearchExclude: false
 weight: 0 
 ---
 
-# **GamesCrafters Groups** 
+# **Course Organizers**
 
 {{< hint warning >}}
 

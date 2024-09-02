@@ -6,7 +6,7 @@ bookToC: true
 
 # **Computational Game Theory at UC Berkeley**
 
-We are an applied research group under the supervision of [Prof. Dan Garcia](https://people.eecs.berkeley.edu/~ddgarcia/). We develop systems and techniques to [solve games](https://en.wikipedia.org/wiki/Solved_game) and interfaces to interact with these systems. During the semester, we introduce new members to our team by facilitating a 2-unit course providing a guided overview intersecting the theories of computation and games.
+We are an applied research group under the supervision of [Prof. Dan Garcia](https://people.eecs.berkeley.edu/~ddgarcia/). We develop systems and techniques to [solve games](https://en.wikipedia.org/wiki/Solved_game) and interfaces to interact with these systems. During the semester, we introduce new members to our team by organizing a 2-unit course providing a guided overview intersecting the theories of computation and games.
 
 {{< columns >}}
 

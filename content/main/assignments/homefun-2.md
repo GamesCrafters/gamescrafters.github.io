@@ -8,12 +8,8 @@ weight: 1
 
 Due date: `9/16/2024`
 
----
+{{< hint warning >}}
 
-Placeholder
-
-{{< hint info >}}
-
-**Note:** 
+**Warning:** This page is under construction.
 
 {{< /hint >}}

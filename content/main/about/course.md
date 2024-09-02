@@ -6,3 +6,9 @@ weight: 1
 ---
 
 # **Course Details**
+
+{{< hint warning >}}
+
+**Warning:** This page is under construction.
+
+{{< /hint >}}
