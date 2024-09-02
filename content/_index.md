@@ -10,7 +10,7 @@ We are an applied research group under the supervision of [Prof. Dan Garcia](htt
 
 {{< columns >}}
 
-## **Course Information**
+## **Meeting Information**
 
 * Schedule: `MWF 11:00AM to 12:00PM`
 * Facilitator: [`Prof. Dan Garcia`](https://people.eecs.berkeley.edu/~ddgarcia/)
@@ -30,10 +30,10 @@ We are an applied research group under the supervision of [Prof. Dan Garcia](htt
 ![Group photo](/group_photo.jpg)
 *- Spring 2023 GamesCrafters*
 
-## **Informal Syllabus**
-Here is a rough outline of the activities and topics we will be covering this semester. Assignment deadlines are set to midnight of their due date. Links to resources will be added gradually.
+## **Informal Schedule** 
+Here is a rough outline of the activities and topics we will be covering in the course. Assignment deadlines are set to midnight of their due date. Links to resources will be added gradually.
 
-| # | Date | Lecture Topic | Due |
+| # | Date | Activity or Lecture Topic | Due |
 | :-: | :-: | :- | :-: |
 | 1 | 8/28 | Welcome | - |
 | 2 | 8/30 | Introduction to strong solutions | - |
