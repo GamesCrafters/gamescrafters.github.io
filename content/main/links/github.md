@@ -1,9 +1,9 @@
 ---
-title: GitHub
+title: GitHub Organization
 type: docs
 bookSearchExclude: false
 bookHref: 'https://github.com/GamesCrafters'
-weight: 0
+weight: 1
 ---
  
 #

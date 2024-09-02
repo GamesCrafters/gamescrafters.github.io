@@ -18,11 +18,12 @@ We are an applied research group under the supervision of [Prof. Dan Garcia](htt
 
 <--->
 
-## **Linked Resources**
+## **Linked Forms**
 
-* Session attendance form: [`here`](.)
-* General sign-up form: [`here`](.)
-* Completion sheet: [`here`](.)
+* Session attendance form: [`here`](https://forms.gle/onbQNjJJfLfyMgi36)
+* General sign-up form: [`here`](https://forms.gle/AmL3j1de9XDTSRrQ9)
+* Submissions form: [`here`](https://forms.gle/M2RYf3aVRL4cmZLeA)
+
 
 {{< /columns >}}
 
@@ -34,51 +35,48 @@ Here is a rough outline of the activities and topics we will be covering this se
 
 | # | Date | Lecture Topic | Due |
 | :-: | :-: | :- | :-: |
-| 1 | 8/21 | Welcome | - |
-| 2 | 8/23 | The results of Computational Game Theory | - |
-| 3 | 8/26 | Introduction to Game Theory | - |
-| 4 | 8/28 | Representing extensive-form games (EFGs) | - |
-| 5 | 8/30 | Subgame perfection via backward induction | - |
+| 1 | 8/28 | Welcome | - |
+| 2 | 8/30 | Introduction to strong solutions | - |
 | - | 9/2 | Labor Day | - |
-| 6 | 9/4 | Intractability of true backward induction | [Assignment 1](main/assignments/1) |
-| 7 | 9/6 | Techniques 1: Symmetric reduction | - |
-| 8 | 9/9 | Techniques 2: State space partitioning | - |
-| 9 | 9/11 | Techniques 3: Parallel Solving | - |
-| 10 | 9/13 | Techniques 4: Cache efficiency | [Assignment 2](main/assignments/2) |
-| 11 | 9/16 | Techniques 5: Weak solutions and SSS* | - |
-| 12 | 9/18 | Dealing with infinite-horizon games (IHGs) | - |
-| 13 | 9/20 | Finding finite equilibrium strategies for IHGs | - |
-| 14 | 9/23 | Theory of pure draws for IHGs | [Assignment 3](main/assignments/3) |
-| 15 | 9/25 | Introduction to combinatorial games | - |
-| 16 | 9/27 | The Sprague–Grundy theorem | - |
-| 17 | 9/30 | Project specification showcase | - |
-| 18 | 10/2 | Team formation for new members | [Assignment 4](main/assignments/4) |
-| 19 | 10/4 | Game-theoretic computational systems | - |
-| 20 | 10/7 | System installation walkthroughs | - |
-| 21 | 10/9 | Software architecture and development | - |
-| 22 | 10/11 | Software architecture and development | [Assignment 5](main/assignments/5) |
-| 23 | 10/14 | Project specification reviews | - |
-| 24 | 10/16 | Work session | - |
-| 25 | 10/18 | Work session | - |
-| 26 | 10/21 | Project check-ins with veterans | - |
-| 27 | 10/23 | Work session | - |
-| 28 | 10/25 | Work session | - |
-| 29 | 10/28 | Project check-ins with veterans | - |
-| 30 | 10/30 | Work session | - |
-| 31 | 11/1 | Work session | [Assignment 6](main/assignments/6) |
-| 32 | 11/4 | New members' project presentations | - |
-| 33 | 11/6 | New members' project presentations | - |
-| 34 | 11/8 | Project matching for new members | - |
-| - | 11/11 | Veterans' Day | - |
-| 35 | 11/13 |Special topic: Collaborative Game Theory | - |
-| 36 | 11/15 | Special topic: High-Performance Computing | - |
-| 37 | 11/18 | Special topic: Imperfect information & CFR | - |
-| 38 | 11/20 | Special topic: Abstractions and decision-making | - |
-| 39 | 11/22 | Special topic: Game design | - |
-| 40 | 11/25 | Veterans' project presentations | - |
+| 3 | 9/4 | | - |
+| 4 | 9/6 | | - |
+| 5 | 9/9 | | [Homefun 1](main/assignments/homefun-1) |
+| 6 | 9/11 | | - |
+| 7 | 9/13 | | - |
+| 8 | 9/16 | | [Homefun 2](main/assignments/homefun-2) |
+| 9 | 9/18 | | - |
+| 10 | 9/20 | | - |
+| 11 | 9/23 | | [Homefun 3](main/assignments/homefun-3) |
+| 12 | 9/25 | | - |
+| 13 | 9/27 | | - |
+| 14 | 9/30 | | - |
+| 15 | 10/2 | | - |
+| 16 | 10/4 | | - |
+| 17 | 10/7 | | - |
+| 18 | 10/9 | | - |
+| 19 | 10/11 | | - |
+| 20 | 10/14 | | - |
+| 21 | 10/16 | | - |
+| 22 | 10/18 | | - |
+| 23 | 10/21 | | - |
+| 24 | 10/23 | | - |
+| 25 | 10/25 | | - |
+| 26 | 10/28 | | - |
+| 27 | 10/30 | | - |
+| 28 | 11/1 | | - |
+| 29 | 11/4 | | - |
+| 30 | 11/6 | | - |
+| 31 | 11/8 | | - |
+| - | 11/11 | Veteran's Day | - |
+| 32 | 11/13 | | - |
+| 33 | 11/15 | | - |
+| 34 | 11/18 | | - |
+| 35 | 11/20 | | - |
+| 36 | 11/22 | | - |
+| 37 | 11/25 | | - |
 | - | 11/27 | Thanksgiving | - |
 | - | 11/29 | Thanksgiving | - |
-| 41 | 12/2 | Veterans' project presentations | - |
-| 42 | 12/4 | Veterans' project presentations | - |
-| 43 | 12/6 | End-of-semester celebration! | - |
+| 38 | 12/2 | | - |
+| 39 | 12/4 | | - |
+| 40 | 12/6 | End-of-semester celebration! | - |
 | 0x0 | 0x0 | --------------------------------------------------------------------------------------------------- | EOF |

@@ -1,12 +1,12 @@
 ---
-title: 6. Team Presentation
+title: 6. Presentation
 type: docs
 weight: 6
 ---
 
-# Assignment 6: Team Presentation
+# Team Presentation for Capstone Project
 
-Due date: 11/01/2024
+Due date: `11/1/2024`
 
 ---
 

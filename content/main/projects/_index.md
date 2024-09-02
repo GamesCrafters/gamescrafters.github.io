@@ -1,5 +1,7 @@
 ---
-title: Our Projects
+title: Ongoing Projects 
 type: docs
-weight: 33
+weight: 11 
+bookCollapseSection: true
+bookFlatSection: true
 ---

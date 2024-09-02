@@ -1,7 +1,7 @@
 ---
 title: Links
 type: docs
-weight: 30
-bookCollapseSection: true
-bookFlatSection: true
+weight: 5
+bookCollapseSection: false
+bookFlatSection: True 
 ---

@@ -1,8 +1,8 @@
 ---
-title: About Our Group
+title: Information 
 type: docs
 bookSearchExclude: false
-weight: 31
+bookFlatSection: true 
+weight: 4 
 ---
 
-# **About GamesCrafters**
