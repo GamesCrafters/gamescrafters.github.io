@@ -1,5 +1,5 @@
 ---
-title: 2. Homefun II 
+title: Homefun II 
 type: docs
 weight: 1
 ---

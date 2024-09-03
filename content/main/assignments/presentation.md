@@ -1,5 +1,5 @@
 ---
-title: 6. Presentation
+title: Presentation
 type: docs
 weight: 6
 ---

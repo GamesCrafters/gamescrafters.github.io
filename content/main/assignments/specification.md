@@ -1,5 +1,5 @@
 ---
-title: 5. Specification
+title: Specification
 type: docs
 weight: 5
 ---

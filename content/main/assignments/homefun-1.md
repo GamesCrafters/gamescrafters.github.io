@@ -1,5 +1,5 @@
 ---
-title: 1. Homefun I 
+title: Homefun I 
 type: docs
 weight: 1
 ---

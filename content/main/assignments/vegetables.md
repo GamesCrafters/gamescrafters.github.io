@@ -1,5 +1,5 @@
 ---
-title: 4. Vegetables 
+title: Vegetables 
 type: docs
 weight: 4
 ---
