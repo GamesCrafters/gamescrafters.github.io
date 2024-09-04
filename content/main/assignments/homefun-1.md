@@ -16,7 +16,7 @@ All Homefuns are managed through a single Github classroom assignment. You can a
 
 These tests simply verify that your program has the correct outputs for certain inputs. Each Homefun has a set of input/output pairs that the tests enforce. **If the latest commit on your Homefun repository's `main` branch passes all of a given Homefun's tests before its due date passes, you will receive full credit for the Homefun.**
 
-This means that you may not need to pass all "autograding" tests to complete a particular Homefun (because they include other Homefuns' tests), but you should pass all tests once you complete all Homefuns. **The tests belonging to each Homefun are made public on their pages.** If you do not pass the necessary autograder tests before a due date passes, your work will be reviewed by an organizer on an effort basis.
+This means that you may not need to pass all "autograding" tests to complete a particular Homefun (because they include other Homefuns' tests), but you should pass all tests once you complete all Homefuns. **Some of the tests belonging to each Homefun are made public on their pages.** If you do not pass the necessary autograder tests before a due date passes, your work will be reviewed by an organizer on an effort basis.
 
 {{< /tab >}}
 
@@ -148,35 +148,7 @@ Command:
 make run ARGS="zero_by 25 1 3 4"
 ```
 
-Output:
-```
-25: WIN
-24: WIN
-23: WIN
-22: WIN
-21: LOSE
-20: WIN
-19: LOSE
-18: WIN
-17: WIN
-16: WIN
-15: WIN
-14: LOSE
-13: WIN
-12: LOSE
-11: WIN
-10: WIN
-9: WIN
-8: WIN
-7: LOSE
-6: WIN
-5: LOSE
-4: WIN
-3: WIN
-2: WIN
-1: WIN
-0: LOSE
-```
+Output is hidden.
 
 ---
 
