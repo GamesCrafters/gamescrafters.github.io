@@ -8,10 +8,6 @@ weight: 1
 
 Due date: `9/9/2024`
 
-## Summary
-
-Write a program that computes the strong solution of two related games, `10-to-0-by-1-or-2` and `25-to-0-by-1-3-or-4`. Any programming language is acceptable. Optional aid is provided in the form of a Python template.
-
 {{< tabs >}}
 
 {{< tab "Logistics" >}}
@@ -25,6 +21,10 @@ This means that you may not need to pass all "autograding" tests to complete a p
 {{< /tab >}}
 
 {{< /tabs >}}
+
+## Summary
+
+Write a program that computes the strong solution of two related games, `10-to-0-by-1-or-2` and `25-to-0-by-1-3-or-4`. Any programming language is acceptable. Optional aid is provided in the form of a Python template.
 
 ## Game Representation
 
