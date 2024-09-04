@@ -12,7 +12,7 @@ Due date: `9/9/2024`
 
 {{< tab "Logistics" >}}
 
-All Homefuns are managed through a single Github classroom assignment. You can accept it [here](.). This will create a new repository that you have write access to. **Read the `README`.** When you push new commits on this repository, an "autograding" job will run the tests for all Homefuns.
+All Homefuns are managed through a single Github classroom assignment. You can accept it [here](https://classroom.github.com/a/-W652rH9). This will create a new repository that you have write access to. **Read the `README`.** When you push new commits on this repository, an "autograding" job will run the tests for all Homefuns.
 
 These tests simply verify that your program has the correct outputs for certain inputs. Each Homefun has a set of input/output pairs that the tests enforce. **If the latest commit on your Homefun repository's `main` branch passes all of a given Homefun's tests before its due date passes, you will receive full credit for the Homefun.**
 
