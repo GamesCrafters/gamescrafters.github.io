@@ -12,7 +12,9 @@ Due date: `9/9/2024`
 
 Write a program that computes the strong solution of two related games, `10-to-0-by-1-or-2` and `25-to-0-by-1-3-or-4`. Any programming language is acceptable. Optional aid is provided in the form of a Python template.
 
-## Logistics
+{{< tabs >}}
+
+{{< tab "Logistics" >}}
 
 All Homefuns are managed through a single Github classroom assignment. You can accept it [here](.). This will create a new repository that you have write access to. **Read the `README`.** When you push new commits on this repository, an "autograding" job will run the tests for all Homefuns.
 
@@ -20,53 +22,19 @@ These tests simply verify that your program has the correct outputs for certain 
 
 This means that you may not need to pass all "autograding" tests to complete a particular Homefun (because they include other Homefuns' tests), but you should pass all tests once you complete all Homefuns. **The tests belonging to each Homefun are made public on their pages.** If you do not pass the necessary autograder tests before a due date passes, your work will be reviewed by an organizer on an effort basis.
 
+{{< /tab >}}
+
+{{< /tabs >}}
+
+## Game Representation
+
+The object of the Homefun series will be to find out specific facts about a certain class of games. It can be summarized as: "For games like Chess, Tic-Tac-Toe, and Connect-4, how do I put them into a computer and have it tell me how to play perfectly?"
+
 {{< hint warning >}}
 
-If you experience exceptional circumstances and require accommodations, reach out to a course organizer as soon as you can to discuss how we can help you.
+This is enough to get an intuitive understanding of the activities, but we highly recommend you read through the appended [theoretic introduction](#appendix). Refer to it if you see an unknown term.
 
 {{< /hint >}}
-
-## Introduction to Games 
-
-### Games vs. Problems 
-
-An optimization problem attempts to maximize or minimize an objective with respect to a set of parameters. For example, the optimization problem
-
-{{< katex display >}}
-
-\max_{0 \leq x \leq 1} f(x)
-
-{{< /katex >}}
-
-asks a very clear question: "Given {{< katex inline >}} f : \mathbb{R} \to \mathbb{R} {{< /katex >}} and {{< katex inline >}} x \in [0, 1]{{< /katex >}}, what is the maximum possible value {{< katex inline >}} f {{< /katex >}} can take?" However, a game is a _situation_, not a problem. While we will visit proper definitions later, the cornestone assumption is that each player attempts to maximize their own utility in these situations (whatever that may mean). But from a global perspective, there is no obvious "ask" when presented with a game (unlike optimization problems).
-
-It is tempting to believe that there exists some "universally optimal" way of playing any game, and therefore a way of predicting how any game will be played. It turns out this is not true under most conditions. This is non-obvious, and took a lot of bright minds to figure out. However, for many specific kinds of games, there exist very reasonable rules that can be used to predict how a game will be played _a priori_.
-
-### Solution Concepts
-
-Each different way to formulate such rules is called a [solution concept](https://en.wikipedia.org/wiki/Solution_concept). A very famous solution concept is the [Nash Equilibrium](https://en.wikipedia.org/wiki/Nash_equilibrium). It tells us to look at all of the possible strategies that players could implement, and look for groups of strategies (one per player) where no player could be better off by only changing their own strategy. This applies to games where players cannot cooperate. Each of these strategy "profiles" (a one-per-player set of strategies) is called a Nash Equilibrium.
-
-In a very specific subset of games that are deterministic, [complete-information](https://en.wikipedia.org/wiki/Complete_information), [sequential](https://en.wikipedia.org/wiki/Sequential_game), finite, and either [non-cooperative](https://en.wikipedia.org/wiki/Non-cooperative_game_theory) or [zero-sum](https://en.wikipedia.org/wiki/Zero-sum_game) (such as Chess), there is an efficient way of computing such strategy profiles known as [backward induction](https://en.wikipedia.org/wiki/Backward_induction), which refers to the procedure of analyzing players' choices "in reverse," assuming everyone does what is best for them. In the specific subcase of zero-sum games, this is implemented by the popular [Minmax algorithm](https://en.wikipedia.org/wiki/Minimax). For the remainder of the Homefun series, we will only talk about this kind of game. 
-
-### Strong Solutions 
-
-The game-theoretic value of a position is the highest utility that a player whose turn it is at that position can guarantee to obtain for themselves through their own actions. Oftentimes, the way in which we compute optimal strategies under different solution concepts is by storing a mapping of all positions in a game to their values. When we have such a mapping, we also have access to the best possible strategies in the corresponding game from any position. 
-
-Such a mapping is equivalent to something known as a [strong solution](https://en.wikipedia.org/wiki/Solved_game), as it provides the answer to the question: "Given any position in the game, what is the best possible course of action?" It is not obvious why this is possible; to figure out the best possible action from a position, it suffices to look at the values of all possible positions that the player who is "in power" at that position could transform the game into, and materialize the one that is most utilitarian for that player.
-
-{{< hint info >}}
-
-Remember that this is only referring to the subset of games described above. For example, we can only talk about a player "in power" because we assume the game is sequential.
-
-{{< /hint >}}
-
-{{< hint info >}}
-
-While the name may suggest so, a strong solution is not a solution concept. A solution concept is a convention of sorts, while a strong solution is actual data.
-
-{{< /hint >}}
-
-## Game Representation 
 
 ### Games and Rulesets 
 
@@ -86,7 +54,7 @@ The game `10-to-0-by-1-2` is generated by the following ruleset:
 
 It is quite a simple game. Try playing it with someone else to become familiar with it. You can even try figuring out a perfect strategy for it by hand or in your head, but it is somewhat difficult. We will explore how you can have a computer do this. But before that, we will hint at how we might be able to take advantage of modern generic programming by introducing the idea of a game family.
 
-### Our Second Family 
+### Families of Games
 
 The `zero-by` family is the set of games achievable via the parameterization `N-to-0-by-S`, where `N` is a positive integer and `S` is a set of positive integers. The generic ruleset is as follows:
 
@@ -133,12 +101,19 @@ Remember that these two games are part of a very intuitive family; you should no
 4. Design tests that the functions you implement will need to pass.
 5. Implement your solution, and iterate using your tests.
 
+{{< hint info >}}
+
+Remember that you can choose to delete all the files in the provided template and code your solution from scratch!
+
+{{< /hint >}}
+
 ## Resources
 
 Here are some things that might help you get started:
 
 * [Dan's CalWeek 2020 Lecture](https://www.youtube.com/watch?v=YyTJOjgJD7w)
 * [Dan's Computational Game Theory Slides](https://www.dropbox.com/scl/fi/gxp9xkxxehy8xaqk2fdlg/2019-08-28-Computational-Game-Theory.pdf?rlkey=6t07frdal6d05ysw10fg08i9x&e=1&dl=0)
+* [Rogue AI Riddle](https://www.youtube.com/watch?v=qMFpOcLroOg&t=247s)
 
 ## Checks 
 
@@ -167,3 +142,46 @@ Output:
 ```
 OUTPUT
 ```
+
+---
+
+## Appendix 
+
+### Games vs. Problems 
+
+An optimization problem attempts to maximize or minimize an objective with respect to a set of parameters. For example, the optimization problem
+
+{{< katex display >}}
+
+\max_{0 \leq x \leq 1} f(x)
+
+{{< /katex >}}
+
+asks a very clear question: "Given {{< katex inline >}} f : \mathbb{R} \to \mathbb{R} {{< /katex >}} and {{< katex inline >}} x \in [0, 1]{{< /katex >}}, what is the maximum possible value {{< katex inline >}} f {{< /katex >}} can take?" However, a game is a _situation_, not a problem. While we will visit proper definitions later, the cornestone assumption is that each player attempts to maximize their own utility in these situations (whatever that may mean). But from a global perspective, there is no obvious "ask" when presented with a game (unlike optimization problems).
+
+It is tempting to believe that there exists some "universally optimal" way of playing any game, and therefore a way of predicting how any game will be played. It turns out this is not true under most conditions. This is non-obvious, and took a lot of bright minds to figure out. However, for many specific kinds of games, there exist very reasonable rules that can be used to predict how a game will be played _a priori_.
+
+### Solution Concepts
+
+Each different way to formulate such rules is called a [solution concept](https://en.wikipedia.org/wiki/Solution_concept). A very famous solution concept is the [Nash Equilibrium](https://en.wikipedia.org/wiki/Nash_equilibrium). It tells us to look at all of the possible strategies that players could implement, and look for groups of strategies (one per player) where no player could be better off by only changing their own strategy. This applies to games where players cannot cooperate. Each of these strategy "profiles" (a one-per-player set of strategies) is called a Nash Equilibrium.
+
+In a very specific subset of games that are deterministic, [complete-information](https://en.wikipedia.org/wiki/Complete_information), [sequential](https://en.wikipedia.org/wiki/Sequential_game), finite, and either [non-cooperative](https://en.wikipedia.org/wiki/Non-cooperative_game_theory) or [zero-sum](https://en.wikipedia.org/wiki/Zero-sum_game) (such as Chess), there is an efficient way of computing such strategy profiles known as [backward induction](https://en.wikipedia.org/wiki/Backward_induction), which refers to the procedure of analyzing players' choices "in reverse," assuming everyone does what is best for them. In the specific subcase of zero-sum games, this is implemented by the popular [Minmax algorithm](https://en.wikipedia.org/wiki/Minimax). For the remainder of the Homefun series, we will only talk about this kind of game. 
+
+### Strong Solutions 
+
+The game-theoretic value of a position is the highest utility that a player whose turn it is at that position can guarantee to obtain for themselves through their own actions. Oftentimes, the way in which we compute optimal strategies under different solution concepts is by storing a mapping of all positions in a game to their values. When we have such a mapping, we also have access to the best possible strategies in the corresponding game from any position. 
+
+Such a mapping is equivalent to something known as a [strong solution](https://en.wikipedia.org/wiki/Solved_game), as it provides the answer to the question: "Given any position in the game, what is the best possible course of action?" It is not obvious why this is possible; to figure out the best possible action from a position, it suffices to look at the values of all possible positions that the player who is "in power" at that position could transform the game into, and materialize the one that is most utilitarian for that player.
+
+{{< hint info >}}
+
+Remember that this is only referring to the subset of games described above. For example, we can only talk about a player "in power" because we assume the game is sequential.
+
+{{< /hint >}}
+
+{{< hint info >}}
+
+While the name may suggest so, a strong solution is not a solution concept. A solution concept is a convention of sorts, while a strong solution is actual data.
+
+{{< /hint >}}
+
