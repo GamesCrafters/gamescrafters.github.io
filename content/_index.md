@@ -20,7 +20,7 @@ We are an applied research group under the supervision of [Prof. Dan Garcia](htt
 
 ## **Linked Forms**
 
-* Session attendance form: [`here`](https://forms.gle/onbQNjJJfLfyMgi36)
+* Session attendance form: [`here`](https://forms.gle/89xuNuLGVwkovnRZ7)
 * General sign-up form: [`here`](https://forms.gle/AmL3j1de9XDTSRrQ9)
 * Submissions form: [`here`](https://forms.gle/M2RYf3aVRL4cmZLeA)
 
