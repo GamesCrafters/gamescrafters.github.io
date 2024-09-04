@@ -123,24 +123,59 @@ The following commands will be ran from your submission's top-level directory ve
 
 Command:
 ```
-make run ARGS="10 1 2"
+make run ARGS="zero_by 10 1 2"
 ```
 
 Output:
 ```
-OUTPUT
+10: WIN
+9: LOSE
+8: WIN
+7: WIN
+6: LOSE
+5: WIN
+4: WIN
+3: LOSE
+2: WIN
+1: WIN
+0: LOSE
 ```
 
 ### `25-to-0-by-1-3-or-4`
 
 Command:
 ```
-make run ARGS="25 1 3 4"
+make run ARGS="zero_by 25 1 3 4"
 ```
 
 Output:
 ```
-OUTPUT
+25: WIN
+24: WIN
+23: WIN
+22: WIN
+21: LOSE
+20: WIN
+19: LOSE
+18: WIN
+17: WIN
+16: WIN
+15: WIN
+14: LOSE
+13: WIN
+12: LOSE
+11: WIN
+10: WIN
+9: WIN
+8: WIN
+7: LOSE
+6: WIN
+5: LOSE
+4: WIN
+3: WIN
+2: WIN
+1: WIN
+0: LOSE
 ```
 
 ---
