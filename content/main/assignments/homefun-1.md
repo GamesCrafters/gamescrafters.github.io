@@ -62,6 +62,10 @@ The `zero-by` family is the set of games achievable via the parameterization `N-
 * 2 players take alternating turns removing an amount of items in the set `S` from the collection.
 * Player 1 starts. The player who takes the last item from the collection wins.
 
+If we do not restrict `S`, it is possible to choose parameters for which a terminal position cannot be reached (e.g., `11-to-0-by-5`). Hence, we will include a new rule in the generic version:
+
+* If a player can remove more items than there are left in the collection, they can remove all remaining items (winning the game in the process).
+
 It is also possible to parameterize this ruleset on player count; we decide how abstract we make a family's parameterization. We motivate this decision by semantics and the available provisions for generic constructs in our programming language of choice.
 
 Ultimately, a game family is the set of games describable by concretizing the parameters of its generic ruleset. The games within a game family are often referred to as "variants" of each other, and games which belong to obvious families are sometimes called "variable."
