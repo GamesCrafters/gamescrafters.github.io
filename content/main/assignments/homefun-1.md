@@ -6,7 +6,7 @@ weight: 1
 
 # **Homefun I**
 
-Due date: `9/9/2024`
+Due: `11:59PM 9/11/2024`
 
 {{< tabs >}}
 

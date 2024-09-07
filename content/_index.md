@@ -40,22 +40,22 @@ Here is a rough outline of the activities and topics we will be covering in the 
 | - | 9/2 | Labor Day | - |
 | 3 | 9/4 | | - |
 | 4 | 9/6 | | - |
-| 5 | 9/9 | | [Homefun 1](main/assignments/homefun-1) |
-| 6 | 9/11 | | - |
+| 5 | 9/9 | | - |
+| 6 | 9/11 | | [Homefun 1](main/assignments/homefun-1) |
 | 7 | 9/13 | | - |
-| 8 | 9/16 | | [Homefun 2](main/assignments/homefun-2) |
-| 9 | 9/18 | | - |
+| 8 | 9/16 | | - |
+| 9 | 9/18 | | [Homefun 2](main/assignments/homefun-2) |
 | 10 | 9/20 | | - |
-| 11 | 9/23 | | [Homefun 3](main/assignments/homefun-3) |
-| 12 | 9/25 | | - |
+| 11 | 9/23 | | - |
+| 12 | 9/25 | | [Homefun 3](main/assignments/homefun-3) |
 | 13 | 9/27 | | - |
 | 14 | 9/30 | | - |
-| 15 | 10/2 | | - |
+| 15 | 10/2 | | [Vegetables](main/assignments/vegetables) |
 | 16 | 10/4 | | - |
 | 17 | 10/7 | | - |
 | 18 | 10/9 | | - |
 | 19 | 10/11 | | - |
-| 20 | 10/14 | | - |
+| 20 | 10/14 | | [Specification](main/assignments/specification) |
 | 21 | 10/16 | | - |
 | 22 | 10/18 | | - |
 | 23 | 10/21 | | - |
@@ -77,6 +77,6 @@ Here is a rough outline of the activities and topics we will be covering in the 
 | - | 11/27 | Thanksgiving | - |
 | - | 11/29 | Thanksgiving | - |
 | 38 | 12/2 | | - |
-| 39 | 12/4 | | - |
+| 39 | 12/4 | | [Presentation](main/assignments/presentation) |
 | 40 | 12/6 | End-of-semester celebration! | - |
 | 0x0 | 0x0 | --------------------------------------------------------------------------------------------------- | EOF |
