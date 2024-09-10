@@ -4,9 +4,9 @@ type: docs
 weight: 5
 ---
 
-# Design Specification for Capstone Team Project
+# **Specification** 
 
-Due date: `10/11/2024`
+Due date: `11:59PM 9/30/2024`
 
 {{< hint warning >}}
 

@@ -4,9 +4,9 @@ type: docs
 weight: 6
 ---
 
-# Team Presentation for Capstone Project
+# **Presentation**
 
-Due date: `11/1/2024`
+Due date: `11:59PM 11/25/2024`
 
 {{< hint warning >}}
 

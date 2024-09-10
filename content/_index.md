@@ -24,7 +24,6 @@ We are an applied research group under the supervision of [Prof. Dan Garcia](htt
 * General sign-up form: [`here`](https://forms.gle/AmL3j1de9XDTSRrQ9)
 * Submissions form: [`here`](https://forms.gle/M2RYf3aVRL4cmZLeA)
 
-
 {{< /columns >}}
 
 ![Group photo](/group_photo.jpg)
@@ -41,21 +40,21 @@ Here is a rough outline of the activities and topics we will be covering in the 
 | 3 | 9/4 | | - |
 | 4 | 9/6 | | - |
 | 5 | 9/9 | | - |
-| 6 | 9/11 | | [Homefun 1](main/assignments/homefun-1) |
+| 6 | 9/11 | | [Homefun Pt. 1](main/assignments/homefun-pt1) |
 | 7 | 9/13 | | - |
 | 8 | 9/16 | | - |
-| 9 | 9/18 | | [Homefun 2](main/assignments/homefun-2) |
+| 9 | 9/18 | | [Homefun Pt. 2](main/assignments/homefun-pt2) |
 | 10 | 9/20 | | - |
 | 11 | 9/23 | | - |
-| 12 | 9/25 | | [Homefun 3](main/assignments/homefun-3) |
+| 12 | 9/25 | | - |
 | 13 | 9/27 | | - |
-| 14 | 9/30 | | - |
-| 15 | 10/2 | | [Vegetables](main/assignments/vegetables) |
+| 14 | 9/30 | | [Specification](main/assignments/specification) |
+| 15 | 10/2 | | - |
 | 16 | 10/4 | | - |
 | 17 | 10/7 | | - |
 | 18 | 10/9 | | - |
 | 19 | 10/11 | | - |
-| 20 | 10/14 | | [Specification](main/assignments/specification) |
+| 20 | 10/14 | | - |
 | 21 | 10/16 | | - |
 | 22 | 10/18 | | - |
 | 23 | 10/21 | | - |
@@ -73,10 +72,10 @@ Here is a rough outline of the activities and topics we will be covering in the 
 | 34 | 11/18 | | - |
 | 35 | 11/20 | | - |
 | 36 | 11/22 | | - |
-| 37 | 11/25 | | - |
+| 37 | 11/25 | | [Presentation](main/assignments/presentation) |
 | - | 11/27 | Thanksgiving | - |
 | - | 11/29 | Thanksgiving | - |
 | 38 | 12/2 | | - |
-| 39 | 12/4 | | [Presentation](main/assignments/presentation) |
+| 39 | 12/4 | | - |
 | 40 | 12/6 | End-of-semester celebration! | - |
 | 0x0 | 0x0 | --------------------------------------------------------------------------------------------------- | EOF |

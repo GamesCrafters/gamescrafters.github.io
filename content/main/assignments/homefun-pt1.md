@@ -1,10 +1,10 @@
 ---
-title: Homefun I 
+title: Homefun Pt. 1
 type: docs
 weight: 1
 ---
 
-# **Homefun I**
+# **Homefun Part 1**
 
 Due: `11:59PM 9/11/2024`
 
@@ -12,11 +12,11 @@ Due: `11:59PM 9/11/2024`
 
 {{< tab "Logistics" >}}
 
-All Homefuns are managed through a single Github classroom assignment. You can accept it [here](https://classroom.github.com/a/-W652rH9). This will create a new repository that you have write access to. **Read the `README`.** When you push new commits on this repository, an "autograding" job will run the tests for all Homefuns.
+Both parts of the Homefun are managed through a single Github classroom assignment. You can accept it [here](https://classroom.github.com/a/-W652rH9). This will create a new repository that you have write access to. **Read the `README`.** When you push new commits on this repository, an "autograding" job will run the tests for both parts.
 
-These tests simply verify that your program has the correct outputs for certain inputs. Each Homefun has a set of input/output pairs that the tests enforce. **If the latest commit on your Homefun repository's `main` branch passes all of a given Homefun's tests before its due date passes, you will receive full credit for the Homefun.**
+These tests simply verify that your program has the correct outputs for certain inputs. Each part has a set of input/output pairs that the tests enforce. **If the latest commit on your Homefun repository's `main` branch passes all of a given part's tests before its due date passes, you will receive full credit for that part of the Homefun.** You can see which tests belong to which part in the assignments' "Checks" sections.
 
-This means that you may not need to pass all "autograding" tests to complete a particular Homefun (because they include other Homefuns' tests), but you should pass all tests once you complete all Homefuns. **Some of the tests belonging to each Homefun are made public on their pages.** If you do not pass the necessary autograder tests before a due date passes, your work will be reviewed by an organizer on an effort basis.
+This means that you may not need to pass all "autograding" tests to complete a particular part (because they include the other part's tests), but you should pass all tests once you complete both. **All of the tests' expected input/output pairs are publically visible in the autograder workflow runs.** If you do not pass the necessary autograder tests before a due date passes, your work will be reviewed by an organizer on an effort basis.
 
 {{< /tab >}}
 
@@ -82,7 +82,6 @@ interface Game:
     function terminal_value(Position) -> Value
 ```
 
-
 {{< hint info >}}
 
 This is not a real programming language, but the idea of an interface is central to generic programming in most programming languages.
@@ -130,7 +129,7 @@ Command:
 make run ARGS="zero_by 10 1 2"
 ```
 
-Output:
+Expected output:
 ```
 10: WIN
 9: LOSE
@@ -152,7 +151,7 @@ Command:
 make run ARGS="zero_by 25 1 3 4"
 ```
 
-Output is hidden.
+Output not shown for brevity.
 
 ---
 
