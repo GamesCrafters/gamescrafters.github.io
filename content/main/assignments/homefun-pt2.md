@@ -197,6 +197,12 @@ Once that works, create a new `Game` implementation for Tic-Tac-Toe using its "p
 
 Finally, format and print the number of winning, losing, and tying positions under the above symbolic representation of Tic-Tac-Toe when queried. See the [checks](#checks) section for specifics.
 
+{{< hint danger >}}
+
+Do not write a separate solver for Tic-Tac-Toe; use the same one for both games.
+
+{{< /hint >}}
+
 ## Checks 
 
 The following commands will be ran from your submission's top-level directory verbatim. We will expect to see the output shown below each of them in `STDOUT`. There will be no input provided through `STDIN`. 
