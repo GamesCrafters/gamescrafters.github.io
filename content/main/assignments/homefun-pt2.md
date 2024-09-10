@@ -30,7 +30,7 @@ This means that you may not need to pass all "autograding" tests to complete a p
 
 ## Summary
 
-Enhance the solver you wrote for Homefun I to handle `100-to-0-by-1-or-2`. Encode the ruleset of `Tic-Tac-Toe`, and write a hash function and its inverse to allow the solving algorithm you wrote to interface with this new `Game` implementation. 
+Enhance the solver you wrote for Homefun I to handle `100-to-0-by-1-or-2`. Encode the ruleset of Tic-Tac-Toe, and write a hash function and its inverse to allow the solving algorithm you wrote to interface with this new `Game` implementation. 
 
 ## Game Abstraction 
 
