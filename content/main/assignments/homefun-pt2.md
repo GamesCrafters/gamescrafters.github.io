@@ -30,7 +30,7 @@ This means that you may not need to pass all "autograding" tests to complete a p
 
 ## Summary
 
-Enhance the solver you wrote for Part 1 to handle `100-to-0-by-1-or-2`. Encode the ruleset of Tic-Tac-Toe, and write a hash function and its inverse to allow the solving algorithm you wrote to interface with this new `Game` implementation. 
+Bolster the solver you wrote for Part 1 to handle `100-to-0-by-1-or-2`. Implement the ruleset of Tic-Tac-Toe, and write a hash function and its inverse to allow the solving algorithm you wrote to interface with this new `Game` implementation. 
 
 ## Game Abstraction 
 
@@ -193,7 +193,7 @@ These are only problems for bigger games. You do not need to worry about any of 
 
 Modify or replace your solver from Part 1 to be able to solve `100-to-0-by-1-or-2` instantly. This will require that you implement some of the ideas in the [positional solvers](#positional-solvers) section. You should not need to change any of the code in your `zero_by` implementation.
 
-Once that works, create a new `Game` implementation for Tic-Tac-Toe using its "physical" board configurations as position symbols. **You do not need to reduce the amount of boards in any way.** Writing tests will be very helpful. Depending on how you decide to encode the positions, you may need to write a hash function (and its inverse).
+Once that works, create a new `Game` implementation for Tic-Tac-Toe using its "physical" board configurations as position symbols. **You do not need to reduce the amount of boards in any way.** Writing tests will be very helpful. Depending on how you decide to encode the positions, you may need to write a hash function (and its inverse) to adhere to the `Game` interface.
 
 Finally, format and print the number of winning, losing, and tying positions under the above symbolic representation of Tic-Tac-Toe when queried. See the [checks](#checks) section for specifics.
 
