@@ -6,7 +6,7 @@ weight: 1
 
 # **Homefun Part 2**
 
-Due: `11:59PM 9/18/2024`
+Due: `11:59PM 9/23/2024`
 
 {{< hint warning >}}
 

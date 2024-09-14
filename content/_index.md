@@ -43,14 +43,14 @@ Here is a rough outline of the activities and topics we will be covering in the 
 | 6 | 9/11 | | [Homefun Pt. 1](main/assignments/homefun-pt1) |
 | 7 | 9/13 | | - |
 | 8 | 9/16 | | - |
-| 9 | 9/18 | | [Homefun Pt. 2](main/assignments/homefun-pt2) |
+| 9 | 9/18 | | - |
 | 10 | 9/20 | | - |
-| 11 | 9/23 | | - |
+| 11 | 9/23 | | [Homefun Pt. 2](main/assignments/homefun-pt2) |
 | 12 | 9/25 | | - |
 | 13 | 9/27 | | - |
-| 14 | 9/30 | | [Specification](main/assignments/specification) |
+| 14 | 9/30 | | - |
 | 15 | 10/2 | | - |
-| 16 | 10/4 | | - |
+| 16 | 10/4 | | [Specification](main/assignments/specification) |
 | 17 | 10/7 | | - |
 | 18 | 10/9 | | - |
 | 19 | 10/11 | | - |
