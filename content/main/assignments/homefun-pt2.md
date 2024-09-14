@@ -89,7 +89,7 @@ Not all games have boards, and not all boards carry all of the information we ca
 
 We did not go to the trouble of defining positions this way just out of fear of picking wrong game representations. This is kind of mistake is not silent -- when the time comes to use your symbols, you simply would not have the information you need. 
 
-The real reason we choose these mathematics is to "game" abstract strategy games. It all starts by taking advantage of the fact that their rulesets are expressed in terms of symbols to begin with (which is what gives them the "abstract" qualifier). Because they are expressed in terms of abstract symbols (such as game boards or mathematical objects like sets), their histories oftentimes exhibit the structure that the symbols themselves inherently carry.
+The real reason we choose these mathematics is to "game" abstract strategy games. By involving these constructs, we can take advantage of the fact that their rulesets are expressed in terms of symbols to begin with (which is what gives them the "abstract" qualifier). Because they are expressed in terms of abstract symbols (such as game boards or mathematical objects like sets), their histories oftentimes exhibit the structure that the symbols themselves inherently carry.
 
 This means quite a few things. To begin with, we can almost exclusively transact in symbols when analyzing this class of games. This is nice, because they are a lot easier to encode than histories (see the [position hashing](#position-hashing) section). However, we can also take advantage of much more subtle aspects of these symbols, and use the freedom we have when definining them to our benefit.
 
@@ -107,7 +107,7 @@ However, this is equivalent to the position:
 [middle left X][middle middle O][top left X]
 ```
 
-Here, we can apply our first trick; we will choose symbols that reflect the fact that these two options are the same. This is easy, since the board already accomplishes this:
+Here, we can apply our first trick; we will choose symbols that reflect the fact that these two histories are the same. This is easy, since the board already accomplishes this:
 
 ```
 X |   |  
@@ -145,61 +145,45 @@ Techniques like the ones above, which reduce the amount of positions in a game i
 
 To reap the benefits of a reduced position count, we must ensure that we only explore the reduced symbol space. The most general approach to doing this is to interpret the structure of this space as a graph, where symbols are nodes connected by actions. This is because some games that exhibit possibly infinite play can be reduced to finite-position graphs that include cycles.
 
-In cases where infinite play is impossible (regardless of strategy), the "game graph" (which is to symbols what "game tree" is to histories) is [a DAG](https://en.wikipedia.org/wiki/Directed_acyclic_graph). In such cases, a naive solving algorithm such as the one shown in the [naive solvers](#naive-solvers) subsection can be adapted to only explore the space of symbols via [memoization](https://en.wikipedia.org/wiki/Memoization).
-
-{{< hint warning >}}
-
-Bottom-up dynamic programming angles are only viable for some "nice" rulesets. 
-
-{{< /hint >}}
-
-## Position Hashing
-
-While techniques in game abstraction help us drastically reduce the number of positions we must traverse when doing search, there is still the problem of encoding their symbols in a computer program. We will take a brief overview of how this is done by turning position symbols into numbers, and will introduce some systems problems related to this.
-
-### Motivation 
-
-Remember the [game interface](/main/assignments/homefun-pt1#the-game-interface) from Part 1. What is the type `Position`? When creating systems that will be used to solve many different games, we make sure that all games agree on a single position encoding data type, which is usually a 64-bit integer. This is in contrast to making it, for example, a list of integers.
-
-The reason we make this seemingly arbitrary choice is because having a fixed-size datatype means that a lot of the machine code needed to hande it can be streamlined at compilation time. We choose an integer datatype specifically because bitwise operations on integers are usually available, making it easy to do bit-level symbol encodings.
-
-This leaves us a specific problem: How do we encode position symbols as 64-bit integers?
-
-### Simple Creativity 
-
-There is no single answer for this, but it is also not a very hard problem. To inspire you, here is one way you could do it for Tic-Tac-Toe in a 32-bit integer:
+In cases where infinite play is impossible (regardless of strategy), the "game graph" (which is to symbols what "game tree" is to histories) is [a DAG](https://en.wikipedia.org/wiki/Directed_acyclic_graph). In such cases, a naive solving algorithm such as the one shown in the [naive solvers](#naive-solvers) subsection can be adapted to only explore the space of symbols via [memoization](https://en.wikipedia.org/wiki/Memoization). An example of such a game is Tic-Tac-Toe. This would have a form similar to this:
 
 ```
-AB CD EF GH IJ KL MN OP QR 00 00 00 00 00 00 00
+function solve(position, seen)
+    if position has been seen 
+        return value of position
+
+    if position is terminal
+        mark position as seen 
+        store position's value
+        return value of position
+
+    else
+        opponent = worst_value(
+            solve(result of taking action from position)
+            for action in possible actions from position
+        ) 
+
+        value = opposite_value(opponent)
+        mark position as seen 
+        store position's value
+        return value 
 ```
-
-Here, each letter is a bit. Each pair of letters stands for a single number (e.g., `11` is 3 in binary). There are 9 pairs of letters, one for each square in the Tic-Tac-Toe board. When there is a `00`, that will mean there is nothing in that square. When there is a `01`, there is an `X`. `10` will be an `O`. Just like that, we have created a hash function for Tic-Tac-Toe positions.
-
-### Issues At Scale
-
-The real problems come with storing very large datasets. In general, there are two options when it comes to storing a mapping of positions to any kind of value: Storing hashes or not. 
-
-You can store a mapping of key-value pairs (with position hashes as keys) by using hash values to index into an array of values. However, this relies on the density of the hash function being relatively high (while staying collision-free), which is generally very difficult to achieve. For very sparse hashes, you end up with a mostly empty array that wastes space. This is what would happen if you used the hash function described above.
-
-If you do store hashes, you will pay an upfront space cost of the hash size for every value you wish to store. This may seem like a small overhead, but when you consider that the values being stored are usually no more than a few bits in length, it is hard to justify using up to 90% of your space just to store hashes (which are usually 64 bits in length). Furthermore, it becomes slower to query the mapping, as you no longer have the benefit of constant-time array lookups.
-
-{{< hint info >}}
-
-These are only problems for bigger games. You do not need to worry about any of this for now.
-
-{{< /hint >}}
 
 ## Deliverable
 
-Modify or replace your solver from Part 1 to be able to solve `100-to-0-by-1-or-2` instantly. This will require that you implement some of the ideas in the [positional solvers](#positional-solvers) section. You should not need to change any of the code in your `zero_by` implementation.
+Modify or replace your solver from Part 1 to be able to solve `100-to-0-by-1-or-2` instantly (if it can't already). This will require that you implement some of the ideas in the [positional solvers](#positional-solvers) section. You should not need to change any of the code in your `zero_by` implementation.
 
-Once that works, create a new `Game` implementation for Tic-Tac-Toe using its "physical" board configurations as position symbols. **You do not need to reduce the amount of boards in any way.** Writing tests will be very helpful. Depending on how you decide to encode the positions, you may need to write a hash function (and its inverse) to adhere to the `Game` interface.
+Once that works, create a new `Game` implementation for Tic-Tac-Toe using its "physical" board configurations as position symbols. **You do not need to reduce the amount of boards in any way.** Writing tests will be very helpful. 
 
 Finally, format and print the number of winning, losing, and tying positions under the above symbolic representation of Tic-Tac-Toe when queried. See the [checks](#checks) section for specifics.
 
 {{< hint danger >}}
 
-Do not write a separate solver for Tic-Tac-Toe; use the same one for both games.
+**Do not write a separate solver for Tic-Tac-Toe; use the same one for both games.**
+
+This means that you will somehow have to turn your "symbolic representation" of a tic-tac-toe board (e.g., `[['x', 'o', 'x'], ...]`) into an `int` and vice versa. This is known as position hashing and unhashing, and we have included an [appendix](#position-hashing) with an introduction to the topic.
+
+This can be a complicated matter, so to help you do this, we have written a [Python class](https://gist.github.com/maxfierrog/f8ca575ef1d00b1715fb90942695502f) that does this for you (but assumes a board encoding). Feel free to use it if your solution is in Python. Otherwise, you will need to write your own.
 
 {{< /hint >}}
 
@@ -252,3 +236,48 @@ TIE: 1068
 LOSE: 1574
 TOTAL: 5478
 ```
+
+## Appendix
+
+While techniques in game abstraction help us drastically reduce the number of positions we must traverse when doing search, there is still the problem of encoding their symbols in a computer program. We will take a brief overview of how this is done by turning position symbols into numbers, and will introduce some systems problems related to this.
+
+### Position Encoding 
+
+Remember the [game interface](/main/assignments/homefun-pt1#the-game-interface) from Part 1. What is the concrete type `Position`? When creating systems that will be used to solve many different games, we make sure that all games agree on a single position encoding data type, which is usually a 64-bit integer. This is in contrast to making it, for example, a list of integers.
+
+The reason we make this seemingly arbitrary choice is because having a fixed-size datatype means that a lot of the machine code needed to hande it can be streamlined at compilation time. We choose an integer datatype specifically because bitwise operations on integers are usually available, making it easy to do bit-level symbol encodings.
+
+It is not difficult to express a position symbol for an abstract strategy game in most modern programming languages because the symbols themselves are expressed in terms of fundamental mathematical objects (e.g., grids, sets, etc.), which enjoy ample library provisions. But when given such a representation, how do we turn it into a 64-bit integer?
+
+### Hashing and Unhashing 
+
+There is no single answer for this, but without adding any constraints, it is also not a very hard problem. To inspire you, here is one way you could do it for Tic-Tac-Toe in a 32-bit integer:
+
+```
+AB CD EF GH IJ KL MN OP QR 00 00 00 00 00 00 00
+```
+
+Here, each letter is a bit. Each pair of letters stands for a single number (e.g., `11` is 3 in binary). There are 9 pairs of letters, one for each square in the Tic-Tac-Toe board. When there is a `00`, that will mean there is nothing in that square. When there is a `01`, there is an `X`. `10` will be an `O`. Just like that, we have created a what is known as a **hash function** for Tic-Tac-Toe positions.
+
+A function that carries out the inverse process (in this example, turning a 32-bit integer into our representation of a Tic-Tac-Toe position) is known as an **unhashing function**. When writing a game-solving system, it is usually necessary to implement both to enable back-and-forth communication between solving algorithms and `Game` implementations. 
+
+{{< hint info >}}
+
+High-efficiency `Game` implementations operate on 64-bit integers directly as position representations, eliminating the need for hashing and unhashing. However, this is very unergonomic from a programming standpoint.
+
+{{< /hint >}}
+
+
+### Issues At Scale
+
+However, there are very real constraints associated with most game-solving systems. Most of them are associated with storing very large datasets. In general, there are two options when it comes to storing a mapping of positions to any kind of value: Storing hashes or not. 
+
+You can store a mapping of key-value pairs (with position hashes as keys) by using hash values to index into an array of values. However, this relies on the density of the hash function being relatively high (while staying collision-free), which is generally very difficult to achieve. For very sparse hashes, you end up with a mostly empty array that wastes space. This is what would happen if you used the hash function described above.
+
+If you do store hashes, you will pay an upfront space cost of the hash size for every value you wish to store. This may seem like a small overhead, but when you consider that the values being stored are usually no more than a few bits in length, it is hard to justify using up to 90% of your space just to store hashes (which are usually 64 bits in length). Furthermore, it becomes slower to query the mapping, as you no longer have the benefit of constant-time array lookups.
+
+{{< hint info >}}
+
+These are only problems for bigger games. You do not need to worry about any of this for now.
+
+{{< /hint >}}
