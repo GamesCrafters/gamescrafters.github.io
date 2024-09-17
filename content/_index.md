@@ -45,7 +45,7 @@ Here is a rough outline of the activities and topics we will be covering in the 
 | 8 | 9/16 | | - |
 | 9 | 9/18 | | - |
 | 10 | 9/20 | | - |
-| 11 | 9/23 | | [Homefun Pt. 2](main/assignments/homefun-pt2) |
+| 11 | 9/23 | | - |
 | 12 | 9/25 | | - |
 | 13 | 9/27 | | - |
 | 14 | 9/30 | | - |
