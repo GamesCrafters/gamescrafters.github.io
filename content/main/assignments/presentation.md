@@ -6,7 +6,7 @@ weight: 6
 
 # **Presentation**
 
-Due date: `11:59PM 11/25/2024`
+Due date: `TODO`
 
 {{< hint warning >}}
 

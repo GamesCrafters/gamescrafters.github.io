@@ -4,9 +4,9 @@ type: docs
 weight: 5
 ---
 
-# **Specification** 
+# **Specification**
 
-Due date: `11:59PM 9/30/2024`
+Due date: `TODO`
 
 {{< hint warning >}}
 
