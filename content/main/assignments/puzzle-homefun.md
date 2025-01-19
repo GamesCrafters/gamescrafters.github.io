@@ -157,4 +157,4 @@ Removing the complexity of conflicting player interests makes single-player game
 
 This fact is constantly reflected in the systems you will be building on top of; sometimes they will be generic, using the same infrastructure for multi-player games and puzzles; other times, there will be dedicated platforms for puzzles, which allow builders to cut the corners that are only necessary when dealing with multi-player games.
 
-Regardless, all of the vocabulary that is used when talking about multi-player games (e.g., strong solutions) is still valid for puzzles because they are still games. In this assignment, we opt to be as generic as possible so that everything you learn is applicable when you think about general games.
+Regardless, all of the vocabulary that is used when talking about multi-player games (e.g., strong solutions) is still valid for puzzles because they are still games. In this assignment, everything you learn will also be at least partially applicable to multi-player games.
