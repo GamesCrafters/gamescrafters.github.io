@@ -30,29 +30,23 @@ When you push commits to this repository, an automatic testing job will run pre-
 
 ## Summary
 
-Write a program that encodes a family of puzzles generically and uses that encoding to compute "perfect solutions" to concrete instances of them. Any programming language is acceptable. Optional aid is provided in the form of a Python template.
+Write a program that encodes two puzzles generically and uses this encoding to compute "perfect solutions" for them. Any programming language is acceptable. Optional aid is provided in the form of a Python template.
 
 ## Explanation
 
-Here, we give a bare-minimum introduction to essential concepts you will encounter while you complete this assignment.
-
-{{< hint warning >}}
-
-We highly recommend you read through the appended [theoretic introduction](#appendix) for motivation and context, as well as the other [provided resources](#resources).
-
-{{< /hint >}}
+Here, we give a bare-minimum introduction to essential concepts you will encounter while you complete this assignment. We highly recommend you read through the appended [theoretic introduction](#appendix) for motivation and context, as well as the other [provided resources](#resources).
 
 ### Puzzles and Games
 
-Puzzles are games in both a formal and informal sense; we play them to have fun, and in formal theory they are the single-player subclass of games. As such, we will introduce concepts that are applicable for games in general, even if you will only explore them in-depth for puzzles.
+Puzzles are games in both a formal and informal sense; we play them to have fun, and in formal theory they are the single-player subclass of games. As such, we will introduce concepts that are applicable for games in general, even if we will only explore them in-depth for puzzles.
 
-### Games and Rulesets
+### Puzzles and Rulesets
 
-The games we are interested in are determined by what positions they can find themselves in, what players there are, how positions can transition to others, and by what positions are terminal (and the benefit associated with reaching them according to each player).
+The puzzles we are interested in are determined by what positions they can find themselves in, what players there are, how positions can transition to others, and by what positions are terminal (and the benefit associated with reaching them according to each player).
 
-When we talk about games colloquially, we don't usually refer to all of these things. If someone refers to Chess, they are not referring to it in terms of its positions, but rather in terms of the **ruleset** that "generates" the game itself. In doing so, they can communicate a game with {{< katex inline >}} >10^{100} {{< /katex >}} unique positions in only about a page of rules.
+When we talk about puzzles colloquially, we don't usually refer to all of these things. If someone refers to the game of Chess, they are not referring to it in terms of its positions, but rather in terms of the **ruleset** that "generates" the game itself. In doing so, they can communicate a game with {{< katex inline >}} >10^{100} {{< /katex >}} unique positions in only about a page of rules.
 
-The process of encoding a ruleset in a computer and obtaining a subset of positions in the game it generates (perhaps figuring out interesting facts about it in the process) is known as "exploration" or "search." This is what we will do in this Homefun.
+The process of encoding a ruleset in a computer and obtaining a subset of positions in the puzzle it generates (perhaps figuring out interesting facts about it in the process) is known as "exploration" or "search." This is what we will do in this Homefun.
 
 ### Our First Ruleset
 
@@ -63,7 +57,7 @@ The [wolf, goat, and cabbage problem](https://en.wikipedia.org/wiki/Wolf,_goat_a
 * If left alone together, the goat would eat the cabbage.
 * If left alone together, the wolf would eat the goat.
 
-It is quite a simple puzzle. Try figuring out a perfect strategy for it by hand or in your head. We will explore how you can have a computer do this. But before that, we will hint at how we might be able to represent this in code.
+It is quite a simple puzzle. Try figuring out a perfect strategy for it by hand or in your head. We will explore how you can have a computer do this. But as a first step, we will show how we might be able to represent this in code below.
 
 ### The Puzzle Interface
 
@@ -76,7 +70,7 @@ interface Puzzle:
     function do_move(Position, Move) -> Position
 ```
 
-So now, if we wished to write code that could explore a puzzle for us, it could be defined generically with this interface. And later, the only work we would need to do is fill out the functions of this interface according to the next ruleset we are interested in.
+So now, if we wished to write code that could explore a puzzle for us, it could be defined generically with this interface. And later, the only work we would need to do is fill out the functions of this interface according to the ruleset we are interested in.
 
 ### Families of Puzzles
 
@@ -92,19 +86,15 @@ This puzzle is more complicated than the last, but you will notice that they hav
 
 This situation happens a lot. Here, we call these puzzles **variants** of one another. In other words, they are under the same family of puzzles (in this case, [river crossing puzzles](https://en.wikipedia.org/wiki/River_crossing_puzzle)). Sometimes puzzles in the same family are so logically similar that it is better to implement the `Puzzle` interface once for the whole family, and then provide a way to instantiate concrete puzzles via a constructor.
 
-{{< hint info >}}
-
-Programmers decide convenient "levels of abstraction" for families of puzzles and games according to what they want. Implementing `Puzzle` for the family of river crossing puzzles may necessitate the use of hashmaps, so a programmer might avoid doing so because of how slow they are to use. Conversely, implementing `Puzzle` for each of the concrete rulesets might result in a lot of repeated code, which is also bad.
-
-{{< /hint >}}
+Programmers decide convenient levels of abstraction for families of puzzles and games according to what they want. For example, implementing `Puzzle` for the family of river crossing puzzles may necessitate the use of hashmaps, so a programmer might avoid doing so because of how slow they are to use. Conversely, implementing `Puzzle` for each of the concrete rulesets might result in a lot of repeated code, which is also bad.
 
 ## Deliverable
 
 Write an exploration module that only knows about the `Puzzle` interface, and from its provided methods, can generate strong solutions to concrete puzzles.
 
-Then, encode both of the river crossing problems mentioned above as separate implementations of the `Puzzle` interface. As a challenge, make a single implementation of the `Puzzle` interface for a family of river crossing problems that includes both of these puzzles.
+Then, encode both of the river crossing problems mentioned above as separate implementations of the `Puzzle` interface. Alternatively, make a single implementation of the `Puzzle` interface for a family of river crossing problems that includes both of these puzzles. The latter option should be challenging but fun.
 
-Finally, write code that allows your program to call the exploration module on an argument `Puzzle` implementation and print the generated strong solution to `STDOUT`.
+Finally, write code that allows your program to call the exploration module on an argument `Puzzle` implementation by name and print the generated strong solution to `STDOUT`.
 
 {{< hint warning >}}
 
