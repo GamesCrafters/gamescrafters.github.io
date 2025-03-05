@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=59338&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="
+  Homefun Part 2
+  #
+
+Due: 11:59PM 9/23/2024
+
+Warning: This part is missing test outputs. They will be added soon, but you can begin your implementation without them.
+
+
+
+Logistics
+Both parts of the Homefun are managed through a single Github classroom assignment. You can accept it 
+  here. This will create a new repository that you have write access to. Read the README. When you push new commits on this repository, an &ldquo;autograding&rdquo; job will run the tests for both parts.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:59338/archive/game-homefun-p2/">
+  <meta property="og:site_name" content="GamesCrafters">
+  <meta property="og:title" content="Homefun Pt. 2">
+  <meta property="og:description" content="Homefun Part 2 # Due: 11:59PM 9/23/2024
+Warning: This part is missing test outputs. They will be added soon, but you can begin your implementation without them.
+Logistics Both parts of the Homefun are managed through a single Github classroom assignment. You can accept it here. This will create a new repository that you have write access to. Read the README. When you push new commits on this repository, an “autograding” job will run the tests for both parts.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="archive">
+<title>Homefun Pt. 2 | GamesCrafters</title>
+<link rel="icon" href="/favicon.png" >
+
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+    integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV"
+    crossorigin="anonymous"
+/>
+<script
+    defer
+    src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+    integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8"
+    crossorigin="anonymous"
+></script>
+<script
+    defer
+    src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05"
+    crossorigin="anonymous"
+></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        renderMathInElement(document.body, {
+            
+            
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true },
+            ],
+            
+            throwOnError: false,
+        });
+    });
+</script>
+
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:59338/archive/game-homefun-p2/">
+<link rel="stylesheet" href="/book.min.31f7d27dbf8d7b2810c8aa30ae63e37eb5ef18517feeb6ac1e4aaf58a8f58a02.css" integrity="sha256-MffSfb&#43;NeygQyKowrmPjfrXvGFF/7rasHkqvWKj1igI=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.6f7a17e8623dabc8dce4891f1f137e48d14e0e9d49c0019824a8c94975404b0f.js" integrity="sha256-b3oX6GI9q8jc5IkfHxN&#43;SNFODp1JwAGYJKjJSXVASw8=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" class="book-icon" /><span>GamesCrafters</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Information</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/main/about/course/" class="">About the Course</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/main/about/group/" class="">About the Group</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/main/about/misc/" class="">Miscellaneous</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>People</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/main/people/organizers/" class="">Course Organizers</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/main/people/alumni/" class="">Group Alumni</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/main/people/groups/" class="">Past Groups</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Links</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://github.com/GamesCrafters" class="" target="_blank" rel="noopener">GitHub Organization</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://nyc.cs.berkeley.edu/uni/" class="" target="_blank" rel="noopener">GamesmanUni</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-988a2b6a27d3889c023feeb6f03aa76e" class="toggle"  />
+    <label for="section-988a2b6a27d3889c023feeb6f03aa76e" class="flex justify-between">
+      <a role="button" class="">Course Assignments</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/main/assignments/specification/" class="">Specification</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/main/assignments/presentation/" class="">Presentation</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-8e55808161062b6ea13ee669bff44eb2" class="toggle"  />
+    <label for="section-8e55808161062b6ea13ee669bff44eb2" class="flex justify-between">
+      <a role="button" class="">Ongoing Projects</a>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>Homefun Pt. 2</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#summary">Summary</a></li>
+    <li><a href="#game-abstraction">Game Abstraction</a>
+      <ul>
+        <li><a href="#naive-solvers">Naive Solvers</a></li>
+        <li><a href="#position-semantics">Position Semantics</a></li>
+        <li><a href="#abstract-strategy-games">Abstract Strategy Games</a></li>
+        <li><a href="#symbolic-reduction">Symbolic Reduction</a></li>
+        <li><a href="#positional-solvers">Positional Solvers</a></li>
+      </ul>
+    </li>
+    <li><a href="#deliverable">Deliverable</a></li>
+    <li><a href="#checks">Checks</a>
+      <ul>
+        <li><a href="#100-to-0-by-1-or-2"><code>100-to-0-by-1-or-2</code></a></li>
+        <li><a href="#tic-tac-toe">Tic-Tac-Toe</a></li>
+      </ul>
+    </li>
+    <li><a href="#appendix">Appendix</a>
+      <ul>
+        <li><a href="#position-encoding">Position Encoding</a></li>
+        <li><a href="#hashing-and-unhashing">Hashing and Unhashing</a></li>
+        <li><a href="#issues-at-scale">Issues At Scale</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="homefun-part-2">
+  <strong>Homefun Part 2</strong>
+  <a class="anchor" href="#homefun-part-2">#</a>
+</h1>
+<p>Due: <code>11:59PM 9/23/2024</code></p>
+<blockquote class="book-hint warning">
+<p><strong>Warning:</strong> This part is missing test outputs. They will be added soon, but you can begin your implementation without them.</p>
+</blockquote>
+<div class="book-tabs">
+<input type="radio" class="toggle" name="tabs-1" id="tabs-1-0" checked="checked" />
+<label for="tabs-1-0">Logistics</label>
+<div class="book-tabs-content markdown-inner"><p>Both parts of the Homefun are managed through a single Github classroom assignment. You can accept it 
+  <a href="https://classroom.github.com/a/-W652rH9">here</a>. This will create a new repository that you have write access to. <strong>Read the <code>README</code>.</strong> When you push new commits on this repository, an &ldquo;autograding&rdquo; job will run the tests for both parts.</p>
+<p>These tests simply verify that your program has the correct outputs for certain inputs. Each part has a set of input/output pairs that the tests enforce. <strong>If the latest commit on your Homefun repository&rsquo;s <code>main</code> branch passes all of a given part&rsquo;s tests before its due date passes, you will receive full credit for that part of the Homefun.</strong> You can see which tests belong to which part in the assignments&rsquo; &ldquo;Checks&rdquo; sections.</p>
+<p>This means that you may not need to pass all &ldquo;autograding&rdquo; tests to complete a particular part (because they include the other part&rsquo;s tests), but you should pass all tests once you complete both. <strong>All of the tests&rsquo; expected input/output pairs are publically visible in the autograder workflow runs.</strong> If you do not pass the necessary autograder tests before a due date passes, your work will be reviewed by an organizer on an effort basis.</p>
+</div>
+</div>
+<h2 id="summary">
+  Summary
+  <a class="anchor" href="#summary">#</a>
+</h2>
+<p>Bolster the solver you wrote for Part 1 to handle <code>100-to-0-by-1-or-2</code>. Implement the ruleset of Tic-Tac-Toe, and write a hash function and its inverse to allow the solving algorithm you wrote to interface with this new <code>Game</code> implementation.</p>
+<h2 id="game-abstraction">
+  Game Abstraction
+  <a class="anchor" href="#game-abstraction">#</a>
+</h2>
+<p>In Part 1, we provided a semi-formal definition of a game in terms of the positions it could find itself in. This heavily relied on intuition and put a lot of weight on the term &ldquo;position.&rdquo;</p>
+<p>It turns out that the idea of a position is a conceptual add-on to games. That is, games do not &ldquo;come with&rdquo; positions; they are expressed entirely in terms of sequences of actions taken by players. Such a sequence of actions is called a &ldquo;history.&rdquo;</p>
+<p>In this section, we will bridge the ideas of a &ldquo;history&rdquo; and a &ldquo;position.&rdquo; We will then observe that our existing understanding of a &ldquo;position&rdquo; is arbitrary. Finally, we will relax this preconceived notion into a class of techniques known as &ldquo;game abstraction&rdquo; that are useful when exploring &ldquo;bigger&rdquo; games.</p>
+<blockquote class="book-hint warning">
+<p>Note that we are still talking about a restricted subset of games, as explained in Part 1.</p>
+</blockquote>
+<h3 id="naive-solvers">
+  Naive Solvers
+  <a class="anchor" href="#naive-solvers">#</a>
+</h3>
+<p>In Part 1, you may have written a solving algorithm that looks somewhat like the following pseudocode in order to solve the <code>zero_by</code> family of games:</p>
+<pre tabindex="0"><code>function solve(position)
+    if position is terminal
+        return value of position
+    else
+        opponent = worst_value(
+            solve(result of taking action from position)
+            for action in possible actions from position
+        )
+        return opposite_value(opponent)
+</code></pre><p>This essentially says that the value of a position is its terminal value (if it has one), or the opposite of the worst possible outcome that can be forced into the opponent&rsquo;s hands (e.g., if we can force the opponent to lose then we can win). If we take a look at the 
+  <a href="https://en.wikipedia.org/wiki/Call_graph">call graph</a> of this recursive function when applied to Tic-Tac-Toe, we may see something like this:</p>
+<p>
+  <img src="/ttt_call_graph.png" alt="" /></p>
+<p>From this, we can observe that the <code>solve</code> function is called once for each possible sequence of actions in the game. This tells us that by writing our solver this way we have effectively encoded the game by its set of histories $H$, and that the amount of time our solver will take to terminate will be proportional to $|H|$.</p>
+<h3 id="position-semantics">
+  Position Semantics
+  <a class="anchor" href="#position-semantics">#</a>
+</h3>
+<p>Without preamble, a position $p \in P$ is a symbol that represents its own preimage under some function $f : H \to P$ (a function that takes a history and returns a symbol from a set $P$).</p>
+<p>We will unpack this confusing definition by talking about a function $f$ that makes it intuitive. In casual conversation, we usually take $f(h)$ to be &ldquo;the board resulting from the application of all of the actions in $h$ to the starting game board,&rdquo; and $P$ to be the set of all possible physical board configurations. For example, using this interpretation of $f$ and $P$, we would come to the conclusion that we are calling <code>solve</code> twice on the same position in the previous example:</p>
+<p>
+  <img src="/ttt_position_mapping.png" alt="" /></p>
+<blockquote class="book-hint warning">
+<p><strong>Why don&rsquo;t we just say that positions are board states?</strong></p>
+<p>Not all games have boards, and not all boards carry all of the information we care about in a game. For example, a board of Chess does not indicate whether the 
+  <a href="https://www.chess.com/terms/50-move-rule-chess">50-move rule</a> is active.</p>
+</blockquote>
+<h3 id="abstract-strategy-games">
+  Abstract Strategy Games
+  <a class="anchor" href="#abstract-strategy-games">#</a>
+</h3>
+<p>We did not go to the trouble of defining positions this way just out of fear of picking wrong game representations. This is kind of mistake is not silent &ndash; when the time comes to use your symbols, you simply would not have the information you need.</p>
+<p>The real reason we choose these mathematics is to &ldquo;game&rdquo; abstract strategy games. By involving these constructs, we can take advantage of the fact that their rulesets are expressed in terms of symbols to begin with (which is what gives them the &ldquo;abstract&rdquo; qualifier). Because they are expressed in terms of abstract symbols (such as game boards or mathematical objects like sets), their histories oftentimes exhibit the structure that the symbols themselves inherently carry.</p>
+<p>This means quite a few things. To begin with, we can almost exclusively transact in symbols when analyzing this class of games. This is nice, because they are a lot easier to encode than histories (see the 
+  <a href="/#position-hashing">position hashing</a> section). However, we can also take advantage of much more subtle aspects of these symbols, and use the freedom we have when definining them to our benefit.</p>
+<h3 id="symbolic-reduction">
+  Symbolic Reduction
+  <a class="anchor" href="#symbolic-reduction">#</a>
+</h3>
+<p>One of the clearest mappings we could establish from histories to some symbolic representation is to simply write down strings of actions. For example, a position of Tic-Tac-Toe could be:</p>
+<pre tabindex="0"><code>[top left X][middle middle O][middle left X]
+</code></pre><p>However, this is equivalent to the position:</p>
+<pre tabindex="0"><code>[middle left X][middle middle O][top left X]
+</code></pre><p>Here, we can apply our first trick; we will choose symbols that reflect the fact that these two histories are the same. This is easy, since the board already accomplishes this:</p>
+<pre tabindex="0"><code>X |   |
+- + - + -
+X | O |
+- + - + -
+  |   |
+</code></pre><p>In making this change, we have already cut down the number of symbols we will ever see by a significant amount. But observe the following position, which is symmetric to the one above:</p>
+<pre tabindex="0"><code>  |   |
+- + - + -
+X | O |
+- + - + -
+X |   |
+</code></pre><p>We can define a new function $g : P \to P&rsquo;$ that takes a symbol from the set of possible board configurations and returns one of its &ldquo;symmetries,&rdquo; in such a way that</p>
+$$
+g(p) = g(q) \iff p \text{ is symmetric to } q.
+$$<p>With the understanding that $f : H \to P$ maps game histories to game boards, we can compose $g \circ f$ to obtain a new function that both preserves the game&rsquo;s structure and reduces the amount of symbols (and therefore positions) necessary to analyze it even further.</p>
+<blockquote class="book-hint info">
+<p>It is okay if you do not understand this technique. It takes time to internalize, and you will not need it for this part. Interpret it as &ldquo;treat all symmetries of the same board as one position.&rdquo;</p>
+</blockquote>
+<p>Techniques like the ones above, which reduce the amount of positions in a game in a way that retains information about its history structure through a wise choice of symbolic mappings, collectively form what is known as &ldquo;game abstraction.&rdquo;</p>
+<h3 id="positional-solvers">
+  Positional Solvers
+  <a class="anchor" href="#positional-solvers">#</a>
+</h3>
+<p>To reap the benefits of a reduced position count, we must ensure that we only explore the reduced symbol space. The most general approach to doing this is to interpret the structure of this space as a graph, where symbols are nodes connected by actions. This is because some games that exhibit possibly infinite play can be reduced to finite-position graphs that include cycles.</p>
+<p>In cases where infinite play is impossible (regardless of strategy), the &ldquo;game graph&rdquo; (which is to symbols what &ldquo;game tree&rdquo; is to histories) is 
+  <a href="https://en.wikipedia.org/wiki/Directed_acyclic_graph">a DAG</a>. In such cases, a naive solving algorithm such as the one shown in the 
+  <a href="/#naive-solvers">naive solvers</a> subsection can be adapted to only explore the space of symbols via 
+  <a href="https://en.wikipedia.org/wiki/Memoization">memoization</a>. An example of such a game is Tic-Tac-Toe. This would have a form similar to this:</p>
+<pre tabindex="0"><code>function solve(position, seen)
+    if position has been seen
+        return value of position
+
+    if position is terminal
+        mark position as seen
+        store position&#39;s value
+        return value of position
+
+    else
+        opponent = worst_value(
+            solve(result of taking action from position)
+            for action in possible actions from position
+        )
+
+        value = opposite_value(opponent)
+        mark position as seen
+        store position&#39;s value
+        return value
+</code></pre><h2 id="deliverable">
+  Deliverable
+  <a class="anchor" href="#deliverable">#</a>
+</h2>
+<p>Modify or replace your solver from Part 1 to be able to solve <code>100-to-0-by-1-or-2</code> instantly (if it can&rsquo;t already). This will require that you implement some of the ideas in the 
+  <a href="/#positional-solvers">positional solvers</a> section. You should not need to change any of the code in your <code>zero_by</code> implementation.</p>
+<p>Once that works, create a new <code>Game</code> implementation for Tic-Tac-Toe using its &ldquo;physical&rdquo; board configurations as position symbols. <strong>You do not need to reduce the amount of boards in any way.</strong> Writing tests will be very helpful.</p>
+<p>Finally, format and print the number of winning, losing, and tying positions under the above symbolic representation of Tic-Tac-Toe when queried. See the 
+  <a href="/#checks">checks</a> section for specifics.</p>
+<blockquote class="book-hint danger">
+<p><strong>Do not write a separate solver for Tic-Tac-Toe; use the same one for both games.</strong></p>
+<p>This means that you will somehow have to turn your &ldquo;symbolic representation&rdquo; of a tic-tac-toe board (e.g., <code>[['x', 'o', 'x'], ...]</code>) into an <code>int</code> and vice versa. This is known as position hashing and unhashing, and we have included an 
+  <a href="/#position-hashing">appendix</a> with an introduction to the topic.</p>
+<p>This can be a complicated matter, so to help you do this, we have written a 
+  <a href="https://gist.github.com/maxfierrog/f8ca575ef1d00b1715fb90942695502f">Python class</a> that does this for you (but assumes a board encoding). Feel free to use it if your solution is in Python. Otherwise, you will need to write your own.</p>
+</blockquote>
+<h2 id="checks">
+  Checks
+  <a class="anchor" href="#checks">#</a>
+</h2>
+<p>The following commands will be ran from your submission&rsquo;s top-level directory verbatim. We will expect to see the output shown below each of them in <code>STDOUT</code>. There will be no input provided through <code>STDIN</code>.</p>
+<blockquote class="book-hint warning">
+<p>You will 
+  <a href="https://docs.python.org/3/library/os.html#os.environ">need to read</a> the <code>ITEMIZED</code> 
+  <a href="https://en.wikipedia.org/wiki/Environment_variable">environment variable</a> to determine whether or not to print a per-position breakdown of values like you did for Part 1. This is because it would be messy to print all position-to-value mappings in Tic-Tac-Toe.</p>
+</blockquote>
+<h3 id="100-to-0-by-1-or-2">
+  <code>100-to-0-by-1-or-2</code>
+  <a class="anchor" href="#100-to-0-by-1-or-2">#</a>
+</h3>
+<p>Command:</p>
+<pre tabindex="0"><code>ITEMIZED=1 make run ARGS=&#34;zero_by 100 1 2&#34;
+</code></pre><p>Output:</p>
+<pre tabindex="0"><code>100: TODO
+99: TODO
+&lt;CUT 98 LINES FOR BREVITY&gt;
+1: WIN
+0: LOSE
+
+WIN: TODO
+TIE: TODO
+LOSE: TODO
+TOTAL: 101
+</code></pre><h3 id="tic-tac-toe">
+  Tic-Tac-Toe
+  <a class="anchor" href="#tic-tac-toe">#</a>
+</h3>
+<p>Command:</p>
+<pre tabindex="0"><code>ITEMIZED=0 make run ARGS=&#34;tic_tac_toe&#34;
+</code></pre><p>Output:</p>
+<pre tabindex="0"><code>WIN: 2836
+TIE: 1068
+LOSE: 1574
+TOTAL: 5478
+</code></pre><h2 id="appendix">
+  Appendix
+  <a class="anchor" href="#appendix">#</a>
+</h2>
+<p>While techniques in game abstraction help us drastically reduce the number of positions we must traverse when doing search, there is still the problem of encoding their symbols in a computer program. We will take a brief overview of how this is done by turning position symbols into numbers, and will introduce some systems problems related to this.</p>
+<h3 id="position-encoding">
+  Position Encoding
+  <a class="anchor" href="#position-encoding">#</a>
+</h3>
+<p>Remember the 
+  <a href="/archive/game-homefun-p1/#the-game-interface">game interface</a> from Part 1. What is the concrete type <code>Position</code>? When creating systems that will be used to solve many different games, we make sure that all games agree on a single position encoding data type, which is usually a 64-bit integer. This is in contrast to making it, for example, a list of integers.</p>
+<p>The reason we make this seemingly arbitrary choice is because having a fixed-size datatype means that a lot of the machine code needed to hande it can be streamlined at compilation time. We choose an integer datatype specifically because bitwise operations on integers are usually available, making it easy to do bit-level symbol encodings.</p>
+<p>It is not difficult to express a position symbol for an abstract strategy game in most modern programming languages because the symbols themselves are expressed in terms of fundamental mathematical objects (e.g., grids, sets, etc.), which enjoy ample library provisions. But when given such a representation, how do we turn it into a 64-bit integer?</p>
+<h3 id="hashing-and-unhashing">
+  Hashing and Unhashing
+  <a class="anchor" href="#hashing-and-unhashing">#</a>
+</h3>
+<p>There is no single answer for this, but without adding any constraints, it is also not a very hard problem. To inspire you, here is one way you could do it for Tic-Tac-Toe in a 32-bit integer:</p>
+<pre tabindex="0"><code>AB CD EF GH IJ KL MN OP QR 00 00 00 00 00 00 00
+</code></pre><p>Here, each letter is a bit. Each pair of letters stands for a single number (e.g., <code>11</code> is 3 in binary). There are 9 pairs of letters, one for each square in the Tic-Tac-Toe board. When there is a <code>00</code>, that will mean there is nothing in that square. When there is a <code>01</code>, there is an <code>X</code>. <code>10</code> will be an <code>O</code>. Just like that, we have created a what is known as a <strong>hash function</strong> for Tic-Tac-Toe positions.</p>
+<p>A function that carries out the inverse process (in this example, turning a 32-bit integer into our representation of a Tic-Tac-Toe position) is known as an <strong>unhashing function</strong>. When writing a game-solving system, it is usually necessary to implement both to enable back-and-forth communication between solving algorithms and <code>Game</code> implementations.</p>
+<blockquote class="book-hint info">
+<p>High-efficiency <code>Game</code> implementations operate on 64-bit integers directly as position representations, eliminating the need for hashing and unhashing. However, this is very unergonomic from a programming standpoint.</p>
+</blockquote>
+<h3 id="issues-at-scale">
+  Issues At Scale
+  <a class="anchor" href="#issues-at-scale">#</a>
+</h3>
+<p>However, there are very real constraints associated with most game-solving systems. Most of them are associated with storing very large datasets. In general, there are two options when it comes to storing a mapping of positions to any kind of value: Storing hashes or not.</p>
+<p>You can store a mapping of key-value pairs (with position hashes as keys) by using hash values to index into an array of values. However, this relies on the density of the hash function being relatively high (while staying collision-free), which is generally very difficult to achieve. For very sparse hashes, you end up with a mostly empty array that wastes space. This is what would happen if you used the hash function described above.</p>
+<p>If you do store hashes, you will pay an upfront space cost of the hash size for every value you wish to store. This may seem like a small overhead, but when you consider that the values being stored are usually no more than a few bits in length, it is hard to justify using up to 90% of your space just to store hashes (which are usually 64 bits in length). Furthermore, it becomes slower to query the mapping, as you no longer have the benefit of constant-time array lookups.</p>
+<blockquote class="book-hint info">
+<p>These are only problems for bigger games. You do not need to worry about any of this for now.</p>
+</blockquote>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/gamescrafters/gamescrafters.github.io/edit/main/content/archive/game-homefun-p2.md" target="_blank" rel="noopener">
+      <img src="/svg/edit.svg" class="book-icon" alt="" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#summary">Summary</a></li>
+    <li><a href="#game-abstraction">Game Abstraction</a>
+      <ul>
+        <li><a href="#naive-solvers">Naive Solvers</a></li>
+        <li><a href="#position-semantics">Position Semantics</a></li>
+        <li><a href="#abstract-strategy-games">Abstract Strategy Games</a></li>
+        <li><a href="#symbolic-reduction">Symbolic Reduction</a></li>
+        <li><a href="#positional-solvers">Positional Solvers</a></li>
+      </ul>
+    </li>
+    <li><a href="#deliverable">Deliverable</a></li>
+    <li><a href="#checks">Checks</a>
+      <ul>
+        <li><a href="#100-to-0-by-1-or-2"><code>100-to-0-by-1-or-2</code></a></li>
+        <li><a href="#tic-tac-toe">Tic-Tac-Toe</a></li>
+      </ul>
+    </li>
+    <li><a href="#appendix">Appendix</a>
+      <ul>
+        <li><a href="#position-encoding">Position Encoding</a></li>
+        <li><a href="#hashing-and-unhashing">Hashing and Unhashing</a></li>
+        <li><a href="#issues-at-scale">Issues At Scale</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=59338&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="
+  Homefun Part 1
+  #
+
+Due: 11:59PM 9/11/2024
+
+
+Logistics
+Both parts of the Homefun are managed through a single Github classroom assignment. You can accept it 
+  here. This will create a new repository that you have write access to. Read the README. When you push new commits on this repository, an &ldquo;autograding&rdquo; job will run the tests for both parts.
+These tests simply verify that your program has the correct outputs for certain inputs. Each part has a set of input/output pairs that the tests enforce. If the latest commit on your Homefun repository&rsquo;s main branch passes all of a given part&rsquo;s tests before its due date passes, you will receive full credit for that part of the Homefun. You can see which tests belong to which part in the assignments&rsquo; &ldquo;Checks&rdquo; sections.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:59338/archive/game-homefun-p1/">
+  <meta property="og:site_name" content="GamesCrafters">
+  <meta property="og:title" content="Homefun Pt. 1">
+  <meta property="og:description" content="Homefun Part 1 # Due: 11:59PM 9/11/2024
+Logistics Both parts of the Homefun are managed through a single Github classroom assignment. You can accept it here. This will create a new repository that you have write access to. Read the README. When you push new commits on this repository, an “autograding” job will run the tests for both parts.
+These tests simply verify that your program has the correct outputs for certain inputs. Each part has a set of input/output pairs that the tests enforce. If the latest commit on your Homefun repository’s main branch passes all of a given part’s tests before its due date passes, you will receive full credit for that part of the Homefun. You can see which tests belong to which part in the assignments’ “Checks” sections.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="archive">
+<title>Homefun Pt. 1 | GamesCrafters</title>
+<link rel="icon" href="/favicon.png" >
+
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+    integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV"
+    crossorigin="anonymous"
+/>
+<script
+    defer
+    src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+    integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8"
+    crossorigin="anonymous"
+></script>
+<script
+    defer
+    src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05"
+    crossorigin="anonymous"
+></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        renderMathInElement(document.body, {
+            
+            
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true },
+            ],
+            
+            throwOnError: false,
+        });
+    });
+</script>
+
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:59338/archive/game-homefun-p1/">
+<link rel="stylesheet" href="/book.min.31f7d27dbf8d7b2810c8aa30ae63e37eb5ef18517feeb6ac1e4aaf58a8f58a02.css" integrity="sha256-MffSfb&#43;NeygQyKowrmPjfrXvGFF/7rasHkqvWKj1igI=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.6f7a17e8623dabc8dce4891f1f137e48d14e0e9d49c0019824a8c94975404b0f.js" integrity="sha256-b3oX6GI9q8jc5IkfHxN&#43;SNFODp1JwAGYJKjJSXVASw8=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" class="book-icon" /><span>GamesCrafters</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Information</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/main/about/course/" class="">About the Course</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/main/about/group/" class="">About the Group</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/main/about/misc/" class="">Miscellaneous</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>People</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/main/people/organizers/" class="">Course Organizers</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/main/people/alumni/" class="">Group Alumni</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/main/people/groups/" class="">Past Groups</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Links</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://github.com/GamesCrafters" class="" target="_blank" rel="noopener">GitHub Organization</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://nyc.cs.berkeley.edu/uni/" class="" target="_blank" rel="noopener">GamesmanUni</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-988a2b6a27d3889c023feeb6f03aa76e" class="toggle"  />
+    <label for="section-988a2b6a27d3889c023feeb6f03aa76e" class="flex justify-between">
+      <a role="button" class="">Course Assignments</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/main/assignments/specification/" class="">Specification</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/main/assignments/presentation/" class="">Presentation</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-8e55808161062b6ea13ee669bff44eb2" class="toggle"  />
+    <label for="section-8e55808161062b6ea13ee669bff44eb2" class="flex justify-between">
+      <a role="button" class="">Ongoing Projects</a>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>Homefun Pt. 1</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#summary">Summary</a></li>
+    <li><a href="#game-representation">Game Representation</a>
+      <ul>
+        <li><a href="#games-and-rulesets">Games and Rulesets</a></li>
+        <li><a href="#our-first-ruleset">Our First Ruleset</a></li>
+        <li><a href="#families-of-games">Families of Games</a></li>
+        <li><a href="#the-game-interface">The Game Interface</a></li>
+      </ul>
+    </li>
+    <li><a href="#deliverable">Deliverable</a></li>
+    <li><a href="#resources">Resources</a></li>
+    <li><a href="#checks">Checks</a>
+      <ul>
+        <li><a href="#10-to-0-by-1-or-2"><code>10-to-0-by-1-or-2</code></a></li>
+        <li><a href="#25-to-0-by-1-3-or-4"><code>25-to-0-by-1-3-or-4</code></a></li>
+      </ul>
+    </li>
+    <li><a href="#appendix">Appendix</a>
+      <ul>
+        <li><a href="#games-vs-problems">Games vs. Problems</a></li>
+        <li><a href="#solution-concepts">Solution Concepts</a></li>
+        <li><a href="#strong-solutions">Strong Solutions</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="homefun-part-1">
+  <strong>Homefun Part 1</strong>
+  <a class="anchor" href="#homefun-part-1">#</a>
+</h1>
+<p>Due: <code>11:59PM 9/11/2024</code></p>
+<div class="book-tabs">
+<input type="radio" class="toggle" name="tabs-0" id="tabs-0-0" checked="checked" />
+<label for="tabs-0-0">Logistics</label>
+<div class="book-tabs-content markdown-inner"><p>Both parts of the Homefun are managed through a single Github classroom assignment. You can accept it 
+  <a href="https://classroom.github.com/a/-W652rH9">here</a>. This will create a new repository that you have write access to. <strong>Read the <code>README</code>.</strong> When you push new commits on this repository, an &ldquo;autograding&rdquo; job will run the tests for both parts.</p>
+<p>These tests simply verify that your program has the correct outputs for certain inputs. Each part has a set of input/output pairs that the tests enforce. <strong>If the latest commit on your Homefun repository&rsquo;s <code>main</code> branch passes all of a given part&rsquo;s tests before its due date passes, you will receive full credit for that part of the Homefun.</strong> You can see which tests belong to which part in the assignments&rsquo; &ldquo;Checks&rdquo; sections.</p>
+<p>This means that you may not need to pass all &ldquo;autograding&rdquo; tests to complete a particular part (because they include the other part&rsquo;s tests), but you should pass all tests once you complete both. <strong>All of the tests&rsquo; expected input/output pairs are publically visible in the autograder workflow runs.</strong> If you do not pass the necessary autograder tests before a due date passes, your work will be reviewed by an organizer on an effort basis.</p>
+</div>
+</div>
+<h2 id="summary">
+  Summary
+  <a class="anchor" href="#summary">#</a>
+</h2>
+<p>Write a program that computes the strong solution of two related games, <code>10-to-0-by-1-or-2</code> and <code>25-to-0-by-1-3-or-4</code>. Any programming language is acceptable. Optional aid is provided in the form of a Python template.</p>
+<h2 id="game-representation">
+  Game Representation
+  <a class="anchor" href="#game-representation">#</a>
+</h2>
+<p>The object of the Homefun series will be to find out specific facts about a certain class of games. It can be summarized as: &ldquo;For games like Chess, Tic-Tac-Toe, and Connect-4, how do I put them into a computer and have it tell me how to play perfectly?&rdquo;</p>
+<blockquote class="book-hint warning">
+<p>This is enough to get an intuitive understanding of the activities, but we highly recommend you read through the appended 
+  <a href="/#appendix">theoretic introduction</a>. Refer to it if you see an unknown term.</p>
+</blockquote>
+<h3 id="games-and-rulesets">
+  Games and Rulesets
+  <a class="anchor" href="#games-and-rulesets">#</a>
+</h3>
+<p>Having narrowed down the games we will be dealing with, we can provide a semi-formal definition of a game. Games in this subset are determined by what positions they can find themselves in, what players there are, how positions can transition to another, and by what positions are terminal (and what benefit is associated with reaching them).</p>
+<p>When we talk about games colloquially, we don&rsquo;t usually refer to all of these things. If someone refers to Chess, they are not referring to it in terms of its positions, but rather in terms of the <strong>ruleset</strong> that &ldquo;generates&rdquo; the game itself. In doing so, they can communicate a game with $&gt;10^{100}$ unique positions in only about a page of rules, which can be memorized.</p>
+<p>The process of encoding a ruleset in a computer and obtaining a subset of positions in the game it generates (perhaps figuring out interesting facts about it in the process) is known as &ldquo;exploration&rdquo; or &ldquo;search.&rdquo; This is what we will do in this Homefun, for two specific rulesets.</p>
+<h3 id="our-first-ruleset">
+  Our First Ruleset
+  <a class="anchor" href="#our-first-ruleset">#</a>
+</h3>
+<p>The game <code>10-to-0-by-1-2</code> is generated by the following ruleset:</p>
+<ul>
+<li>There is a collection of 10 items.</li>
+<li>2 players take alternating turns removing either 1 or 2 items from the collection.</li>
+<li>Player 1 starts. The player who takes the last item from the collection wins.</li>
+</ul>
+<p>It is quite a simple game. Try playing it with someone else to become familiar with it. You can even try figuring out a perfect strategy for it by hand or in your head, but it is somewhat difficult. We will explore how you can have a computer do this. But before that, we will hint at how we might be able to take advantage of modern generic programming by introducing the idea of a game family.</p>
+<h3 id="families-of-games">
+  Families of Games
+  <a class="anchor" href="#families-of-games">#</a>
+</h3>
+<p>The <code>zero-by</code> family is the set of games achievable via the parameterization <code>N-to-0-by-S</code>, where <code>N</code> is a positive integer and <code>S</code> is a set of positive integers. The generic ruleset is as follows:</p>
+<ul>
+<li>There is a collection of <code>N</code> items.</li>
+<li>2 players take alternating turns removing an amount of items in the set <code>S</code> from the collection.</li>
+<li>Player 1 starts. The player who takes the last item from the collection wins.</li>
+</ul>
+<p>If we do not restrict <code>S</code>, it is possible to choose parameters for which a terminal position cannot be reached (e.g., <code>11-to-0-by-5</code>). Hence, we will include a new rule in the generic version:</p>
+<ul>
+<li>If a player can remove more items than there are left in the collection, they can remove all remaining items (winning the game in the process).</li>
+</ul>
+<p>It is also possible to parameterize this ruleset on player count; we decide how abstract we make a family&rsquo;s parameterization. We motivate this decision by semantics and the available provisions for generic constructs in our programming language of choice.</p>
+<p>Ultimately, a game family is the set of games describable by concretizing the parameters of its generic ruleset. The games within a game family are often referred to as &ldquo;variants&rdquo; of each other, and games which belong to obvious families are sometimes called &ldquo;variable.&rdquo;</p>
+<h3 id="the-game-interface">
+  The Game Interface
+  <a class="anchor" href="#the-game-interface">#</a>
+</h3>
+<p>We will work with the following way of programmatically characterizing any ruleset:</p>
+<pre tabindex="0"><code class="language-none" data-lang="none">interface Game:
+    function start() -&gt; Position
+    function get_moves(Position) -&gt; Collection&lt;Move&gt;
+    function do_move(Position, Move) -&gt; Position
+    function terminal_value(Position) -&gt; Value
+</code></pre><blockquote class="book-hint info">
+<p>This is not a real programming language, but the idea of an interface is central to generic programming in most programming languages.</p>
+</blockquote>
+<p>The <code>start</code> function provides a way to specify how a game starts. The <code>get_moves</code> function returns a collection of things you can do from a given position; <code>do_move</code> applies one of those things onto a position and returns the resulting position, assuming it is allowed. In the case of terminal positions, <code>terminal_value</code> specifies the benefit obtained by the player whose turn it is at that position.</p>
+<p>This interface is very general, but it does assume a turn order (e.g., alternating play). Including a <code>turn(Position) -&gt; Player</code> function fixes this. There are many other (perhaps more elegant) ways to present the <code>Game</code> interface, but we have found that this is an intuitive first impression.</p>
+<h2 id="deliverable">
+  Deliverable
+  <a class="anchor" href="#deliverable">#</a>
+</h2>
+<p>Implement the rulesets <code>10-to-0-by-1-or-2</code> and <code>25-to-0-by-1-3-or-4</code>, write a single solving algorithm that computes the mappings of positions in each of these games to their values, and print the mappings in a specific format (shown in the next section).</p>
+<p>Remember that these two games are part of a very intuitive family; you should not need to repeat much logic, if any at all. Here are some steps we recommended you take to do this:</p>
+<ol>
+<li>Read through the Python template, making sure to read the <code>README</code>.</li>
+<li>Make a mental path of how inputs enter the program, and of how outputs are created.</li>
+<li>Take note of the <code>TODO</code> hints left throughout the template.</li>
+<li>Design tests that the functions you implement will need to pass.</li>
+<li>Implement your solution, and iterate using your tests.</li>
+</ol>
+<blockquote class="book-hint info">
+<p>Remember that you can choose to delete all the files in the provided template and code your solution from scratch!</p>
+</blockquote>
+<h2 id="resources">
+  Resources
+  <a class="anchor" href="#resources">#</a>
+</h2>
+<p>Here are some things that might help you get started:</p>
+<ul>
+<li>
+  <a href="https://www.youtube.com/watch?v=YyTJOjgJD7w">Dan&rsquo;s CalWeek 2020 Lecture</a></li>
+<li>
+  <a href="https://www.dropbox.com/scl/fi/gxp9xkxxehy8xaqk2fdlg/2019-08-28-Computational-Game-Theory.pdf?rlkey=6t07frdal6d05ysw10fg08i9x&amp;e=1&amp;dl=0">Dan&rsquo;s Computational Game Theory Slides</a></li>
+<li>
+  <a href="https://www.youtube.com/watch?v=qMFpOcLroOg&amp;t=247s">Rogue AI Riddle</a></li>
+</ul>
+<h2 id="checks">
+  Checks
+  <a class="anchor" href="#checks">#</a>
+</h2>
+<p>The following commands will be ran from your submission&rsquo;s top-level directory verbatim. We will expect to see the output shown below each of them in <code>STDOUT</code>. There will be no input provided through <code>STDIN</code>. If you are using the template, you should just need to write <code>print</code> statements.</p>
+<h3 id="10-to-0-by-1-or-2">
+  <code>10-to-0-by-1-or-2</code>
+  <a class="anchor" href="#10-to-0-by-1-or-2">#</a>
+</h3>
+<p>Command:</p>
+<pre tabindex="0"><code>make run ARGS=&#34;zero_by 10 1 2&#34;
+</code></pre><p>Expected output:</p>
+<pre tabindex="0"><code>10: WIN
+9: LOSE
+8: WIN
+7: WIN
+6: LOSE
+5: WIN
+4: WIN
+3: LOSE
+2: WIN
+1: WIN
+0: LOSE
+</code></pre><h3 id="25-to-0-by-1-3-or-4">
+  <code>25-to-0-by-1-3-or-4</code>
+  <a class="anchor" href="#25-to-0-by-1-3-or-4">#</a>
+</h3>
+<p>Command:</p>
+<pre tabindex="0"><code>make run ARGS=&#34;zero_by 25 1 3 4&#34;
+</code></pre><p>Output not shown for brevity.</p>
+<hr>
+<h2 id="appendix">
+  Appendix
+  <a class="anchor" href="#appendix">#</a>
+</h2>
+<h3 id="games-vs-problems">
+  Games vs. Problems
+  <a class="anchor" href="#games-vs-problems">#</a>
+</h3>
+<p>An optimization problem attempts to maximize or minimize an objective with respect to a set of parameters. For example, the optimization problem</p>
+$$
+\max_{0 \leq x \leq 1} f(x)
+$$<p>asks a very clear question: &ldquo;Given $f : \mathbb{R} \to \mathbb{R}$ and $x \in [0, 1]$, what is the maximum possible value $f$ can take?&rdquo; However, a game is a <em>situation</em>, not a problem. While we will visit proper definitions later, the cornestone assumption is that each player attempts to maximize their own utility in these situations (whatever that may mean). But from a global perspective, there is no obvious &ldquo;ask&rdquo; when presented with a game (unlike optimization problems).</p>
+<p>It is tempting to believe that there exists some &ldquo;universally optimal&rdquo; way of playing any game, and therefore a way of predicting how any game will be played. It turns out this is not true under most conditions. This is non-obvious, and took a lot of bright minds to figure out. However, for many specific kinds of games, there exist very reasonable rules that can be used to predict how a game will be played <em>a priori</em>.</p>
+<h3 id="solution-concepts">
+  Solution Concepts
+  <a class="anchor" href="#solution-concepts">#</a>
+</h3>
+<p>Each different way to formulate such rules is called a 
+  <a href="https://en.wikipedia.org/wiki/Solution_concept">solution concept</a>. A very famous solution concept is the 
+  <a href="https://en.wikipedia.org/wiki/Nash_equilibrium">Nash Equilibrium</a>. It tells us to look at all of the possible strategies that players could implement, and look for groups of strategies (one per player) where no player could be better off by only changing their own strategy. This applies to games where players cannot cooperate. Each of these strategy &ldquo;profiles&rdquo; (a one-per-player set of strategies) is called a Nash Equilibrium.</p>
+<p>In a very specific subset of games that are deterministic, 
+  <a href="https://en.wikipedia.org/wiki/Complete_information">complete-information</a>, 
+  <a href="https://en.wikipedia.org/wiki/Sequential_game">sequential</a>, finite, and either 
+  <a href="https://en.wikipedia.org/wiki/Non-cooperative_game_theory">non-cooperative</a> or 
+  <a href="https://en.wikipedia.org/wiki/Zero-sum_game">zero-sum</a> (such as Chess), there is an efficient way of computing such strategy profiles known as 
+  <a href="https://en.wikipedia.org/wiki/Backward_induction">backward induction</a>, which refers to the procedure of analyzing players&rsquo; choices &ldquo;in reverse,&rdquo; assuming everyone does what is best for them. In the specific subcase of zero-sum games, this is implemented by the popular 
+  <a href="https://en.wikipedia.org/wiki/Minimax">Minmax algorithm</a>. For the remainder of the Homefun series, we will only talk about this kind of game.</p>
+<h3 id="strong-solutions">
+  Strong Solutions
+  <a class="anchor" href="#strong-solutions">#</a>
+</h3>
+<p>The game-theoretic value of a position is the highest utility that a player whose turn it is at that position can guarantee to obtain for themselves through their own actions. Oftentimes, the way in which we compute optimal strategies under different solution concepts is by storing a mapping of all positions in a game to their values. When we have such a mapping, we also have access to the best possible strategies in the corresponding game from any position.</p>
+<p>Such a mapping is equivalent to something known as a 
+  <a href="https://en.wikipedia.org/wiki/Solved_game">strong solution</a>, as it provides the answer to the question: &ldquo;Given any position in the game, what is the best possible course of action?&rdquo; It is not obvious why this is possible; to figure out the best possible action from a position, it suffices to look at the values of all possible positions that the player who is &ldquo;in power&rdquo; at that position could transform the game into, and materialize the one that is most utilitarian for that player.</p>
+<blockquote class="book-hint info">
+<p>Remember that this is only referring to the subset of games described above. For example, we can only talk about a player &ldquo;in power&rdquo; because we assume the game is sequential.</p>
+</blockquote>
+<blockquote class="book-hint info">
+<p>While the name may suggest so, a strong solution is not a solution concept. A solution concept is a convention of sorts, while a strong solution is actual data.</p>
+</blockquote>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/gamescrafters/gamescrafters.github.io/edit/main/content/archive/game-homefun-p1.md" target="_blank" rel="noopener">
+      <img src="/svg/edit.svg" class="book-icon" alt="" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#summary">Summary</a></li>
+    <li><a href="#game-representation">Game Representation</a>
+      <ul>
+        <li><a href="#games-and-rulesets">Games and Rulesets</a></li>
+        <li><a href="#our-first-ruleset">Our First Ruleset</a></li>
+        <li><a href="#families-of-games">Families of Games</a></li>
+        <li><a href="#the-game-interface">The Game Interface</a></li>
+      </ul>
+    </li>
+    <li><a href="#deliverable">Deliverable</a></li>
+    <li><a href="#resources">Resources</a></li>
+    <li><a href="#checks">Checks</a>
+      <ul>
+        <li><a href="#10-to-0-by-1-or-2"><code>10-to-0-by-1-or-2</code></a></li>
+        <li><a href="#25-to-0-by-1-3-or-4"><code>25-to-0-by-1-3-or-4</code></a></li>
+      </ul>
+    </li>
+    <li><a href="#appendix">Appendix</a>
+      <ul>
+        <li><a href="#games-vs-problems">Games vs. Problems</a></li>
+        <li><a href="#solution-concepts">Solution Concepts</a></li>
+        <li><a href="#strong-solutions">Strong Solutions</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

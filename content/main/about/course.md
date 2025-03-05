@@ -1,14 +1,14 @@
 ---
-title: About the Course 
+title: About the Course
 type: docs
 bookSearchExclude: false
-weight: 1 
+weight: 1
 ---
 
 # **Course Details**
 
-{{< hint warning >}}
+{{% hint warning %}}
 
 **Warning:** This page is under construction.
 
-{{< /hint >}}
+{{% /hint %}}

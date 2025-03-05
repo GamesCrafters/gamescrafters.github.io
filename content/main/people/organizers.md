@@ -1,14 +1,14 @@
 ---
-title: Course Organizers 
+title: Course Organizers
 type: docs
 bookSearchExclude: false
-weight: 0 
+weight: 0
 ---
 
 # **Course Organizers**
 
-{{< hint warning >}}
+{{% hint warning %}}
 
 **Warning:** This page is under construction.
 
-{{< /hint >}}
+{{% /hint %}}

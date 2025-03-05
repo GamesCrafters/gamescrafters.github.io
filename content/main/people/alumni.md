@@ -1,16 +1,15 @@
 ---
-title: Group Alumni 
+title: Group Alumni
 type: docs
 bookSearchExclude: false
-weight: 0 
+weight: 0
 ---
 
 # **GamesCrafters Alumni**
 
 
-{{< hint warning >}}
+{{% hint warning %}}
 
 **Warning:** This page is under construction.
 
-{{< /hint >}}
-
+{{% /hint %}}

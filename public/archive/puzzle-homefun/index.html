@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=59338&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="
+  Homefun
+  #
+
+Due: February 3, 2025
+
+Warning: This page is under construction.
+
+
+
+Logistics
+This assignment is managed through a single Github classroom assignment. You can accept it via 
+  this link. This will create a new repository that you have write access to. Once you accept it, read the README file.
+When you push commits to this repository, an automatic testing job will run pre-written tests. These tests verify that your program produces the right outputs on certain inputs. You can find verbal descriptions of each one in the &ldquo;Checks&rdquo; section. Further, all of the tests&rsquo; expected input/output pairs are publically visible in the autograder workflow runs.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:59338/archive/puzzle-homefun/">
+  <meta property="og:site_name" content="GamesCrafters">
+  <meta property="og:title" content="Homefun">
+  <meta property="og:description" content="Homefun # Due: February 3, 2025
+Warning: This page is under construction.
+Logistics This assignment is managed through a single Github classroom assignment. You can accept it via this link. This will create a new repository that you have write access to. Once you accept it, read the README file.
+When you push commits to this repository, an automatic testing job will run pre-written tests. These tests verify that your program produces the right outputs on certain inputs. You can find verbal descriptions of each one in the “Checks” section. Further, all of the tests’ expected input/output pairs are publically visible in the autograder workflow runs.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="archive">
+    <meta property="article:modified_time" content="2025-01-31T11:46:55-08:00">
+<title>Homefun | GamesCrafters</title>
+<link rel="icon" href="/favicon.png" >
+
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+    integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV"
+    crossorigin="anonymous"
+/>
+<script
+    defer
+    src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+    integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8"
+    crossorigin="anonymous"
+></script>
+<script
+    defer
+    src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05"
+    crossorigin="anonymous"
+></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        renderMathInElement(document.body, {
+            
+            
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true },
+            ],
+            
+            throwOnError: false,
+        });
+    });
+</script>
+
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:59338/archive/puzzle-homefun/">
+<link rel="stylesheet" href="/book.min.31f7d27dbf8d7b2810c8aa30ae63e37eb5ef18517feeb6ac1e4aaf58a8f58a02.css" integrity="sha256-MffSfb&#43;NeygQyKowrmPjfrXvGFF/7rasHkqvWKj1igI=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.6f7a17e8623dabc8dce4891f1f137e48d14e0e9d49c0019824a8c94975404b0f.js" integrity="sha256-b3oX6GI9q8jc5IkfHxN&#43;SNFODp1JwAGYJKjJSXVASw8=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" class="book-icon" /><span>GamesCrafters</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Information</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/main/about/course/" class="">About the Course</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/main/about/group/" class="">About the Group</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/main/about/misc/" class="">Miscellaneous</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>People</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/main/people/organizers/" class="">Course Organizers</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/main/people/alumni/" class="">Group Alumni</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/main/people/groups/" class="">Past Groups</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Links</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://github.com/GamesCrafters" class="" target="_blank" rel="noopener">GitHub Organization</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://nyc.cs.berkeley.edu/uni/" class="" target="_blank" rel="noopener">GamesmanUni</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-988a2b6a27d3889c023feeb6f03aa76e" class="toggle"  />
+    <label for="section-988a2b6a27d3889c023feeb6f03aa76e" class="flex justify-between">
+      <a role="button" class="">Course Assignments</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/main/assignments/specification/" class="">Specification</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/main/assignments/presentation/" class="">Presentation</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-8e55808161062b6ea13ee669bff44eb2" class="toggle"  />
+    <label for="section-8e55808161062b6ea13ee669bff44eb2" class="flex justify-between">
+      <a role="button" class="">Ongoing Projects</a>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>Homefun</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#summary">Summary</a></li>
+    <li><a href="#explanation">Explanation</a>
+      <ul>
+        <li><a href="#puzzles-and-games">Puzzles and Games</a></li>
+        <li><a href="#puzzles-and-rulesets">Puzzles and Rulesets</a></li>
+        <li><a href="#our-first-ruleset">Our First Ruleset</a></li>
+        <li><a href="#the-puzzle-interface">The Puzzle Interface</a></li>
+        <li><a href="#families-of-puzzles">Families of Puzzles</a></li>
+      </ul>
+    </li>
+    <li><a href="#deliverable">Deliverable</a></li>
+    <li><a href="#checks">Checks</a></li>
+    <li><a href="#resources">Resources</a></li>
+    <li><a href="#appendix">Appendix</a>
+      <ul>
+        <li><a href="#games-vs-problems">Games vs. Problems</a></li>
+        <li><a href="#solution-concepts">Solution Concepts</a></li>
+        <li><a href="#strong-solutions">Strong Solutions</a></li>
+        <li><a href="#games-to-puzzles">Games to Puzzles</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="homefun">
+  <strong>Homefun</strong>
+  <a class="anchor" href="#homefun">#</a>
+</h1>
+<p>Due: <code>February 3, 2025</code></p>
+<blockquote class="book-hint warning">
+<p><strong>Warning:</strong> This page is under construction.</p>
+</blockquote>
+<div class="book-tabs">
+<input type="radio" class="toggle" name="tabs-1" id="tabs-1-0" checked="checked" />
+<label for="tabs-1-0">Logistics</label>
+<div class="book-tabs-content markdown-inner"><p>This assignment is managed through a single Github classroom assignment. You can accept it via 
+  <a href="https://classroom.github.com/a/-W652rH9">this link</a>. This will create a new repository that you have write access to. Once you accept it, <strong>read the <code>README</code> file.</strong></p>
+<p>When you push commits to this repository, an automatic testing job will run pre-written tests. These tests verify that your program produces the right outputs on certain inputs. You can find verbal descriptions of each one in the &ldquo;Checks&rdquo; section. Further, all of the tests&rsquo; expected input/output pairs are publically visible in the autograder workflow runs.</p>
+<p><strong>If the latest commit on your Homefun repository&rsquo;s <code>main</code> branch passes all tests before the due date passes, you will receive full credit.</strong> If you do not pass the necessary autograder tests before the due date passes, your work can be reviewed by an organizer on an effort basis upon request (so you should always let someone know if you won&rsquo;t finish in time).</p>
+</div>
+</div>
+<h2 id="summary">
+  Summary
+  <a class="anchor" href="#summary">#</a>
+</h2>
+<p>Write a program that encodes two puzzles generically and uses this encoding to compute &ldquo;perfect solutions&rdquo; for them. Any programming language is acceptable. Optional aid is provided in the form of a Python template.</p>
+<h2 id="explanation">
+  Explanation
+  <a class="anchor" href="#explanation">#</a>
+</h2>
+<p>Here, we give a bare-minimum introduction to essential concepts you will encounter while you complete this assignment. We highly recommend you read through the appended 
+  <a href="/#appendix">theoretic introduction</a> for motivation and context, as well as the other 
+  <a href="/#resources">provided resources</a>.</p>
+<h3 id="puzzles-and-games">
+  Puzzles and Games
+  <a class="anchor" href="#puzzles-and-games">#</a>
+</h3>
+<p>Puzzles are games in both a formal and informal sense; we play them to have fun, and in formal theory they are the single-player subclass of games. As such, we will introduce concepts that are applicable for games in general, even if we will only explore them in-depth for puzzles.</p>
+<h3 id="puzzles-and-rulesets">
+  Puzzles and Rulesets
+  <a class="anchor" href="#puzzles-and-rulesets">#</a>
+</h3>
+<p>The puzzles we are interested in are determined by what positions they can find themselves in, what players there are, how positions can transition to others, and by what positions are terminal (and the benefit associated with reaching them according to each player).</p>
+<p>When we talk about puzzles colloquially, we don&rsquo;t usually refer to all of these things. If someone refers to the game of Chess, they are not referring to it in terms of its positions, but rather in terms of the <strong>ruleset</strong> that &ldquo;generates&rdquo; the game itself. In doing so, they can communicate a game with $&gt;10^{100}$ unique positions in only about a page of rules.</p>
+<p>The process of encoding a ruleset in a computer and obtaining a subset of positions in the puzzle it generates (perhaps figuring out interesting facts about it in the process) is known as &ldquo;exploration&rdquo; or &ldquo;search.&rdquo; This is what we will do in this Homefun.</p>
+<h3 id="our-first-ruleset">
+  Our First Ruleset
+  <a class="anchor" href="#our-first-ruleset">#</a>
+</h3>
+<p>The 
+  <a href="https://en.wikipedia.org/wiki/Wolf,_goat_and_cabbage_problem">wolf, goat, and cabbage problem</a> is a very old logic puzzle, defined as follows:</p>
+<ul>
+<li>A farmer with a wolf, a goat, and a cabbage wants to cross a river by boat.</li>
+<li>The boat can carry only the farmer and a single item per trip across the river.</li>
+<li>If left alone together, the goat would eat the cabbage.</li>
+<li>If left alone together, the wolf would eat the goat.</li>
+</ul>
+<p>It is quite a simple puzzle. Try figuring out a perfect strategy for it by hand or in your head. We will explore how you can have a computer do this. But as a first step, we will show how we might be able to represent this in code below.</p>
+<h3 id="the-puzzle-interface">
+  The Puzzle Interface
+  <a class="anchor" href="#the-puzzle-interface">#</a>
+</h3>
+<p>All of the rulesets we are interested in have very clear conditions for success and failure, and they describe what the player (e.g., the farmer) can do. We can leverage this to write an interface for puzzles that we can later write generic code for.</p>
+<pre tabindex="0"><code>interface Puzzle:
+    function start() -&gt; Position
+    function get_moves(Position) -&gt; Collection&lt;Move&gt;
+    function do_move(Position, Move) -&gt; Position
+</code></pre><p>So now, if we wished to write code that could explore a puzzle for us, it could be defined generically with this interface. And later, the only work we would need to do is fill out the functions of this interface according to the ruleset we are interested in.</p>
+<h3 id="families-of-puzzles">
+  Families of Puzzles
+  <a class="anchor" href="#families-of-puzzles">#</a>
+</h3>
+<p>The 
+  <a href="https://en.wikipedia.org/wiki/Missionaries_and_cannibals_problem">missionaries and cannibals problem</a> is a very similar logic puzzle, where:</p>
+<ul>
+<li>A bishop with three missionaries and three cannibals wants to cross a river by boat.</li>
+<li>Only the bishop can row the boat, which can carry at most two additional people.</li>
+<li>The boat needs at least one more person apart from the bishop to float with stability.</li>
+<li>If cannibals are around less missionaries, they would eat them (even if the bishop is around).</li>
+<li>The bishop cannot stop cannibals, but the cannibals do not want to eat the bishop.</li>
+</ul>
+<p>This puzzle is more complicated than the last, but you will notice that they have many things in common. In fact, they have so much in common that it might feel silly to re-implement the <code>Puzzle</code> interface for each one.</p>
+<p>This situation happens a lot. Here, we call these puzzles <strong>variants</strong> of one another. In other words, they are under the same family of puzzles (in this case, 
+  <a href="https://en.wikipedia.org/wiki/River_crossing_puzzle">river crossing puzzles</a>). Sometimes puzzles in the same family are so logically similar that it is better to implement the <code>Puzzle</code> interface once for the whole family, and then provide a way to instantiate concrete puzzles via a constructor.</p>
+<p>Programmers decide convenient levels of abstraction for families of puzzles and games according to what they want. For example, implementing <code>Puzzle</code> for the family of river crossing puzzles may necessitate the use of hashmaps, so a programmer might avoid doing so because of how slow they are to use. Conversely, implementing <code>Puzzle</code> for each of the concrete rulesets might result in a lot of repeated code, which is also bad.</p>
+<h2 id="deliverable">
+  Deliverable
+  <a class="anchor" href="#deliverable">#</a>
+</h2>
+<p>Write an exploration module that only knows about the <code>Puzzle</code> interface, and from its provided methods, can generate strong solutions to concrete puzzles.</p>
+<p>Then, encode both of the river crossing problems mentioned above as separate implementations of the <code>Puzzle</code> interface. Alternatively, make a single implementation of the <code>Puzzle</code> interface for a family of river crossing problems that includes both of these puzzles. The latter option should be challenging but fun.</p>
+<p>Finally, write code that allows your program to call the exploration module on an argument <code>Puzzle</code> implementation by name and print the generated strong solution to <code>STDOUT</code>.</p>
+<blockquote class="book-hint warning">
+<p>Regardless of your programming language and of whether you choose to create separate <code>Puzzle</code> implementations, your exploration module should not depend in any way on any information about either of the two rulesets (beyond the generic <code>Puzzle</code> interface).</p>
+</blockquote>
+<h2 id="checks">
+  Checks
+  <a class="anchor" href="#checks">#</a>
+</h2>
+<p>TODO</p>
+<h2 id="resources">
+  Resources
+  <a class="anchor" href="#resources">#</a>
+</h2>
+<p>Here are some things that might help you get started.</p>
+<ul>
+<li>
+  <a href="/#appendix">The appendix below</a></li>
+<li>
+  <a href="https://www.youtube.com/watch?v=YyTJOjgJD7w">Dan&rsquo;s CalWeek 2020 Lecture</a></li>
+<li>
+  <a href="https://www.dropbox.com/scl/fi/gxp9xkxxehy8xaqk2fdlg/2019-08-28-Computational-Game-Theory.pdf?rlkey=6t07frdal6d05ysw10fg08i9x&amp;e=1&amp;dl=0">Dan&rsquo;s Computational Game Theory Slides</a></li>
+<li>
+  <a href="https://www.youtube.com/watch?v=qMFpOcLroOg&amp;t=247s">Rogue AI Riddle</a></li>
+</ul>
+<h2 id="appendix">
+  Appendix
+  <a class="anchor" href="#appendix">#</a>
+</h2>
+<p>We provide an introduction to games by comparing them to optimization problems, and explain what solution concepts and strong solutions are. Finally, we present puzzles as 1-player games.</p>
+<h3 id="games-vs-problems">
+  Games vs. Problems
+  <a class="anchor" href="#games-vs-problems">#</a>
+</h3>
+<p>A single-objective optimization problem attempts to maximize or minimize a value with respect to a set of parameters. For example, the optimization problem</p>
+$$
+\max_{0 \leq x \leq 1} f(x)
+$$<p>asks a very clear question: &ldquo;Given $f : \mathbb{R} \to \mathbb{R}$ and $x \in [0, 1]$, what is the maximum possible value $f$ can take?&rdquo; However, a game is a <em>situation</em>, not a problem. We will skip a proper definition, but the cornestone assumption is that each player attempts to maximize their own 
+  <a href="https://en.wikipedia.org/wiki/Utility">utility</a>. But from a global perspective, there is no obvious &ldquo;ask&rdquo; when presented with a game (unlike optimization problems).</p>
+<p>It is tempting to believe that there exists some &ldquo;universally optimal&rdquo; way of playing any game, and therefore a way of predicting how any game will be played. It turns out this is not true under most conditions. This is non-obvious, and took a lot of bright minds to figure out. However, for many specific kinds of games, there exist very reasonable rules that can be used to predict how a game will be played <em>a priori</em>.</p>
+<h3 id="solution-concepts">
+  Solution Concepts
+  <a class="anchor" href="#solution-concepts">#</a>
+</h3>
+<p>Each different way to formulate such rules is called a 
+  <a href="https://en.wikipedia.org/wiki/Solution_concept">solution concept</a>. A very famous solution concept is the 
+  <a href="https://en.wikipedia.org/wiki/Nash_equilibrium">Nash Equilibrium</a>. It tells us to look at all of the possible strategies that players could implement, and look for groups of strategies (one per player) where no player could be better off by only changing their own strategy. This applies to games where players cannot cooperate. Each of these strategy &ldquo;profiles&rdquo; (a one-per-player set of strategies) is called a Nash Equilibrium.</p>
+<p>In a very specific subset of games that are deterministic, 
+  <a href="https://en.wikipedia.org/wiki/Complete_information">complete-information</a>, 
+  <a href="https://en.wikipedia.org/wiki/Sequential_game">sequential</a>, finite, and either 
+  <a href="https://en.wikipedia.org/wiki/Non-cooperative_game_theory">non-cooperative</a> or 
+  <a href="https://en.wikipedia.org/wiki/Zero-sum_game">zero-sum</a> (such as Chess), there is an efficient way of computing such strategy profiles known as 
+  <a href="https://en.wikipedia.org/wiki/Backward_induction">backward induction</a>, which refers to the procedure of analyzing players&rsquo; choices &ldquo;in reverse,&rdquo; assuming everyone does what is best for them. In the specific subcase of zero-sum games, this is implemented by the popular 
+  <a href="https://en.wikipedia.org/wiki/Minimax">Minmax algorithm</a>.</p>
+<h3 id="strong-solutions">
+  Strong Solutions
+  <a class="anchor" href="#strong-solutions">#</a>
+</h3>
+<p>The game-theoretic value of a position is the highest utility that a player whose turn it is at that position can guarantee to obtain for themselves through their own actions. Oftentimes, the way in which we compute optimal strategies under different solution concepts is by storing a mapping of all positions in a game to their values. When we have such a mapping, we also have access to the best possible strategies in the corresponding game from any position.</p>
+<p>Such a mapping is equivalent to something known as a 
+  <a href="https://en.wikipedia.org/wiki/Solved_game">strong solution</a>, as it provides the answer to the question: &ldquo;Given any position in the game, what is the best possible course of action?&rdquo; It is not obvious why this is possible; to figure out the best possible action from a position, it suffices to look at the values of all possible positions that the player who is &ldquo;in power&rdquo; at that position could transform the game into, and materialize the one that is most utilitarian for that player.</p>
+<blockquote class="book-hint info">
+<p>While the name may suggest so, a strong solution is not a solution concept. A solution concept is a convention of sorts, while a strong solution is actual data.</p>
+</blockquote>
+<h3 id="games-to-puzzles">
+  Games to Puzzles
+  <a class="anchor" href="#games-to-puzzles">#</a>
+</h3>
+<p>Removing the complexity of conflicting player interests makes single-player games more akin to single-objective optimization problems, as opposed to the complicated situations that their multi-player cousins are likened to.</p>
+<p>This fact is constantly reflected in the systems you will be building on top of; sometimes they will be generic, using the same infrastructure for multi-player games and puzzles; other times, there will be dedicated platforms for puzzles, which allow builders to cut the corners that are only necessary when dealing with multi-player games.</p>
+<p>Regardless, all of the vocabulary that is used when talking about multi-player games (e.g., strong solutions) is still valid for puzzles because they are still games. In this assignment, everything you learn will also be at least partially applicable to multi-player games.</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+  <div><a class="flex align-center" href="https://github.com/gamescrafters/gamescrafters.github.io/commit/c85ffc7b290e4cb98f2ff9596bbb57347b5acaf0" title='Last modified by Max Fierro | January 31, 2025' target="_blank" rel="noopener">
+      <img src="/svg/calendar.svg" class="book-icon" alt="" />
+      <span>January 31, 2025</span>
+    </a>
+  </div>
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/gamescrafters/gamescrafters.github.io/edit/main/content/archive/puzzle-homefun.md" target="_blank" rel="noopener">
+      <img src="/svg/edit.svg" class="book-icon" alt="" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#summary">Summary</a></li>
+    <li><a href="#explanation">Explanation</a>
+      <ul>
+        <li><a href="#puzzles-and-games">Puzzles and Games</a></li>
+        <li><a href="#puzzles-and-rulesets">Puzzles and Rulesets</a></li>
+        <li><a href="#our-first-ruleset">Our First Ruleset</a></li>
+        <li><a href="#the-puzzle-interface">The Puzzle Interface</a></li>
+        <li><a href="#families-of-puzzles">Families of Puzzles</a></li>
+      </ul>
+    </li>
+    <li><a href="#deliverable">Deliverable</a></li>
+    <li><a href="#checks">Checks</a></li>
+    <li><a href="#resources">Resources</a></li>
+    <li><a href="#appendix">Appendix</a>
+      <ul>
+        <li><a href="#games-vs-problems">Games vs. Problems</a></li>
+        <li><a href="#solution-concepts">Solution Concepts</a></li>
+        <li><a href="#strong-solutions">Strong Solutions</a></li>
+        <li><a href="#games-to-puzzles">Games to Puzzles</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

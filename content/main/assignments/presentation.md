@@ -8,8 +8,8 @@ weight: 6
 
 Due date: `TODO`
 
-{{< hint warning >}}
+{{% hint warning %}}
 
 **Warning:** This page is under construction.
 
-{{< /hint >}}
+{{% /hint %}}

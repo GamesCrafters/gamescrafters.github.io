@@ -1,0 +1,39 @@
+baseURL: https://gamescrafters.github.io/
+languageCode: en-us
+title: GamesCrafters
+theme: hugo-book
+
+disablePathToLower: true
+enableGitInfo: true
+
+tableOfContents:
+  startLevel: 1
+
+params:
+  BookTheme: auto
+  BookToC: true
+  BookFavicon: favicon.png
+  BookDateFormat: January 2, 2006
+  BookSearch: true
+  BookComments: true
+  BookPortableLinks: true
+  BookServiceWorker: true
+  BookTranslatedOnly: false
+  BookLogo: logo.png
+  BookSection: main
+  BookRepo: https://github.com/gamescrafters/gamescrafters.github.io
+  BookCommitPath: commit
+  BookEditPath: edit/main
+
+markup:
+  highlight:
+    noClasses: false
+  goldmark:
+    renderer:
+      unsafe: true
+    extensions:
+      passthrough:
+        delimiters:
+          block: [['\[', '\]'], ["$$", "$$"]]
+          inline: [['\(', '\)']]
+        enable: true

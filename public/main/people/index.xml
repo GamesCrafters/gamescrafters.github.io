@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>People on GamesCrafters</title>
+    <link>http://localhost:59338/main/people/</link>
+    <description>Recent content in People on GamesCrafters</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <atom:link href="http://localhost:59338/main/people/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Course Organizers</title>
+      <link>http://localhost:59338/main/people/organizers/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:59338/main/people/organizers/</guid>
+      <description>&lt;h1 id=&#34;course-organizers&#34;&gt;&#xA;  &lt;strong&gt;Course Organizers&lt;/strong&gt;&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#course-organizers&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;blockquote class=&#34;book-hint warning&#34;&gt;&#xA;&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt; This page is under construction.&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
+    </item>
+    <item>
+      <title>Group Alumni</title>
+      <link>http://localhost:59338/main/people/alumni/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:59338/main/people/alumni/</guid>
+      <description>&lt;h1 id=&#34;gamescrafters-alumni&#34;&gt;&#xA;  &lt;strong&gt;GamesCrafters Alumni&lt;/strong&gt;&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#gamescrafters-alumni&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;blockquote class=&#34;book-hint warning&#34;&gt;&#xA;&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt; This page is under construction.&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
+    </item>
+    <item>
+      <title>Past Groups</title>
+      <link>http://localhost:59338/main/people/groups/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:59338/main/people/groups/</guid>
+      <description>&lt;h1 id=&#34;gamescrafters-groups&#34;&gt;&#xA;  &lt;strong&gt;GamesCrafters Groups&lt;/strong&gt;&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#gamescrafters-groups&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;blockquote class=&#34;book-hint warning&#34;&gt;&#xA;&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt; This page is under construction.&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
+    </item>
+  </channel>
+</rss>

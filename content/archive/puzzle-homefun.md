@@ -2,21 +2,22 @@
 title: Homefun
 type: docs
 weight: 1
+math: true
 ---
 
 # **Homefun**
 
 Due: `February 3, 2025`
 
-{{< hint warning >}}
+{{% hint warning %}}
 
 **Warning:** This page is under construction.
 
-{{< /hint >}}
+{{% /hint %}}
 
-{{< tabs >}}
+{{% tabs %}}
 
-{{< tab "Logistics" >}}
+{{% tab "Logistics" %}}
 
 This assignment is managed through a single Github classroom assignment. You can accept it via [this link](https://classroom.github.com/a/-W652rH9). This will create a new repository that you have write access to. Once you accept it, **read the `README` file.**
 
@@ -24,9 +25,9 @@ When you push commits to this repository, an automatic testing job will run pre-
 
 **If the latest commit on your Homefun repository's `main` branch passes all tests before the due date passes, you will receive full credit.** If you do not pass the necessary autograder tests before the due date passes, your work can be reviewed by an organizer on an effort basis upon request (so you should always let someone know if you won't finish in time).
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< /tabs >}}
+{{% /tabs %}}
 
 ## Summary
 
@@ -44,7 +45,7 @@ Puzzles are games in both a formal and informal sense; we play them to have fun,
 
 The puzzles we are interested in are determined by what positions they can find themselves in, what players there are, how positions can transition to others, and by what positions are terminal (and the benefit associated with reaching them according to each player).
 
-When we talk about puzzles colloquially, we don't usually refer to all of these things. If someone refers to the game of Chess, they are not referring to it in terms of its positions, but rather in terms of the **ruleset** that "generates" the game itself. In doing so, they can communicate a game with {{< katex inline >}} >10^{100} {{< /katex >}} unique positions in only about a page of rules.
+When we talk about puzzles colloquially, we don't usually refer to all of these things. If someone refers to the game of Chess, they are not referring to it in terms of its positions, but rather in terms of the **ruleset** that "generates" the game itself. In doing so, they can communicate a game with $>10^{100}$ unique positions in only about a page of rules.
 
 The process of encoding a ruleset in a computer and obtaining a subset of positions in the puzzle it generates (perhaps figuring out interesting facts about it in the process) is known as "exploration" or "search." This is what we will do in this Homefun.
 
@@ -96,11 +97,11 @@ Then, encode both of the river crossing problems mentioned above as separate imp
 
 Finally, write code that allows your program to call the exploration module on an argument `Puzzle` implementation by name and print the generated strong solution to `STDOUT`.
 
-{{< hint warning >}}
+{{% hint warning %}}
 
 Regardless of your programming language and of whether you choose to create separate `Puzzle` implementations, your exploration module should not depend in any way on any information about either of the two rulesets (beyond the generic `Puzzle` interface).
 
-{{< /hint >}}
+{{% /hint %}}
 
 ## Checks
 
@@ -123,13 +124,11 @@ We provide an introduction to games by comparing them to optimization problems, 
 
 A single-objective optimization problem attempts to maximize or minimize a value with respect to a set of parameters. For example, the optimization problem
 
-{{< katex display >}}
-
+$$
 \max_{0 \leq x \leq 1} f(x)
+$$
 
-{{< /katex >}}
-
-asks a very clear question: "Given {{< katex inline >}} f : \mathbb{R} \to \mathbb{R} {{< /katex >}} and {{< katex inline >}} x \in [0, 1]{{< /katex >}}, what is the maximum possible value {{< katex inline >}} f {{< /katex >}} can take?" However, a game is a _situation_, not a problem. We will skip a proper definition, but the cornestone assumption is that each player attempts to maximize their own [utility](https://en.wikipedia.org/wiki/Utility). But from a global perspective, there is no obvious "ask" when presented with a game (unlike optimization problems).
+asks a very clear question: "Given $f : \mathbb{R} \to \mathbb{R}$ and $x \in [0, 1]$, what is the maximum possible value $f$ can take?" However, a game is a _situation_, not a problem. We will skip a proper definition, but the cornestone assumption is that each player attempts to maximize their own [utility](https://en.wikipedia.org/wiki/Utility). But from a global perspective, there is no obvious "ask" when presented with a game (unlike optimization problems).
 
 It is tempting to believe that there exists some "universally optimal" way of playing any game, and therefore a way of predicting how any game will be played. It turns out this is not true under most conditions. This is non-obvious, and took a lot of bright minds to figure out. However, for many specific kinds of games, there exist very reasonable rules that can be used to predict how a game will be played _a priori_.
 
@@ -145,11 +144,11 @@ The game-theoretic value of a position is the highest utility that a player whos
 
 Such a mapping is equivalent to something known as a [strong solution](https://en.wikipedia.org/wiki/Solved_game), as it provides the answer to the question: "Given any position in the game, what is the best possible course of action?" It is not obvious why this is possible; to figure out the best possible action from a position, it suffices to look at the values of all possible positions that the player who is "in power" at that position could transform the game into, and materialize the one that is most utilitarian for that player.
 
-{{< hint info >}}
+{{% hint info %}}
 
 While the name may suggest so, a strong solution is not a solution concept. A solution concept is a convention of sorts, while a strong solution is actual data.
 
-{{< /hint >}}
+{{% /hint %}}
 
 ### Games to Puzzles
 
