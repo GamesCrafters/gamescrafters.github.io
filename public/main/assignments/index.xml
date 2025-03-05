@@ -2,23 +2,23 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Course Assignments on GamesCrafters</title>
-    <link>http://localhost:59338/main/assignments/</link>
+    <link>http://localhost:61072/main/assignments/</link>
     <description>Recent content in Course Assignments on GamesCrafters</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <atom:link href="http://localhost:59338/main/assignments/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:61072/main/assignments/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Specification</title>
-      <link>http://localhost:59338/main/assignments/specification/</link>
+      <link>http://localhost:61072/main/assignments/specification/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:59338/main/assignments/specification/</guid>
+      <guid>http://localhost:61072/main/assignments/specification/</guid>
       <description>&lt;h1 id=&#34;specification&#34;&gt;&#xA;  &lt;strong&gt;Specification&lt;/strong&gt;&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#specification&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;p&gt;Due date: &lt;code&gt;TODO&lt;/code&gt;&lt;/p&gt;&#xA;&lt;blockquote class=&#34;book-hint warning&#34;&gt;&#xA;&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt; This page is under construction.&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
     </item>
     <item>
       <title>Presentation</title>
-      <link>http://localhost:59338/main/assignments/presentation/</link>
+      <link>http://localhost:61072/main/assignments/presentation/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:59338/main/assignments/presentation/</guid>
+      <guid>http://localhost:61072/main/assignments/presentation/</guid>
       <description>&lt;h1 id=&#34;presentation&#34;&gt;&#xA;  &lt;strong&gt;Presentation&lt;/strong&gt;&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#presentation&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;p&gt;Due date: &lt;code&gt;TODO&lt;/code&gt;&lt;/p&gt;&#xA;&lt;blockquote class=&#34;book-hint warning&#34;&gt;&#xA;&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt; This page is under construction.&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
     </item>
   </channel>

@@ -1,101 +1,129 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Introduction on GamesCrafters</title>
-    <link>http://localhost:59338/</link>
-    <description>Recent content in Introduction on GamesCrafters</description>
+    <title>Home on GamesCrafters</title>
+    <link>http://localhost:61072/</link>
+    <description>Recent content in Home on GamesCrafters</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <atom:link href="http://localhost:59338/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:61072/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>About the Course</title>
-      <link>http://localhost:59338/main/about/course/</link>
+      <link>http://localhost:61072/main/overview/course/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:59338/main/about/course/</guid>
+      <guid>http://localhost:61072/main/overview/course/</guid>
       <description>&lt;h1 id=&#34;course-details&#34;&gt;&#xA;  &lt;strong&gt;Course Details&lt;/strong&gt;&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#course-details&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;blockquote class=&#34;book-hint warning&#34;&gt;&#xA;&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt; This page is under construction.&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
     </item>
     <item>
-      <title>GitHub Organization</title>
-      <link>http://localhost:59338/main/links/github/</link>
+      <title>Game Measurements</title>
+      <link>http://localhost:61072/main/knowledge/analyses/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:59338/main/links/github/</guid>
+      <guid>http://localhost:61072/main/knowledge/analyses/</guid>
+      <description>&lt;h1 id=&#34;game-metrics&#34;&gt;&#xA;  &lt;strong&gt;Game Metrics&lt;/strong&gt;&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#game-metrics&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;blockquote class=&#34;book-hint warning&#34;&gt;&#xA;&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt; This page is under construction.&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
+    </item>
+    <item>
+      <title>GitHub Organization</title>
+      <link>http://localhost:61072/main/links/github/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:61072/main/links/github/</guid>
       <description>&lt;br&gt;</description>
     </item>
     <item>
       <title>Homefun</title>
-      <link>http://localhost:59338/archive/puzzle-homefun/</link>
+      <link>http://localhost:61072/archive/puzzle-homefun/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:59338/archive/puzzle-homefun/</guid>
+      <guid>http://localhost:61072/archive/puzzle-homefun/</guid>
       <description>&lt;h1 id=&#34;homefun&#34;&gt;&#xA;  &lt;strong&gt;Homefun&lt;/strong&gt;&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#homefun&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;p&gt;Due: &lt;code&gt;February 3, 2025&lt;/code&gt;&lt;/p&gt;&#xA;&lt;blockquote class=&#34;book-hint warning&#34;&gt;&#xA;&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt; This page is under construction.&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;div class=&#34;book-tabs&#34;&gt;&#xA;&lt;input type=&#34;radio&#34; class=&#34;toggle&#34; name=&#34;tabs-1&#34; id=&#34;tabs-1-0&#34; checked=&#34;checked&#34; /&gt;&#xA;&lt;label for=&#34;tabs-1-0&#34;&gt;Logistics&lt;/label&gt;&#xA;&lt;div class=&#34;book-tabs-content markdown-inner&#34;&gt;&lt;p&gt;This assignment is managed through a single Github classroom assignment. You can accept it via &#xA;  &lt;a href=&#34;https://classroom.github.com/a/-W652rH9&#34;&gt;this link&lt;/a&gt;. This will create a new repository that you have write access to. Once you accept it, &lt;strong&gt;read the &lt;code&gt;README&lt;/code&gt; file.&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;When you push commits to this repository, an automatic testing job will run pre-written tests. These tests verify that your program produces the right outputs on certain inputs. You can find verbal descriptions of each one in the &amp;ldquo;Checks&amp;rdquo; section. Further, all of the tests&amp;rsquo; expected input/output pairs are publically visible in the autograder workflow runs.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Homefun Pt. 1</title>
-      <link>http://localhost:59338/archive/game-homefun-p1/</link>
+      <link>http://localhost:61072/archive/game-homefun-p1/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:59338/archive/game-homefun-p1/</guid>
+      <guid>http://localhost:61072/archive/game-homefun-p1/</guid>
       <description>&lt;h1 id=&#34;homefun-part-1&#34;&gt;&#xA;  &lt;strong&gt;Homefun Part 1&lt;/strong&gt;&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#homefun-part-1&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;p&gt;Due: &lt;code&gt;11:59PM 9/11/2024&lt;/code&gt;&lt;/p&gt;&#xA;&lt;div class=&#34;book-tabs&#34;&gt;&#xA;&lt;input type=&#34;radio&#34; class=&#34;toggle&#34; name=&#34;tabs-0&#34; id=&#34;tabs-0-0&#34; checked=&#34;checked&#34; /&gt;&#xA;&lt;label for=&#34;tabs-0-0&#34;&gt;Logistics&lt;/label&gt;&#xA;&lt;div class=&#34;book-tabs-content markdown-inner&#34;&gt;&lt;p&gt;Both parts of the Homefun are managed through a single Github classroom assignment. You can accept it &#xA;  &lt;a href=&#34;https://classroom.github.com/a/-W652rH9&#34;&gt;here&lt;/a&gt;. This will create a new repository that you have write access to. &lt;strong&gt;Read the &lt;code&gt;README&lt;/code&gt;.&lt;/strong&gt; When you push new commits on this repository, an &amp;ldquo;autograding&amp;rdquo; job will run the tests for both parts.&lt;/p&gt;&#xA;&lt;p&gt;These tests simply verify that your program has the correct outputs for certain inputs. Each part has a set of input/output pairs that the tests enforce. &lt;strong&gt;If the latest commit on your Homefun repository&amp;rsquo;s &lt;code&gt;main&lt;/code&gt; branch passes all of a given part&amp;rsquo;s tests before its due date passes, you will receive full credit for that part of the Homefun.&lt;/strong&gt; You can see which tests belong to which part in the assignments&amp;rsquo; &amp;ldquo;Checks&amp;rdquo; sections.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Homefun Pt. 2</title>
-      <link>http://localhost:59338/archive/game-homefun-p2/</link>
+      <link>http://localhost:61072/archive/game-homefun-p2/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:59338/archive/game-homefun-p2/</guid>
+      <guid>http://localhost:61072/archive/game-homefun-p2/</guid>
       <description>&lt;h1 id=&#34;homefun-part-2&#34;&gt;&#xA;  &lt;strong&gt;Homefun Part 2&lt;/strong&gt;&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#homefun-part-2&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;p&gt;Due: &lt;code&gt;11:59PM 9/23/2024&lt;/code&gt;&lt;/p&gt;&#xA;&lt;blockquote class=&#34;book-hint warning&#34;&gt;&#xA;&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt; This part is missing test outputs. They will be added soon, but you can begin your implementation without them.&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;div class=&#34;book-tabs&#34;&gt;&#xA;&lt;input type=&#34;radio&#34; class=&#34;toggle&#34; name=&#34;tabs-1&#34; id=&#34;tabs-1-0&#34; checked=&#34;checked&#34; /&gt;&#xA;&lt;label for=&#34;tabs-1-0&#34;&gt;Logistics&lt;/label&gt;&#xA;&lt;div class=&#34;book-tabs-content markdown-inner&#34;&gt;&lt;p&gt;Both parts of the Homefun are managed through a single Github classroom assignment. You can accept it &#xA;  &lt;a href=&#34;https://classroom.github.com/a/-W652rH9&#34;&gt;here&lt;/a&gt;. This will create a new repository that you have write access to. &lt;strong&gt;Read the &lt;code&gt;README&lt;/code&gt;.&lt;/strong&gt; When you push new commits on this repository, an &amp;ldquo;autograding&amp;rdquo; job will run the tests for both parts.&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Specification</title>
-      <link>http://localhost:59338/main/assignments/specification/</link>
+      <title>Ruleset Explainers</title>
+      <link>http://localhost:61072/main/knowledge/games/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:59338/main/assignments/specification/</guid>
+      <guid>http://localhost:61072/main/knowledge/games/</guid>
+      <description>&lt;h1 id=&#34;game-descriptions&#34;&gt;&#xA;  &lt;strong&gt;Game Descriptions&lt;/strong&gt;&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#game-descriptions&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;blockquote class=&#34;book-hint warning&#34;&gt;&#xA;&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt; This page is under construction.&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
+    </item>
+    <item>
+      <title>Technical Articles</title>
+      <link>http://localhost:61072/main/knowledge/articles/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:61072/main/knowledge/articles/</guid>
+      <description>&lt;br&gt;</description>
+    </item>
+    <item>
+      <title>Specification</title>
+      <link>http://localhost:61072/main/assignments/specification/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:61072/main/assignments/specification/</guid>
       <description>&lt;h1 id=&#34;specification&#34;&gt;&#xA;  &lt;strong&gt;Specification&lt;/strong&gt;&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#specification&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;p&gt;Due date: &lt;code&gt;TODO&lt;/code&gt;&lt;/p&gt;&#xA;&lt;blockquote class=&#34;book-hint warning&#34;&gt;&#xA;&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt; This page is under construction.&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
     </item>
     <item>
       <title>Presentation</title>
-      <link>http://localhost:59338/main/assignments/presentation/</link>
+      <link>http://localhost:61072/main/assignments/presentation/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:59338/main/assignments/presentation/</guid>
+      <guid>http://localhost:61072/main/assignments/presentation/</guid>
       <description>&lt;h1 id=&#34;presentation&#34;&gt;&#xA;  &lt;strong&gt;Presentation&lt;/strong&gt;&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#presentation&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;p&gt;Due date: &lt;code&gt;TODO&lt;/code&gt;&lt;/p&gt;&#xA;&lt;blockquote class=&#34;book-hint warning&#34;&gt;&#xA;&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt; This page is under construction.&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
     </item>
     <item>
+      <title>Example Article</title>
+      <link>http://localhost:61072/articles/example/</link>
+      <pubDate>Fri, 01 Jan 1999 00:00:00 +0000</pubDate>
+      <guid>http://localhost:61072/articles/example/</guid>
+      <description>&lt;p&gt;Content of article.&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>About the Group</title>
-      <link>http://localhost:59338/main/about/group/</link>
+      <link>http://localhost:61072/main/overview/group/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:59338/main/about/group/</guid>
+      <guid>http://localhost:61072/main/overview/group/</guid>
       <description>&lt;h1 id=&#34;about-gamescrafters&#34;&gt;&#xA;  &lt;strong&gt;About GamesCrafters&lt;/strong&gt;&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#about-gamescrafters&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;blockquote class=&#34;book-hint warning&#34;&gt;&#xA;&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt; This page is under construction.&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
     </item>
     <item>
       <title>Course Organizers</title>
-      <link>http://localhost:59338/main/people/organizers/</link>
+      <link>http://localhost:61072/main/people/organizers/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:59338/main/people/organizers/</guid>
+      <guid>http://localhost:61072/main/people/organizers/</guid>
       <description>&lt;h1 id=&#34;course-organizers&#34;&gt;&#xA;  &lt;strong&gt;Course Organizers&lt;/strong&gt;&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#course-organizers&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;blockquote class=&#34;book-hint warning&#34;&gt;&#xA;&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt; This page is under construction.&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
     </item>
     <item>
       <title>GamesmanUni</title>
-      <link>http://localhost:59338/main/links/uni/</link>
+      <link>http://localhost:61072/main/links/uni/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:59338/main/links/uni/</guid>
+      <guid>http://localhost:61072/main/links/uni/</guid>
       <description>&lt;br&gt;</description>
     </item>
     <item>
       <title>Group Alumni</title>
-      <link>http://localhost:59338/main/people/alumni/</link>
+      <link>http://localhost:61072/main/people/alumni/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:59338/main/people/alumni/</guid>
+      <guid>http://localhost:61072/main/people/alumni/</guid>
       <description>&lt;h1 id=&#34;gamescrafters-alumni&#34;&gt;&#xA;  &lt;strong&gt;GamesCrafters Alumni&lt;/strong&gt;&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#gamescrafters-alumni&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;blockquote class=&#34;book-hint warning&#34;&gt;&#xA;&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt; This page is under construction.&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
     </item>
     <item>
       <title>Miscellaneous</title>
-      <link>http://localhost:59338/main/about/misc/</link>
+      <link>http://localhost:61072/main/overview/misc/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:59338/main/about/misc/</guid>
+      <guid>http://localhost:61072/main/overview/misc/</guid>
       <description>&lt;h1 id=&#34;extra-information&#34;&gt;&#xA;  &lt;strong&gt;Extra Information&lt;/strong&gt;&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#extra-information&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;blockquote class=&#34;book-hint warning&#34;&gt;&#xA;&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt; This page is under construction.&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
     </item>
     <item>
       <title>Past Groups</title>
-      <link>http://localhost:59338/main/people/groups/</link>
+      <link>http://localhost:61072/main/people/groups/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:59338/main/people/groups/</guid>
+      <guid>http://localhost:61072/main/people/groups/</guid>
       <description>&lt;h1 id=&#34;gamescrafters-groups&#34;&gt;&#xA;  &lt;strong&gt;GamesCrafters Groups&lt;/strong&gt;&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#gamescrafters-groups&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;blockquote class=&#34;book-hint warning&#34;&gt;&#xA;&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt; This page is under construction.&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
     </item>
   </channel>

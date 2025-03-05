@@ -1,7 +1,7 @@
 ---
 title: People
 type: docs
-weight: 4 
-bookCollapseSection: false 
+weight: 7
+bookCollapseSection: false
 bookFlatSection: true
 ---

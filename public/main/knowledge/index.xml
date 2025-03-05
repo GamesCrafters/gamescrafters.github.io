@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Knowledge on GamesCrafters</title>
+    <link>http://localhost:61072/main/knowledge/</link>
+    <description>Recent content in Knowledge on GamesCrafters</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <atom:link href="http://localhost:61072/main/knowledge/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ruleset Explainers</title>
+      <link>http://localhost:61072/main/knowledge/games/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:61072/main/knowledge/games/</guid>
+      <description>&lt;h1 id=&#34;game-descriptions&#34;&gt;&#xA;  &lt;strong&gt;Game Descriptions&lt;/strong&gt;&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#game-descriptions&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;blockquote class=&#34;book-hint warning&#34;&gt;&#xA;&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt; This page is under construction.&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
+    </item>
+    <item>
+      <title>Game Measurements</title>
+      <link>http://localhost:61072/main/knowledge/analyses/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:61072/main/knowledge/analyses/</guid>
+      <description>&lt;h1 id=&#34;game-metrics&#34;&gt;&#xA;  &lt;strong&gt;Game Metrics&lt;/strong&gt;&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#game-metrics&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;blockquote class=&#34;book-hint warning&#34;&gt;&#xA;&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt; This page is under construction.&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
+    </item>
+    <item>
+      <title>Technical Articles</title>
+      <link>http://localhost:61072/main/knowledge/articles/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:61072/main/knowledge/articles/</guid>
+      <description>&lt;br&gt;</description>
+    </item>
+  </channel>
+</rss>

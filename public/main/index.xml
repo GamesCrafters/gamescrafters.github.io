@@ -2,10 +2,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Mains on GamesCrafters</title>
-    <link>http://localhost:59338/main/</link>
+    <link>http://localhost:61072/main/</link>
     <description>Recent content in Mains on GamesCrafters</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <atom:link href="http://localhost:59338/main/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:61072/main/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

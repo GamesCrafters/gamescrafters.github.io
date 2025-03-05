@@ -2,69 +2,87 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:59338/main/about/course/</loc>
-    <lastmod>2024-09-01T18:26:54-07:00</lastmod>
+    <loc>http://localhost:61072/main/overview/course/</loc>
   </url><url>
-    <loc>http://localhost:59338/main/links/github/</loc>
+    <loc>http://localhost:61072/main/links/github/</loc>
+    <lastmod>2025-03-05T02:51:33-08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:61072/archive/puzzle-homefun/</loc>
+    <lastmod>2025-03-05T02:51:33-08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:61072/archive/game-homefun-p1/</loc>
+    <lastmod>2025-03-05T02:51:33-08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:61072/archive/game-homefun-p2/</loc>
+    <lastmod>2025-03-05T02:51:33-08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:61072/main/knowledge/games/</loc>
+  </url><url>
+    <loc>http://localhost:61072/main/knowledge/analyses/</loc>
+  </url><url>
+    <loc>http://localhost:61072/main/knowledge/articles/</loc>
+  </url><url>
+    <loc>http://localhost:61072/main/assignments/specification/</loc>
+    <lastmod>2025-03-05T02:51:33-08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:61072/main/overview/</loc>
+  </url><url>
+    <loc>http://localhost:61072/main/assignments/presentation/</loc>
+    <lastmod>2025-03-05T02:51:33-08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:61072/main/people/</loc>
     <lastmod>2024-09-01T17:59:28-07:00</lastmod>
   </url><url>
-    <loc>http://localhost:59338/archive/puzzle-homefun/</loc>
-    <lastmod>2025-01-31T11:46:55-08:00</lastmod>
+    <loc>http://localhost:61072/main/knowledge/</loc>
   </url><url>
-    <loc>http://localhost:59338/archive/game-homefun-p1/</loc>
-  </url><url>
-    <loc>http://localhost:59338/archive/game-homefun-p2/</loc>
-  </url><url>
-    <loc>http://localhost:59338/main/about/</loc>
+    <loc>http://localhost:61072/main/links/</loc>
     <lastmod>2024-09-01T17:59:28-07:00</lastmod>
   </url><url>
-    <loc>http://localhost:59338/main/people/</loc>
+    <loc>http://localhost:61072/main/assignments/</loc>
     <lastmod>2024-09-01T17:59:28-07:00</lastmod>
   </url><url>
-    <loc>http://localhost:59338/main/links/</loc>
+    <loc>http://localhost:61072/main/projects/</loc>
     <lastmod>2024-09-01T17:59:28-07:00</lastmod>
   </url><url>
-    <loc>http://localhost:59338/main/assignments/specification/</loc>
-    <lastmod>2025-01-18T19:55:55-08:00</lastmod>
+    <loc>http://localhost:61072/main/overview/group/</loc>
   </url><url>
-    <loc>http://localhost:59338/main/assignments/presentation/</loc>
-    <lastmod>2025-01-18T19:55:55-08:00</lastmod>
+    <loc>http://localhost:61072/archive/</loc>
+    <lastmod>2025-03-05T02:51:33-08:00</lastmod>
   </url><url>
-    <loc>http://localhost:59338/main/assignments/</loc>
-    <lastmod>2024-09-01T17:59:28-07:00</lastmod>
+    <loc>http://localhost:61072/articles/</loc>
   </url><url>
-    <loc>http://localhost:59338/main/projects/</loc>
-    <lastmod>2024-09-01T17:59:28-07:00</lastmod>
+    <loc>http://localhost:61072/categories/</loc>
   </url><url>
-    <loc>http://localhost:59338/main/about/group/</loc>
-    <lastmod>2024-09-01T18:26:54-07:00</lastmod>
+    <loc>http://localhost:61072/categories/category-one/</loc>
   </url><url>
-    <loc>http://localhost:59338/archive/</loc>
-    <lastmod>2025-01-31T11:46:55-08:00</lastmod>
+    <loc>http://localhost:61072/categories/category-two/</loc>
   </url><url>
-    <loc>http://localhost:59338/categories/</loc>
+    <loc>http://localhost:61072/main/people/organizers/</loc>
+    <lastmod>2025-03-05T02:51:33-08:00</lastmod>
   </url><url>
-    <loc>http://localhost:59338/main/people/organizers/</loc>
-    <lastmod>2024-09-01T18:26:54-07:00</lastmod>
+    <loc>http://localhost:61072/articles/example/</loc>
   </url><url>
-    <loc>http://localhost:59338/main/links/uni/</loc>
-    <lastmod>2024-02-10T03:15:25-08:00</lastmod>
+    <loc>http://localhost:61072/main/links/uni/</loc>
+    <lastmod>2025-03-05T02:51:33-08:00</lastmod>
   </url><url>
-    <loc>http://localhost:59338/main/people/alumni/</loc>
-    <lastmod>2024-09-01T18:26:54-07:00</lastmod>
+    <loc>http://localhost:61072/main/people/alumni/</loc>
+    <lastmod>2025-03-05T02:51:33-08:00</lastmod>
   </url><url>
-    <loc>http://localhost:59338/</loc>
-    <lastmod>2025-01-18T19:55:55-08:00</lastmod>
+    <loc>http://localhost:61072/</loc>
+    <lastmod>2025-03-05T02:51:33-08:00</lastmod>
   </url><url>
-    <loc>http://localhost:59338/main/</loc>
-    <lastmod>2025-01-18T19:55:55-08:00</lastmod>
+    <loc>http://localhost:61072/main/</loc>
+    <lastmod>2025-03-05T02:51:33-08:00</lastmod>
   </url><url>
-    <loc>http://localhost:59338/main/about/misc/</loc>
-    <lastmod>2024-09-01T18:26:54-07:00</lastmod>
+    <loc>http://localhost:61072/main/overview/misc/</loc>
   </url><url>
-    <loc>http://localhost:59338/main/people/groups/</loc>
-    <lastmod>2024-09-01T18:26:54-07:00</lastmod>
+    <loc>http://localhost:61072/main/people/groups/</loc>
+    <lastmod>2025-03-05T02:51:33-08:00</lastmod>
   </url><url>
-    <loc>http://localhost:59338/tags/</loc>
+    <loc>http://localhost:61072/tags/tag-one/</loc>
+  </url><url>
+    <loc>http://localhost:61072/tags/tag-two/</loc>
+  </url><url>
+    <loc>http://localhost:61072/tags/</loc>
   </url>
 </urlset>
