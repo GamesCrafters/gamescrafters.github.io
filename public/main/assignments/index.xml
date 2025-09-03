@@ -2,24 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Course Assignments on GamesCrafters</title>
-    <link>http://localhost:61072/main/assignments/</link>
+    <link>http://localhost:54472/main/assignments/</link>
     <description>Recent content in Course Assignments on GamesCrafters</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <atom:link href="http://localhost:61072/main/assignments/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:54472/main/assignments/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Specification</title>
-      <link>http://localhost:61072/main/assignments/specification/</link>
+      <title>Homefun Pt. 1</title>
+      <link>http://localhost:54472/main/assignments/game-homefun-p1/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:61072/main/assignments/specification/</guid>
-      <description>&lt;h1 id=&#34;specification&#34;&gt;&#xA;  &lt;strong&gt;Specification&lt;/strong&gt;&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#specification&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;p&gt;Due date: &lt;code&gt;TODO&lt;/code&gt;&lt;/p&gt;&#xA;&lt;blockquote class=&#34;book-hint warning&#34;&gt;&#xA;&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt; This page is under construction.&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
-    </item>
-    <item>
-      <title>Presentation</title>
-      <link>http://localhost:61072/main/assignments/presentation/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:61072/main/assignments/presentation/</guid>
-      <description>&lt;h1 id=&#34;presentation&#34;&gt;&#xA;  &lt;strong&gt;Presentation&lt;/strong&gt;&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#presentation&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;p&gt;Due date: &lt;code&gt;TODO&lt;/code&gt;&lt;/p&gt;&#xA;&lt;blockquote class=&#34;book-hint warning&#34;&gt;&#xA;&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt; This page is under construction.&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
+      <guid>http://localhost:54472/main/assignments/game-homefun-p1/</guid>
+      <description>&lt;h1 id=&#34;homefun-part-1&#34;&gt;&#xA;  &lt;strong&gt;Homefun Part 1&lt;/strong&gt;&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#homefun-part-1&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;p&gt;Due: &lt;code&gt;11:59PM 9/10/2025&lt;/code&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;summary&#34;&gt;&#xA;  Summary&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#summary&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;p&gt;Write a program that computes the strong solution of two related games, &lt;code&gt;10-to-0-by-1-or-2&lt;/code&gt; and &lt;code&gt;25-to-0-by-1-3-or-4&lt;/code&gt;. Any programming language is acceptable. Optional aid is provided in the form of a &#xA;  &lt;a href=&#34;https://github.com/GamesCrafters/homefun&#34;&gt;Python template&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;h2 id=&#34;game-representation&#34;&gt;&#xA;  Game Representation&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#game-representation&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;p&gt;The object of the Homefun series will be to find out specific facts about a certain class of games. It can be summarized as: &amp;ldquo;For games like Chess, Tic-Tac-Toe, and Connect-4, how do I put them into a computer and have it tell me how to play perfectly?&amp;rdquo;&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

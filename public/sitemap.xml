@@ -2,87 +2,103 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:61072/main/overview/course/</loc>
+    <loc>http://localhost:54472/main/overview/course/</loc>
+    <lastmod>2025-03-05T04:03:59-08:00</lastmod>
   </url><url>
-    <loc>http://localhost:61072/main/links/github/</loc>
+    <loc>http://localhost:54472/main/knowledge/analyses/</loc>
+    <lastmod>2025-03-05T04:03:59-08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:54472/main/links/github/</loc>
     <lastmod>2025-03-05T02:51:33-08:00</lastmod>
   </url><url>
-    <loc>http://localhost:61072/archive/puzzle-homefun/</loc>
+    <loc>http://localhost:54472/archive/puzzle-homefun/</loc>
     <lastmod>2025-03-05T02:51:33-08:00</lastmod>
   </url><url>
-    <loc>http://localhost:61072/archive/game-homefun-p1/</loc>
+    <loc>http://localhost:54472/archive/game-homefun-p1/</loc>
     <lastmod>2025-03-05T02:51:33-08:00</lastmod>
   </url><url>
-    <loc>http://localhost:61072/archive/game-homefun-p2/</loc>
+    <loc>http://localhost:54472/archive/game-homefun-p2/</loc>
     <lastmod>2025-03-05T02:51:33-08:00</lastmod>
   </url><url>
-    <loc>http://localhost:61072/main/knowledge/games/</loc>
+    <loc>http://localhost:54472/main/knowledge/games/</loc>
+    <lastmod>2025-03-05T04:03:59-08:00</lastmod>
   </url><url>
-    <loc>http://localhost:61072/main/knowledge/analyses/</loc>
+    <loc>http://localhost:54472/main/knowledge/articles/</loc>
+    <lastmod>2025-03-05T04:03:59-08:00</lastmod>
   </url><url>
-    <loc>http://localhost:61072/main/knowledge/articles/</loc>
-  </url><url>
-    <loc>http://localhost:61072/main/assignments/specification/</loc>
+    <loc>http://localhost:54472/main/assignments/specification/</loc>
     <lastmod>2025-03-05T02:51:33-08:00</lastmod>
   </url><url>
-    <loc>http://localhost:61072/main/overview/</loc>
+    <loc>http://localhost:54472/main/overview/</loc>
+    <lastmod>2025-03-05T04:03:59-08:00</lastmod>
   </url><url>
-    <loc>http://localhost:61072/main/assignments/presentation/</loc>
+    <loc>http://localhost:54472/main/assignments/presentation/</loc>
     <lastmod>2025-03-05T02:51:33-08:00</lastmod>
   </url><url>
-    <loc>http://localhost:61072/main/people/</loc>
+    <loc>http://localhost:54472/main/people/</loc>
+    <lastmod>2025-03-05T04:03:59-08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:54472/main/knowledge/</loc>
+    <lastmod>2025-03-05T04:03:59-08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:54472/main/links/</loc>
+    <lastmod>2025-03-05T04:03:59-08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:54472/main/assignments/</loc>
     <lastmod>2024-09-01T17:59:28-07:00</lastmod>
   </url><url>
-    <loc>http://localhost:61072/main/knowledge/</loc>
-  </url><url>
-    <loc>http://localhost:61072/main/links/</loc>
+    <loc>http://localhost:54472/main/projects/</loc>
     <lastmod>2024-09-01T17:59:28-07:00</lastmod>
   </url><url>
-    <loc>http://localhost:61072/main/assignments/</loc>
-    <lastmod>2024-09-01T17:59:28-07:00</lastmod>
+    <loc>http://localhost:54472/articles/</loc>
+    <lastmod>2025-03-05T04:03:59-08:00</lastmod>
   </url><url>
-    <loc>http://localhost:61072/main/projects/</loc>
-    <lastmod>2024-09-01T17:59:28-07:00</lastmod>
+    <loc>http://localhost:54472/categories/</loc>
+    <lastmod>2025-03-05T04:03:59-08:00</lastmod>
   </url><url>
-    <loc>http://localhost:61072/main/overview/group/</loc>
+    <loc>http://localhost:54472/categories/category-one/</loc>
+    <lastmod>2025-03-05T04:03:59-08:00</lastmod>
   </url><url>
-    <loc>http://localhost:61072/archive/</loc>
+    <loc>http://localhost:54472/categories/category-two/</loc>
+    <lastmod>2025-03-05T04:03:59-08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:54472/articles/example/</loc>
+    <lastmod>2025-03-05T04:03:59-08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:54472/tags/tag-one/</loc>
+    <lastmod>2025-03-05T04:03:59-08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:54472/tags/tag-two/</loc>
+    <lastmod>2025-03-05T04:03:59-08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:54472/tags/</loc>
+    <lastmod>2025-03-05T04:03:59-08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:54472/main/overview/group/</loc>
+    <lastmod>2025-03-05T04:03:59-08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:54472/archive/</loc>
     <lastmod>2025-03-05T02:51:33-08:00</lastmod>
   </url><url>
-    <loc>http://localhost:61072/articles/</loc>
-  </url><url>
-    <loc>http://localhost:61072/categories/</loc>
-  </url><url>
-    <loc>http://localhost:61072/categories/category-one/</loc>
-  </url><url>
-    <loc>http://localhost:61072/categories/category-two/</loc>
-  </url><url>
-    <loc>http://localhost:61072/main/people/organizers/</loc>
+    <loc>http://localhost:54472/main/people/organizers/</loc>
     <lastmod>2025-03-05T02:51:33-08:00</lastmod>
   </url><url>
-    <loc>http://localhost:61072/articles/example/</loc>
-  </url><url>
-    <loc>http://localhost:61072/main/links/uni/</loc>
+    <loc>http://localhost:54472/main/links/uni/</loc>
     <lastmod>2025-03-05T02:51:33-08:00</lastmod>
   </url><url>
-    <loc>http://localhost:61072/main/people/alumni/</loc>
+    <loc>http://localhost:54472/main/people/alumni/</loc>
     <lastmod>2025-03-05T02:51:33-08:00</lastmod>
   </url><url>
-    <loc>http://localhost:61072/</loc>
+    <loc>http://localhost:54472/</loc>
+    <lastmod>2025-03-05T04:03:59-08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:54472/main/</loc>
+    <lastmod>2025-03-05T04:03:59-08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:54472/main/overview/misc/</loc>
+    <lastmod>2025-03-05T04:03:59-08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:54472/main/people/groups/</loc>
     <lastmod>2025-03-05T02:51:33-08:00</lastmod>
-  </url><url>
-    <loc>http://localhost:61072/main/</loc>
-    <lastmod>2025-03-05T02:51:33-08:00</lastmod>
-  </url><url>
-    <loc>http://localhost:61072/main/overview/misc/</loc>
-  </url><url>
-    <loc>http://localhost:61072/main/people/groups/</loc>
-    <lastmod>2025-03-05T02:51:33-08:00</lastmod>
-  </url><url>
-    <loc>http://localhost:61072/tags/tag-one/</loc>
-  </url><url>
-    <loc>http://localhost:61072/tags/tag-two/</loc>
-  </url><url>
-    <loc>http://localhost:61072/tags/</loc>
   </url>
 </urlset>
