@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on GamesCrafters</title>
-    <link>http://localhost:54472/tags/</link>
+    <link>http://localhost:63814/tags/</link>
     <description>Recent content in Tags on GamesCrafters</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 05 Mar 2025 04:03:59 -0800</lastBuildDate>
-    <atom:link href="http://localhost:54472/tags/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:63814/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Tag One</title>
-      <link>http://localhost:54472/tags/tag-one/</link>
+      <link>http://localhost:63814/tags/tag-one/</link>
       <pubDate>Fri, 01 Jan 1999 00:00:00 +0000</pubDate>
-      <guid>http://localhost:54472/tags/tag-one/</guid>
+      <guid>http://localhost:63814/tags/tag-one/</guid>
       <description></description>
     </item>
     <item>
       <title>Tag Two</title>
-      <link>http://localhost:54472/tags/tag-two/</link>
+      <link>http://localhost:63814/tags/tag-two/</link>
       <pubDate>Fri, 01 Jan 1999 00:00:00 +0000</pubDate>
-      <guid>http://localhost:54472/tags/tag-two/</guid>
+      <guid>http://localhost:63814/tags/tag-two/</guid>
       <description></description>
     </item>
   </channel>

@@ -1,0 +1,112 @@
+{{ $path := .Get "path" }}
+{{ $foldersParam := .Get "folders" | default "" }}
+{{ $folders := split $foldersParam " " }}
+
+{{ $allMembers := slice }}
+
+{{ range $folderName := $folders }}
+  {{ $folderPath := printf "static/%s/%s" $path $folderName }}
+  {{ $files := readDir $folderPath }}
+
+  {{ range $files }}
+    {{ if and (not (in .Name "Crazy")) (or (in .Name ".jpg") (in .Name ".jpeg") (in .Name ".JPG") (in .Name ".JPEG")) }}
+      {{ $allMembers = $allMembers | append (dict "folder" $folderName "file" .) }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ $sortedMembers := slice }}
+{{ range $folderName := $folders }}
+  {{ $folderMembers := where $allMembers "folder" "eq" $folderName }}
+  {{ $folderMembers = sort $folderMembers "file.Name" }}
+  {{ $sortedMembers = $sortedMembers | append $folderMembers }}
+{{ end }}
+
+{{ $total := len $sortedMembers }}
+{{ range $i, $m := $sortedMembers }}
+
+  {{ $filename := printf "%s" $m.file.Name }}
+  {{ $folderName := $m.folder }}
+  {{ $basename := replaceRE "(?i)\\.jpe?g$" "" $filename }}
+  {{ $name := replaceRE "([a-z])([A-Z])" "${1} ${2}" $basename }}
+  {{ $normalPath := printf "/%s/%s/%s" $path $folderName $filename }}
+  {{ $crazyPath := printf "/%s/%s/%sCrazy.jpg" $path $folderName $basename }}
+
+  {{ $bio := "" }}
+  {{ $bioPath := printf "static/%s/%s/%s.md" $path $folderName $basename }}
+  {{ if fileExists $bioPath }}
+    {{ $bio = readFile $bioPath | markdownify }}
+  {{ end }}
+
+  {{ $term := upper (substr $folderName 0 2) }}
+  {{ $yearSuffix := substr $folderName 2 4 }}
+  {{ $semester := printf "%s 20%s" (cond (eq $term "FA") "Fall" "Spring") $yearSuffix }}
+
+  {{ $number := add 1 (sub $total (add $i 1)) }}
+
+  <div class="member-card" style="
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 100%;
+    margin: 1.5rem 0;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0px 10px rgba(10, 10, 10, 10);
+    flex-wrap: wrap;
+  ">
+    <div class="member-images" style="
+      display: flex;
+      gap: 1rem;
+      flex: 0 0 auto;
+      min-width: 200px;
+    ">
+      <img src="{{ $normalPath }}" style="
+        width: 100px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 0.5rem;
+      ">
+      <img src="{{ $crazyPath }}" style="
+        width: 100px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 0.5rem;
+      ">
+    </div>
+
+    <div class="member-info" style="
+      flex: 1;
+      min-width: 250px;
+    ">
+      <h3 style="
+        margin: 0 0 0.2rem 0;
+        font-size: 1.2rem;
+        line-height: 1.2;
+      ">
+        {{ $name }} <span style="color: #999; font-weight: normal;">#{{ $number }}</span>
+      </h3>
+
+	  <p style="
+		margin: 0 0 0.5rem 0;
+		font-size: 0.75rem;
+		font-style: italic;
+		color: #888;
+	  ">
+		Joined {{ $semester }}
+	  </p>
+
+      {{ if $bio }}
+      <div class="member-bio" style="
+        font-size: 0.9rem;
+        color: #666;
+        line-height: 1.3;
+      ">
+        {{ $bio }}
+      </div>
+      {{ end }}
+    </div>
+  </div>
+{{ end }}
+
