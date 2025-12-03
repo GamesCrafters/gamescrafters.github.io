@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="
+  Game Trees
+  #
+
+To solve a game, we need to be able to know every possible position and move. This allows us to find winning and losing strategies by exploring all possible outcomes. In this chapter, we’ll introduce the concept of game trees, which provide a structured way to visualize and analyze all possible game states and moves.
+
+  What Is a Game Tree?
+  #
+
+
+If you are new to the concept of trees, consider checking out CS61A and CS61B&rsquo;s materials on the topic! We will briefly cover the necessary concepts here, but a deeper understanding will be very helpful.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/main/knowledge/game-trees/">
+  <meta property="og:site_name" content="GamesCrafters">
+  <meta property="og:title" content="Game Trees">
+  <meta property="og:description" content="Game Trees # To solve a game, we need to be able to know every possible position and move. This allows us to find winning and losing strategies by exploring all possible outcomes. In this chapter, we’ll introduce the concept of game trees, which provide a structured way to visualize and analyze all possible game states and moves.
+What Is a Game Tree? # If you are new to the concept of trees, consider checking out CS61A and CS61B’s materials on the topic! We will briefly cover the necessary concepts here, but a deeper understanding will be very helpful.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="main">
+<title>Game Trees | GamesCrafters</title>
+<link rel="icon" href="/favicon.png" >
+
+
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/main/knowledge/game-trees/">
+<link rel="stylesheet" href="/book.min.85ec2cfa9e5f1bbd3e69532dcb571ebdaab64df1d4bd1848727ba6fe02e9ff99.css" integrity="sha256-hews&#43;p5fG70&#43;aVMty1cevaq2TfHUvRhIcnum/gLp/5k=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.06d19fa7afe6b4a225f7dc0ebd99fef7d52a68b30f46f1cc48720d6176226c8f.js" integrity="sha256-BtGfp6/mtKIl99wOvZn&#43;99UqaLMPRvHMSHINYXYibI8=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+    <a
+        class="flex align-center"
+        href="/"
+    ><img src="/logo.png" alt="Logo" /><span>GamesCrafters</span>
+    </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+   
+<ul>
+     
+    <li class="book-section-flat" >
+           
+<span>Overview</span>
+  
+<ul>
+     
+    <li>
+           
+<a href="/main/overview/course/" class="">About the Course</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/overview/group/" class="">About the Group</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/overview/misc/" class="">Miscellaneous</a>
+ 
+    </li>
+     
+</ul>
+
+    </li>
+      
+    <li class="book-section-flat" >
+           
+<span>People</span>
+  
+<ul>
+     
+    <li>
+           
+<a href="/main/people/organizers/" class="">Course Organizers</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/people/alumni/" class="">Group Alumni</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/people/groups/" class="">Past Groups</a>
+ 
+    </li>
+     
+</ul>
+
+    </li>
+      
+    <li class="book-section-flat" >
+           
+<span>Knowledge</span>
+  
+<ul>
+     
+    <li>
+           
+<a href="/main/knowledge/intro/" class="">Intro to Game Theory</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/knowledge/game-trees/" class="active">Game Trees</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/knowledge/position-value/" class="">Position Values</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/knowledge/solving/" class="">Solving a Game</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/knowledge/hashing/" class="">Hashing Positions</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/knowledge/overall-infrastructure/" class="">Overall Infrastructure</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/knowledge/games/" class="">Ruleset Explainers</a>
+ 
+    </li>
+      
+    <li>
+           
+<a
+    href="/articles"
+    class=""
+    rel="noopener"
+>Technical Articles</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/knowledge/analyses/" class="">Game Measurements</a>
+ 
+    </li>
+     
+</ul>
+
+    </li>
+      
+    <li class="book-section-flat" >
+           
+<span>Links</span>
+  
+<ul>
+     
+    <li>
+           
+<a
+    href="https://github.com/GamesCrafters"
+    class=""
+    rel="noopener"
+>GitHub Organization</a>
+ 
+    </li>
+      
+    <li>
+           
+<a
+    href="https://nyc.cs.berkeley.edu/uni/"
+    class=""
+    rel="noopener"
+>GamesmanUni</a>
+ 
+    </li>
+     
+</ul>
+
+    </li>
+      
+    <li class="book-section-flat" >
+           
+<input
+    type="checkbox"
+    id="section-13cc82cb423ec147fad6b058f9d60e0f"
+    class="toggle"
+    
+/>
+<label for="section-13cc82cb423ec147fad6b058f9d60e0f" class="flex justify-between">
+    <a
+        role="button"
+        
+        class=""
+    >Course Assignments</a>
+</label>
+  
+<ul>
+     
+    <li>
+           
+<a href="/main/assignments/game-homefun-p1/" class="">Homefun Pt. 1</a>
+ 
+    </li>
+     
+</ul>
+
+    </li>
+      
+    <li class="book-section-flat" >
+           
+<input
+    type="checkbox"
+    id="section-954f0b784a633dff9d97d5e365bbbefd"
+    class="toggle"
+    
+/>
+<label for="section-954f0b784a633dff9d97d5e365bbbefd" class="flex justify-between">
+    <a
+        role="button"
+        
+        class=""
+    >Ongoing Projects</a>
+</label>
+  
+<ul>
+    
+</ul>
+
+    </li>
+     
+</ul>
+   
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>Game Trees</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#what-is-a-game-tree">What Is a Game Tree?</a></li>
+    <li><a href="#positions">Positions</a></li>
+    <li><a href="#moves">Moves</a></li>
+    <li><a href="#summary">Summary</a></li>
+    <li><a href="#solving-a-game">Solving a Game</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="game-trees">
+  Game Trees
+  <a class="anchor" href="#game-trees">#</a>
+</h1>
+<p>To solve a game, we need to be able to know every possible position and move. This allows us to find winning and losing strategies by exploring all possible outcomes. In this chapter, we’ll introduce the concept of <strong>game trees</strong>, which provide a structured way to visualize and analyze all possible game states and moves.</p>
+<h2 id="what-is-a-game-tree">
+  What Is a Game Tree?
+  <a class="anchor" href="#what-is-a-game-tree">#</a>
+</h2>
+<blockquote class="book-hint info">
+<p>If you are new to the concept of trees, consider checking out <strong>CS61A</strong> and <strong>CS61B</strong>&rsquo;s materials on the topic! We will briefly cover the necessary concepts here, but a deeper understanding will be very helpful.</p>
+</blockquote>
+<p>A game tree helps us visualize our game’s <strong>state space</strong>, the set of all possible states and actions. A <strong>tree</strong> is a connected graph (a collection of points and lines where there is a path between every pair of vertices) with no cycles (loops). In a game tree, the <strong>nodes</strong> represent the different positions of the game and the <strong>edges</strong> represent the moves between the different positions.</p>
+<p>Below is an example of a game tree for Tic-Tac-Toe:</p>
+<p>
+  <img src="/images/knowledge/tic-tac-toe-game-tree.svg" alt="Game tree diagram" /></p>
+<h2 id="positions">
+  Positions
+  <a class="anchor" href="#positions">#</a>
+</h2>
+<p>The various ways we can arrange the pieces on our board are our game states or <strong>positions</strong>. In the tree, these positions are represented by vertices or the <strong>nodes</strong> that form the graph. The <strong>start position</strong> is the starting arrangement of our board and is the single node at the top of the tree, represented by a <strong>single source vertex</strong>. By definition, we can trace any vertex or position in our tree back to the single source vertex!</p>
+<p>When we finish playing a game, we can’t make any more moves. These terminal or <strong>primitive positions</strong> live at the bottom of our tree and are represented by <strong>leaf nodes</strong>, nodes with no outgoing arrows.</p>
+<p>
+  <img src="/images/knowledge/position.png" alt="Position diagram" /></p>
+<h2 id="moves">
+  Moves
+  <a class="anchor" href="#moves">#</a>
+</h2>
+<p>The <strong>moves</strong> the player makes to go from position A to position B are represented by an <strong>edge</strong> connecting vertex A and vertex B. Even though edges can represent movement in both directions, the edges for games are one-way arrows to represent the forward motion of time as we go from one game position to the next. This is why game trees are <strong>directed</strong> graphs, or graphs with edges that point in a specific direction.</p>
+<blockquote class="book-hint info">
+<p>Check out the chapter on Tree Traversals and Graphs in <strong>CS61B</strong> for a deeper dive into the difference between undirected and directed graphs!</p>
+</blockquote>
+<p>
+  <img src="/images/knowledge/move.png" alt="Move diagram" /></p>
+<p>Putting this all together, we get our game tree! We are able to represent the state space (the game’s set of all possible states and actions) as a directed graph \( G = (P, M) \), where \( P \) is the set of positions (vertices) and \( M \) is the set of moves (edges) in a game.</p>
+<h2 id="summary">
+  Summary
+  <a class="anchor" href="#summary">#</a>
+</h2>
+<ul>
+<li>The nodes are all the possible positions of the game.</li>
+<li>The single source vertex is the first node in our tree and the game’s initial position.</li>
+<li>The leaf nodes are the terminal states or the states from which we can no longer make a move (e.g., win, lose, tie).</li>
+<li>The edges are all the possible moves from one game state to the next. We make a move in the direction of the arrow.</li>
+</ul>
+<h2 id="solving-a-game">
+  Solving a Game
+  <a class="anchor" href="#solving-a-game">#</a>
+</h2>
+<p>Now that we have a way to represent all the possible positions and moves in our game, we can use this structure to analyze and solve the game. In the next chapter, we will explore how to assign values to each position in the game tree, which will help us determine the best strategies for winning the game.</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/gamescrafters/gamescrafters.github.io/edit/main/content/main/knowledge/game-trees.md" target="_blank" rel="noopener">
+      <img src="/svg/edit.svg" class="book-icon" alt="" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#what-is-a-game-tree">What Is a Game Tree?</a></li>
+    <li><a href="#positions">Positions</a></li>
+    <li><a href="#moves">Moves</a></li>
+    <li><a href="#summary">Summary</a></li>
+    <li><a href="#solving-a-game">Solving a Game</a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

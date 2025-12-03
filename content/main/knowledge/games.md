@@ -2,7 +2,7 @@
 title: Ruleset Explainers
 type: docs
 bookSearchExclude: false
-weight: 1
+weight: 7
 ---
 
 # **Game Descriptions**

@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="
+  Position Values
+  #
+
+Now that we understand game trees, we can start solving games! Our goal is to assign values to each position. These values tell us whether moving to that position leads to a win, loss, or tie if both players play perfectly. Don&rsquo;t worry if this sounds confusing right now — we&rsquo;ll break it down by solving a small game!
+
+  10-to-0-by-1-or-2
+  #
+
+Imagine you are playing this game with a friend: There are 10 pennies in front of both of you. You can each remove either 1 or 2 pennies from the pile on your turn. The goal is to not be the player who reaches 0.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/main/knowledge/position-value/">
+  <meta property="og:site_name" content="GamesCrafters">
+  <meta property="og:title" content="Position Values">
+  <meta property="og:description" content="Position Values # Now that we understand game trees, we can start solving games! Our goal is to assign values to each position. These values tell us whether moving to that position leads to a win, loss, or tie if both players play perfectly. Don’t worry if this sounds confusing right now — we’ll break it down by solving a small game!
+10-to-0-by-1-or-2 # Imagine you are playing this game with a friend: There are 10 pennies in front of both of you. You can each remove either 1 or 2 pennies from the pile on your turn. The goal is to not be the player who reaches 0.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="main">
+<title>Position Values | GamesCrafters</title>
+<link rel="icon" href="/favicon.png" >
+
+
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/main/knowledge/position-value/">
+<link rel="stylesheet" href="/book.min.85ec2cfa9e5f1bbd3e69532dcb571ebdaab64df1d4bd1848727ba6fe02e9ff99.css" integrity="sha256-hews&#43;p5fG70&#43;aVMty1cevaq2TfHUvRhIcnum/gLp/5k=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.06d19fa7afe6b4a225f7dc0ebd99fef7d52a68b30f46f1cc48720d6176226c8f.js" integrity="sha256-BtGfp6/mtKIl99wOvZn&#43;99UqaLMPRvHMSHINYXYibI8=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+    <a
+        class="flex align-center"
+        href="/"
+    ><img src="/logo.png" alt="Logo" /><span>GamesCrafters</span>
+    </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+   
+<ul>
+     
+    <li class="book-section-flat" >
+           
+<span>Overview</span>
+  
+<ul>
+     
+    <li>
+           
+<a href="/main/overview/course/" class="">About the Course</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/overview/group/" class="">About the Group</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/overview/misc/" class="">Miscellaneous</a>
+ 
+    </li>
+     
+</ul>
+
+    </li>
+      
+    <li class="book-section-flat" >
+           
+<span>People</span>
+  
+<ul>
+     
+    <li>
+           
+<a href="/main/people/organizers/" class="">Course Organizers</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/people/alumni/" class="">Group Alumni</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/people/groups/" class="">Past Groups</a>
+ 
+    </li>
+     
+</ul>
+
+    </li>
+      
+    <li class="book-section-flat" >
+           
+<span>Knowledge</span>
+  
+<ul>
+     
+    <li>
+           
+<a href="/main/knowledge/intro/" class="">Intro to Game Theory</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/knowledge/game-trees/" class="">Game Trees</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/knowledge/position-value/" class="active">Position Values</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/knowledge/solving/" class="">Solving a Game</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/knowledge/hashing/" class="">Hashing Positions</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/knowledge/overall-infrastructure/" class="">Overall Infrastructure</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/knowledge/games/" class="">Ruleset Explainers</a>
+ 
+    </li>
+      
+    <li>
+           
+<a
+    href="/articles"
+    class=""
+    rel="noopener"
+>Technical Articles</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/knowledge/analyses/" class="">Game Measurements</a>
+ 
+    </li>
+     
+</ul>
+
+    </li>
+      
+    <li class="book-section-flat" >
+           
+<span>Links</span>
+  
+<ul>
+     
+    <li>
+           
+<a
+    href="https://github.com/GamesCrafters"
+    class=""
+    rel="noopener"
+>GitHub Organization</a>
+ 
+    </li>
+      
+    <li>
+           
+<a
+    href="https://nyc.cs.berkeley.edu/uni/"
+    class=""
+    rel="noopener"
+>GamesmanUni</a>
+ 
+    </li>
+     
+</ul>
+
+    </li>
+      
+    <li class="book-section-flat" >
+           
+<input
+    type="checkbox"
+    id="section-13cc82cb423ec147fad6b058f9d60e0f"
+    class="toggle"
+    
+/>
+<label for="section-13cc82cb423ec147fad6b058f9d60e0f" class="flex justify-between">
+    <a
+        role="button"
+        
+        class=""
+    >Course Assignments</a>
+</label>
+  
+<ul>
+     
+    <li>
+           
+<a href="/main/assignments/game-homefun-p1/" class="">Homefun Pt. 1</a>
+ 
+    </li>
+     
+</ul>
+
+    </li>
+      
+    <li class="book-section-flat" >
+           
+<input
+    type="checkbox"
+    id="section-954f0b784a633dff9d97d5e365bbbefd"
+    class="toggle"
+    
+/>
+<label for="section-954f0b784a633dff9d97d5e365bbbefd" class="flex justify-between">
+    <a
+        role="button"
+        
+        class=""
+    >Ongoing Projects</a>
+</label>
+  
+<ul>
+    
+</ul>
+
+    </li>
+     
+</ul>
+   
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>Position Values</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#10-to-0-by-1-or-2">10-to-0-by-1-or-2</a></li>
+    <li><a href="#constructing-the-game-tree">Constructing the Game Tree</a></li>
+    <li><a href="#position--move-values">Position &amp; Move Values</a>
+      <ul>
+        <li><a href="#primitive-position-values">Primitive Position Values</a></li>
+      </ul>
+    </li>
+    <li><a href="#how-values-are-assigned">How Values Are Assigned</a>
+      <ul>
+        <li><a href="#losing-positions">Losing Positions</a></li>
+        <li><a href="#winning-positions">Winning Positions</a></li>
+        <li><a href="#tying-positions">Tying Positions</a></li>
+      </ul>
+    </li>
+    <li><a href="#move-value">Move Value</a></li>
+    <li><a href="#summary">Summary</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="position-values">
+  Position Values
+  <a class="anchor" href="#position-values">#</a>
+</h1>
+<p>Now that we understand game trees, we can start solving games! Our goal is to assign values to each position. These values tell us whether moving to that position leads to a win, loss, or tie if both players play perfectly. Don&rsquo;t worry if this sounds confusing right now — we&rsquo;ll break it down by solving a small game!</p>
+<h2 id="10-to-0-by-1-or-2">
+  10-to-0-by-1-or-2
+  <a class="anchor" href="#10-to-0-by-1-or-2">#</a>
+</h2>
+<p>Imagine you are playing this game with a friend: There are 10 pennies in front of both of you. You can each remove either 1 or 2 pennies from the pile on your turn. The goal is to <strong>not</strong> be the player who reaches 0.</p>
+<blockquote class="book-hint info">
+<p>This is a simplified version of the classic game Nim. There is a strategy to always win and we will be deriving it!</p>
+</blockquote>
+<p>Play the game on the GamesCrafters website below to get a feel for it! In this game, you are trying to force your opponent to reach 10 instead of 0.</p>
+<div style="display: flex; justify-content: center; margin: 20px 0;">
+  <iframe
+    src="https://nyc.cs.berkeley.edu/uni/games.com"
+    style="width: 100%; max-width: 900px; height: 600px; border: 1px solid #ccc; border-radius: 8px;">
+  </iframe>
+</div>
+<h2 id="constructing-the-game-tree">
+  Constructing the Game Tree
+  <a class="anchor" href="#constructing-the-game-tree">#</a>
+</h2>
+<p>Based on these rules, we can construct the game tree! For now, let us ignore win and lose conditions. The positions (vertices) are the different possible counts between 0 and 10 and the moves (edges) are subtracting either 1 or 2 from the current count.</p>
+<p>Let’s start with the starting position when the count is 10. From here, there are two moves we can make:</p>
+<ul>
+<li>You can take away 1, which will take us to a count of 9</li>
+<li>You can take away 2, which will take us to a count of 8</li>
+</ul>
+<p>
+  <img src="/images/knowledge/remove.png" alt="Remove diagram" /></p>
+<p>We can repeat this for every position in our game (count 0 to 10). Notice that when the game position has a count of 1, there is only one outgoing edge, since there is only one valid move (subtract 1) you can make from this position. In this game tree, our starting position 10 is our single source vertex and the primitive position 0 is our only leaf node. Every arrow either represents subtracting one or subtracting two.</p>
+<p>
+  <img src="/images/knowledge/full_tree.png" alt="Full game tree" /></p>
+<h2 id="position--move-values">
+  Position &amp; Move Values
+  <a class="anchor" href="#position--move-values">#</a>
+</h2>
+<p>Formally, the value of a position is “the outcome of the game for the player whose turn it is, assuming perfect play” (Cheung, 2023). Although we haven’t yet formally defined the notion of perfect play, we can already deduce the value of primitive positions from this definition alone.</p>
+<h3 id="primitive-position-values">
+  Primitive Position Values
+  <a class="anchor" href="#primitive-position-values">#</a>
+</h3>
+<p>At a primitive position, you can no longer make any moves from the given state (no outgoing edges). In 10-to-0-by-1-or-2, reaching the state with a count of 0 means you have lost the game, so we assign this position the value <code>LOSE</code>.</p>
+<p>Let&rsquo;s imagine we start with 0 items. Whoever plays first will immediately lose, since they have no valid moves. This means that whoever is at this position loses, so we assign it a <code>LOSE</code> value. In this case, the only primitive position is a losing one, but primitive positions can also be winning or tying.</p>
+<p>We will be using the following to refer to and represent position values:</p>
+<ul>
+<li>Positions with a value of <code>WIN</code> will be referred to as winning positions. These positions will be colored <strong>green</strong> in the game tree.</li>
+<li>Positions with a value of <code>TIE</code> will be referred to as tying positions. These positions will be colored <strong>yellow</strong> in the game tree.</li>
+<li>Positions with a value of <code>LOSE</code> will be referred to as losing positions. These positions will be colored <strong>red</strong> in the game tree.</li>
+</ul>
+<p>Let&rsquo;s color the primitive position 0 red, since it is a losing position.</p>
+<p>
+  <img src="/images/knowledge/primitive.png" alt="Primitive value diagram" /></p>
+<h2 id="how-values-are-assigned">
+  How Values Are Assigned
+  <a class="anchor" href="#how-values-are-assigned">#</a>
+</h2>
+<p>To assign values to the other positions, we need to make some assumptions. We assume that both players play perfectly, meaning they always make the best possible move available to them. Since winning isn&rsquo;t always possible, we assume that players prefer outcomes in the following order:</p>
+<p><code>WIN &gt; TIE &gt; DRAW &gt; LOSE</code>.</p>
+<p>We also need to consider that as we move through the game tree, the turn alternates between players. We consider the perspective of the player whose turn it is.</p>
+<h3 id="losing-positions">
+  Losing Positions
+  <a class="anchor" href="#losing-positions">#</a>
+</h3>
+<blockquote class="book-hint info">
+<p>The children of a position are the positions that can be reached by making one valid move from that position. In our diagram, these are the positions that the arrows point to.</p>
+</blockquote>
+<p>A position is a losing position (<code>LOSE</code>) if <strong>all</strong> of its children are winning positions (<code>WIN</code>).</p>
+<p>Remember that turns alternate. When you make a move, you put your opponent in one of the child positions. If all the child positions of your current position are winning ones, your opponent can always win if they play perfectly. Therefore, you are in a losing position.</p>
+<p>
+  <img src="/images/knowledge/lose.png" alt="Losing value diagram" /></p>
+<h3 id="winning-positions">
+  Winning Positions
+  <a class="anchor" href="#winning-positions">#</a>
+</h3>
+<p>A position is a winning position (<code>WIN</code>) if <strong>at least one</strong> of its children is a losing position (<code>LOSE</code>).</p>
+<p>If you can make a move that puts your opponent in a losing position, you can guarantee a win for yourself. You are playing perfectly, so, if there is at least one path to victory, you will take it. Therefore, you are in a winning position.</p>
+<p>
+  <img src="/images/knowledge/win.png" alt="Winning value diagram" /></p>
+<h3 id="tying-positions">
+  Tying Positions
+  <a class="anchor" href="#tying-positions">#</a>
+</h3>
+<p>A position is a tying position (<code>TIE</code>) if <strong>at least one</strong> of its children is a tying position (<code>TIE</code>), and <strong>none</strong> of its children are losing positions (<code>LOSE</code>).</p>
+<p>If there is at least one losing position among the children, you would take that move and be in a winning position. You prefer tying over losing, so if there is at least one path to a tie and no paths to victory, you will take it. Therefore, you are in a tying position.</p>
+<p>
+  <img src="/images/knowledge/tie.png" alt="Tying value diagram" /></p>
+<h2 id="move-value">
+  Move Value
+  <a class="anchor" href="#move-value">#</a>
+</h2>
+<p>Just like positions, moves also have a value, and their value is determined by the value of the position where the move leads. Using the same traffic light convention we define:</p>
+<ul>
+<li>A winning move (move with a value of <code>WIN</code>) is a move which gives the other player a losing position.</li>
+<li>A losing move (move with a value of <code>LOSE</code>) is a move which gives the other player a winning position.</li>
+<li>A tying/draw move (move with a value of <code>TIE</code> or <code>DRAW</code>) is a move which gives the other player a tying or drawing position, respectively.</li>
+</ul>
+<p>
+  <img src="/images/knowledge/move-val.png" alt="Move value diagram" /></p>
+<p>We are now ready to solve our first game!</p>
+<h2 id="summary">
+  Summary
+  <a class="anchor" href="#summary">#</a>
+</h2>
+<p>In this chapter, we covered the following:</p>
+<ul>
+<li>A position is a losing position (<code>LOSE</code>) if all of its children are winning positions (<code>WIN</code>).</li>
+<li>A position is a winning position (<code>WIN</code>) if at least one of its children is a losing position (<code>LOSE</code>).</li>
+<li>A position is a tying position (<code>TIE</code>) if at least one of its children is a tying position (<code>TIE</code>), and none of its children are losing positions (<code>LOSE</code>).</li>
+<li>Move values are determined by the value of the position where the move leads.</li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/gamescrafters/gamescrafters.github.io/edit/main/content/main/knowledge/position-value.md" target="_blank" rel="noopener">
+      <img src="/svg/edit.svg" class="book-icon" alt="" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#10-to-0-by-1-or-2">10-to-0-by-1-or-2</a></li>
+    <li><a href="#constructing-the-game-tree">Constructing the Game Tree</a></li>
+    <li><a href="#position--move-values">Position &amp; Move Values</a>
+      <ul>
+        <li><a href="#primitive-position-values">Primitive Position Values</a></li>
+      </ul>
+    </li>
+    <li><a href="#how-values-are-assigned">How Values Are Assigned</a>
+      <ul>
+        <li><a href="#losing-positions">Losing Positions</a></li>
+        <li><a href="#winning-positions">Winning Positions</a></li>
+        <li><a href="#tying-positions">Tying Positions</a></li>
+      </ul>
+    </li>
+    <li><a href="#move-value">Move Value</a></li>
+    <li><a href="#summary">Summary</a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

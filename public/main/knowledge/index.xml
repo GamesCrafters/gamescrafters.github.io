@@ -2,31 +2,73 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Knowledge on GamesCrafters</title>
-    <link>http://localhost:63814/main/knowledge/</link>
+    <link>http://localhost:1313/main/knowledge/</link>
     <description>Recent content in Knowledge on GamesCrafters</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <atom:link href="http://localhost:63814/main/knowledge/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/main/knowledge/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Game Measurements</title>
-      <link>http://localhost:63814/main/knowledge/analyses/</link>
+      <title>Game Trees</title>
+      <link>http://localhost:1313/main/knowledge/game-trees/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:63814/main/knowledge/analyses/</guid>
-      <description>&lt;h1 id=&#34;game-metrics&#34;&gt;&#xA;  &lt;strong&gt;Game Metrics&lt;/strong&gt;&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#game-metrics&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;blockquote class=&#34;book-hint warning&#34;&gt;&#xA;&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt; This page is under construction.&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
+      <guid>http://localhost:1313/main/knowledge/game-trees/</guid>
+      <description>&lt;h1 id=&#34;game-trees&#34;&gt;&#xA;  Game Trees&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#game-trees&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;p&gt;To solve a game, we need to be able to know every possible position and move. This allows us to find winning and losing strategies by exploring all possible outcomes. In this chapter, we’ll introduce the concept of &lt;strong&gt;game trees&lt;/strong&gt;, which provide a structured way to visualize and analyze all possible game states and moves.&lt;/p&gt;&#xA;&lt;h2 id=&#34;what-is-a-game-tree&#34;&gt;&#xA;  What Is a Game Tree?&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#what-is-a-game-tree&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;blockquote class=&#34;book-hint info&#34;&gt;&#xA;&lt;p&gt;If you are new to the concept of trees, consider checking out &lt;strong&gt;CS61A&lt;/strong&gt; and &lt;strong&gt;CS61B&lt;/strong&gt;&amp;rsquo;s materials on the topic! We will briefly cover the necessary concepts here, but a deeper understanding will be very helpful.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Intro to Game Theory</title>
+      <link>http://localhost:1313/main/knowledge/intro/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/main/knowledge/intro/</guid>
+      <description>&lt;h1 id=&#34;intro-to-game-theory&#34;&gt;&#xA;  Intro to Game Theory&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#intro-to-game-theory&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;p&gt;Game theory studies how players make strategic decisions. GamesCrafters applies these ideas&#xA;to non-random two-player games, using computers to discover perfect play and build interactive tools that let&#xA;anyone explore those strategies.&lt;/p&gt;&#xA;&lt;blockquote class=&#34;book-hint info&#34;&gt;&#xA;&lt;p&gt;A 19-year project led by Prof Jonathan Schaeffer used dozens (sometimes hundreds) of computers and AI to&#xA;prove that Checkers is, in perfect play, a draw. This means that if two perfect players were to play, nobody would ever win!&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Position Values</title>
+      <link>http://localhost:1313/main/knowledge/position-value/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/main/knowledge/position-value/</guid>
+      <description>&lt;h1 id=&#34;position-values&#34;&gt;&#xA;  Position Values&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#position-values&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;p&gt;Now that we understand game trees, we can start solving games! Our goal is to assign values to each position. These values tell us whether moving to that position leads to a win, loss, or tie if both players play perfectly. Don&amp;rsquo;t worry if this sounds confusing right now — we&amp;rsquo;ll break it down by solving a small game!&lt;/p&gt;&#xA;&lt;h2 id=&#34;10-to-0-by-1-or-2&#34;&gt;&#xA;  10-to-0-by-1-or-2&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#10-to-0-by-1-or-2&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;p&gt;Imagine you are playing this game with a friend: There are 10 pennies in front of both of you. You can each remove either 1 or 2 pennies from the pile on your turn. The goal is to &lt;strong&gt;not&lt;/strong&gt; be the player who reaches 0.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Solving a Game</title>
+      <link>http://localhost:1313/main/knowledge/solving/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/main/knowledge/solving/</guid>
+      <description>&lt;h1 id=&#34;solving-a-game&#34;&gt;&#xA;  Solving a Game&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#solving-a-game&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;p&gt;With the foundation now laid out, we have all the tools available to solve a game. Once again, let&amp;rsquo;s consider &lt;code&gt;10-to-0-by-1-or-2&lt;/code&gt; and its game tree:&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  &lt;img src=&#34;http://localhost:1313/images/knowledge/full_tree.png&#34; alt=&#34;Full game tree&#34; /&gt;&lt;/p&gt;&#xA;&lt;p&gt;In order to assign values to each position in the game tree, we can work our way up from the primitive positions using the rules we defined earlier for assigning position values. Remember that the only primitive position in this game is the position with a count of 0, which we assigned a value of &lt;code&gt;LOSE&lt;/code&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Hashing Positions</title>
+      <link>http://localhost:1313/main/knowledge/hashing/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/main/knowledge/hashing/</guid>
+      <description>&lt;h1 id=&#34;hashing-positions&#34;&gt;&#xA;  Hashing Positions&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#hashing-positions&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;p&gt;Solving a game means exploring an enormous game tree. This can be computationally expensive to compute every time we want to play the game, especially for bigger games. To avoid recomputing positions over and over, we need a way to &lt;strong&gt;name&lt;/strong&gt; each position with a number so we can store and look it up quickly. That “naming function” is our &lt;strong&gt;hash function&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;h2 id=&#34;big-idea-memoization&#34;&gt;&#xA;  Big Idea: Memoization&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#big-idea-memoization&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;p&gt;Our solvers use &lt;strong&gt;memoization&lt;/strong&gt; to be more efficient. This means that, once a position has been evaluated, we store its value instead of recomputing it. This is just like caching Fibonacci values instead of using recursion to find every value. We can illustrate this with a simple Fibonacci function. We can access previously computed values by storing pairs &lt;code&gt;(n, fib(n))&lt;/code&gt; in a table.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Overall Infrastructure</title>
+      <link>http://localhost:1313/main/knowledge/overall-infrastructure/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/main/knowledge/overall-infrastructure/</guid>
+      <description>&lt;h1 id=&#34;overall-infrastructure--architecture&#34;&gt;&#xA;  Overall Infrastructure &amp;amp; Architecture&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#overall-infrastructure--architecture&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;p&gt;The GamesCrafters system is built as a small &lt;strong&gt;microservices architecture&lt;/strong&gt;.&#xA;The system is divided into the frontend, middleware, and backends, but they all&#xA;work together to let users play, explore, and analyze strongly solved games in the browser.&lt;/p&gt;&#xA;&lt;h2 id=&#34;architecture-overview&#34;&gt;&#xA;  Architecture Overview&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#architecture-overview&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;p&gt;At a high level, the system is divided into three layers:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Frontend&lt;/strong&gt;: GamesmanUni, the web interface users see&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Middleware&lt;/strong&gt;: GamesCraftersUWAPI, a Python HTTP server that translates frontend requests into backend calls&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Backends&lt;/strong&gt;: game-solving engines like GamesmanClassic, GamesmanPuzzles, GamesmanOne, and newer systems like GamesmanPy&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&#xA;  &lt;img src=&#34;http://localhost:1313/images/knowledge/arch.png&#34; alt=&#34;Architecture diagram&#34; /&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>Ruleset Explainers</title>
-      <link>http://localhost:63814/main/knowledge/games/</link>
+      <link>http://localhost:1313/main/knowledge/games/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:63814/main/knowledge/games/</guid>
+      <guid>http://localhost:1313/main/knowledge/games/</guid>
       <description>&lt;h1 id=&#34;game-descriptions&#34;&gt;&#xA;  &lt;strong&gt;Game Descriptions&lt;/strong&gt;&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#game-descriptions&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;blockquote class=&#34;book-hint warning&#34;&gt;&#xA;&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt; This page is under construction.&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
     </item>
     <item>
       <title>Technical Articles</title>
-      <link>http://localhost:63814/main/knowledge/articles/</link>
+      <link>http://localhost:1313/main/knowledge/articles/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:63814/main/knowledge/articles/</guid>
+      <guid>http://localhost:1313/main/knowledge/articles/</guid>
       <description>&lt;br&gt;</description>
+    </item>
+    <item>
+      <title>Game Measurements</title>
+      <link>http://localhost:1313/main/knowledge/analyses/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/main/knowledge/analyses/</guid>
+      <description>&lt;h1 id=&#34;game-metrics&#34;&gt;&#xA;  &lt;strong&gt;Game Metrics&lt;/strong&gt;&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#game-metrics&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;blockquote class=&#34;book-hint warning&#34;&gt;&#xA;&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt; This page is under construction.&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
     </item>
   </channel>
 </rss>

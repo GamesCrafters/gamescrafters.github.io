@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Category Two on GamesCrafters</title>
-    <link>http://localhost:63814/categories/category-two/</link>
+    <link>http://localhost:1313/categories/category-two/</link>
     <description>Recent content in Category Two on GamesCrafters</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 05 Mar 2025 04:03:59 -0800</lastBuildDate>
-    <atom:link href="http://localhost:63814/categories/category-two/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/categories/category-two/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Example Article</title>
-      <link>http://localhost:63814/articles/example/</link>
+      <link>http://localhost:1313/articles/example/</link>
       <pubDate>Fri, 01 Jan 1999 00:00:00 +0000</pubDate>
-      <guid>http://localhost:63814/articles/example/</guid>
+      <guid>http://localhost:1313/articles/example/</guid>
       <description>&lt;p&gt;Content of article.&lt;/p&gt;</description>
     </item>
   </channel>

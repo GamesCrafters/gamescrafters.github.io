@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="
+  Hashing Positions
+  #
+
+Solving a game means exploring an enormous game tree. This can be computationally expensive to compute every time we want to play the game, especially for bigger games. To avoid recomputing positions over and over, we need a way to name each position with a number so we can store and look it up quickly. That “naming function” is our hash function.
+
+  Big Idea: Memoization
+  #
+
+Our solvers use memoization to be more efficient. This means that, once a position has been evaluated, we store its value instead of recomputing it. This is just like caching Fibonacci values instead of using recursion to find every value. We can illustrate this with a simple Fibonacci function. We can access previously computed values by storing pairs (n, fib(n)) in a table.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/main/knowledge/hashing/">
+  <meta property="og:site_name" content="GamesCrafters">
+  <meta property="og:title" content="Hashing Positions">
+  <meta property="og:description" content="Hashing Positions # Solving a game means exploring an enormous game tree. This can be computationally expensive to compute every time we want to play the game, especially for bigger games. To avoid recomputing positions over and over, we need a way to name each position with a number so we can store and look it up quickly. That “naming function” is our hash function.
+Big Idea: Memoization # Our solvers use memoization to be more efficient. This means that, once a position has been evaluated, we store its value instead of recomputing it. This is just like caching Fibonacci values instead of using recursion to find every value. We can illustrate this with a simple Fibonacci function. We can access previously computed values by storing pairs (n, fib(n)) in a table.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="main">
+<title>Hashing Positions | GamesCrafters</title>
+<link rel="icon" href="/favicon.png" >
+
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+    integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV"
+    crossorigin="anonymous"
+/>
+<script
+    defer
+    src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+    integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8"
+    crossorigin="anonymous"
+></script>
+<script
+    defer
+    src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05"
+    crossorigin="anonymous"
+></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        renderMathInElement(document.body, {
+            
+            
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true },
+            ],
+            
+            throwOnError: false,
+        });
+    });
+</script>
+
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/main/knowledge/hashing/">
+<link rel="stylesheet" href="/book.min.85ec2cfa9e5f1bbd3e69532dcb571ebdaab64df1d4bd1848727ba6fe02e9ff99.css" integrity="sha256-hews&#43;p5fG70&#43;aVMty1cevaq2TfHUvRhIcnum/gLp/5k=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.06d19fa7afe6b4a225f7dc0ebd99fef7d52a68b30f46f1cc48720d6176226c8f.js" integrity="sha256-BtGfp6/mtKIl99wOvZn&#43;99UqaLMPRvHMSHINYXYibI8=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+    <a
+        class="flex align-center"
+        href="/"
+    ><img src="/logo.png" alt="Logo" /><span>GamesCrafters</span>
+    </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+   
+<ul>
+     
+    <li class="book-section-flat" >
+           
+<span>Overview</span>
+  
+<ul>
+     
+    <li>
+           
+<a href="/main/overview/course/" class="">About the Course</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/overview/group/" class="">About the Group</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/overview/misc/" class="">Miscellaneous</a>
+ 
+    </li>
+     
+</ul>
+
+    </li>
+      
+    <li class="book-section-flat" >
+           
+<span>People</span>
+  
+<ul>
+     
+    <li>
+           
+<a href="/main/people/organizers/" class="">Course Organizers</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/people/alumni/" class="">Group Alumni</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/people/groups/" class="">Past Groups</a>
+ 
+    </li>
+     
+</ul>
+
+    </li>
+      
+    <li class="book-section-flat" >
+           
+<span>Knowledge</span>
+  
+<ul>
+     
+    <li>
+           
+<a href="/main/knowledge/intro/" class="">Intro to Game Theory</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/knowledge/game-trees/" class="">Game Trees</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/knowledge/position-value/" class="">Position Values</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/knowledge/solving/" class="">Solving a Game</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/knowledge/hashing/" class="active">Hashing Positions</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/knowledge/overall-infrastructure/" class="">Overall Infrastructure</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/knowledge/games/" class="">Ruleset Explainers</a>
+ 
+    </li>
+      
+    <li>
+           
+<a
+    href="/articles"
+    class=""
+    rel="noopener"
+>Technical Articles</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/knowledge/analyses/" class="">Game Measurements</a>
+ 
+    </li>
+     
+</ul>
+
+    </li>
+      
+    <li class="book-section-flat" >
+           
+<span>Links</span>
+  
+<ul>
+     
+    <li>
+           
+<a
+    href="https://github.com/GamesCrafters"
+    class=""
+    rel="noopener"
+>GitHub Organization</a>
+ 
+    </li>
+      
+    <li>
+           
+<a
+    href="https://nyc.cs.berkeley.edu/uni/"
+    class=""
+    rel="noopener"
+>GamesmanUni</a>
+ 
+    </li>
+     
+</ul>
+
+    </li>
+      
+    <li class="book-section-flat" >
+           
+<input
+    type="checkbox"
+    id="section-13cc82cb423ec147fad6b058f9d60e0f"
+    class="toggle"
+    
+/>
+<label for="section-13cc82cb423ec147fad6b058f9d60e0f" class="flex justify-between">
+    <a
+        role="button"
+        
+        class=""
+    >Course Assignments</a>
+</label>
+  
+<ul>
+     
+    <li>
+           
+<a href="/main/assignments/game-homefun-p1/" class="">Homefun Pt. 1</a>
+ 
+    </li>
+     
+</ul>
+
+    </li>
+      
+    <li class="book-section-flat" >
+           
+<input
+    type="checkbox"
+    id="section-954f0b784a633dff9d97d5e365bbbefd"
+    class="toggle"
+    
+/>
+<label for="section-954f0b784a633dff9d97d5e365bbbefd" class="flex justify-between">
+    <a
+        role="button"
+        
+        class=""
+    >Ongoing Projects</a>
+</label>
+  
+<ul>
+    
+</ul>
+
+    </li>
+     
+</ul>
+   
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>Hashing Positions</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#big-idea-memoization">Big Idea: Memoization</a></li>
+    <li><a href="#what-is-a-hash-function">What Is a Hash Function?</a></li>
+    <li><a href="#writing-a-tic-tac-toe-hash-function">Writing a Tic-Tac-Toe Hash Function</a></li>
+    <li><a href="#optimizing-the-hash-function">Optimizing the Hash Function</a>
+      <ul>
+        <li><a href="#using-combinations">Using Combinations</a></li>
+        <li><a href="#blur-method">Blur Method</a></li>
+        <li><a href="#overcount-method">Overcount Method</a></li>
+      </ul>
+    </li>
+    <li><a href="#finding-a-new-hash-function">Finding a New Hash Function</a></li>
+    <li><a href="#example-hashing-a-small-board">Example: Hashing a Small Board</a></li>
+    <li><a href="#practical-considerations">Practical Considerations</a></li>
+    <li><a href="#summary">Summary</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="hashing-positions">
+  Hashing Positions
+  <a class="anchor" href="#hashing-positions">#</a>
+</h1>
+<p>Solving a game means exploring an enormous game tree. This can be computationally expensive to compute every time we want to play the game, especially for bigger games. To avoid recomputing positions over and over, we need a way to <strong>name</strong> each position with a number so we can store and look it up quickly. That “naming function” is our <strong>hash function</strong>.</p>
+<h2 id="big-idea-memoization">
+  Big Idea: Memoization
+  <a class="anchor" href="#big-idea-memoization">#</a>
+</h2>
+<p>Our solvers use <strong>memoization</strong> to be more efficient. This means that, once a position has been evaluated, we store its value instead of recomputing it. This is just like caching Fibonacci values instead of using recursion to find every value. We can illustrate this with a simple Fibonacci function. We can access previously computed values by storing pairs <code>(n, fib(n))</code> in a table.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">fib</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="n">n</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span> <span class="k">if</span> <span class="n">we</span><span class="err">&#39;</span><span class="n">ve</span> <span class="n">already</span> <span class="n">computed</span> <span class="nf">fib</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="n">stored</span> <span class="n">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span>
+</span></span><span class="line"><span class="cl">      <span class="kt">int</span> <span class="n">value</span> <span class="o">=</span> <span class="nf">fib</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="nf">fib</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">store</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">value</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="n">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>
+  <img src="/images/knowledge/fib.png" alt="Fibonacci recursion tree" /></p>
+<p>For games, we can&rsquo;t use a simple number to store a position&rsquo;s value. We need to represent the entire board state, including whose turn it is, where the pieces are, and so on. How do we map this data into an integer that will serve as an index into our table? This mapping function is called a <strong>hash function</strong>.</p>
+<h2 id="what-is-a-hash-function">
+  What Is a Hash Function?
+  <a class="anchor" href="#what-is-a-hash-function">#</a>
+</h2>
+<p>A <strong>hash function</strong> takes a piece of data (like a board) and returns an integer. We use that integer as an index into an array or as a key in a table.</p>
+<p>For our solvers, a good hash function should:</p>
+<ul>
+<li>Map each reachable position to a unique integer</li>
+<li>Spread different positions out evenly across the table</li>
+<li>Be fast enough to compute on every recursive call</li>
+</ul>
+<h2 id="writing-a-tic-tac-toe-hash-function">
+  Writing a Tic-Tac-Toe Hash Function
+  <a class="anchor" href="#writing-a-tic-tac-toe-hash-function">#</a>
+</h2>
+<p>Let&rsquo;s consider how we might write a hash function for Tic-Tac-Toe. Here&rsquo;s how you play:</p>
+<ul>
+<li>One player chooses X, the other chooses O</li>
+<li>Two players take turns placing Xs and Os on a 3×3 grid</li>
+<li>Assume X goes first</li>
+<li>Once a piece is placed, it isn&rsquo;t moved</li>
+<li>The first player to get three in a row wins</li>
+<li>If the board fills up with no winner, it&rsquo;s a tie</li>
+</ul>
+<p>
+  <img src="/images/knowledge/Tic-Tac.png" alt="Tic-Tac-Toe board" /></p>
+<p>How do we convert a Tic-Tac-Toe position into a unique integer? One idea is to turn the 2D board into a 1D array of 9 slots:</p>
+<p>
+  <img src="/images/knowledge/flat.png" alt="Flattened board" /></p>
+<p>Each slot can be in one of three states: blank, O, or X. We can represent these as three numbers instead:</p>
+<ul>
+<li><code>0</code> for blank</li>
+<li><code>1</code> for O</li>
+<li><code>2</code> for X</li>
+</ul>
+<p>
+  <img src="/images/knowledge/hashed.png" alt="Board encoded as digits" /></p>
+<p>If we treat this as a base-3 number (a “ternary” number), we could hash a position by interpreting the 9-digit ternary number as an integer. That gives us up to <code>3^9 = 19683</code> possible codes.</p>
+<h2 id="optimizing-the-hash-function">
+  Optimizing the Hash Function
+  <a class="anchor" href="#optimizing-the-hash-function">#</a>
+</h2>
+<p>If we understand the rules of the game, we can do better than just using all <code>3^9</code> possible combinations. For Tic-Tac-Toe:</p>
+<ul>
+<li>Players alternate turns</li>
+<li>X always goes first</li>
+<li>You can never have more than one extra X than O on the board</li>
+</ul>
+<p>This means many of the boards our hash function can encode are impossible in real play, like boards with 5 Os and 1 X.</p>
+<p>We can count the number of <strong>legal</strong> boards using combinatorics. Let <code>s</code> be the number of slots.</p>
+<p>Small examples:</p>
+<ul>
+<li><code>s = 1</code>: 2 boards (<code>-</code>, <code>X</code>)</li>
+<li><code>s = 2</code>: 5 boards (<code>--</code>, <code>-X</code>, <code>X-</code>, <code>XO</code>, <code>OX</code>)</li>
+<li><code>s = 3</code>: 13 boards</li>
+</ul>
+<p>This pattern continues based on how many Xs and Os are allowed at each depth.</p>
+<h3 id="using-combinations">
+  Using Combinations
+  <a class="anchor" href="#using-combinations">#</a>
+</h3>
+<p>For example, the number of ways to choose <code>k</code> locations from <code>n</code> is:</p>
+<p>n choose k = n! / (k! (n - k)!)</p>
+<p>This lets us count valid arrangements of Xs and Os.</p>
+<h3 id="blur-method">
+  Blur Method
+  <a class="anchor" href="#blur-method">#</a>
+</h3>
+<ol>
+<li>Choose locations for all <code>x + o</code> pieces: <code>C(s, x + o)</code></li>
+<li>Choose which of those positions are Xs: <code>C(x + o, x)</code></li>
+<li>Multiply both together.</li>
+</ol>
+<h3 id="overcount-method">
+  Overcount Method
+  <a class="anchor" href="#overcount-method">#</a>
+</h3>
+<ol>
+<li>Count all permutations: <code>s!</code></li>
+<li>Divide by repeated symbols: <code>x! o! (s - x - o)!</code></li>
+</ol>
+<p>Both methods give the same result.</p>
+<p>Using this method for full Tic-Tac-Toe, there are only <strong>6046 legal boards</strong>, not 19683.</p>
+<h2 id="finding-a-new-hash-function">
+  Finding a New Hash Function
+  <a class="anchor" href="#finding-a-new-hash-function">#</a>
+</h2>
+<p>We can use <strong>bias + rearrangement</strong> to produce a <strong>combinatorially optimal hash</strong>:</p>
+<ol>
+<li>
+<p><strong>Bias (offset)</strong><br>
+Count how many legal boards exist in all layers before the current one.</p>
+</li>
+<li>
+<p><strong>Rearrangement</strong><br>
+Rank positions <em>within</em> the current layer using combinatorial counts.</p>
+</li>
+</ol>
+<h2 id="example-hashing-a-small-board">
+  Example: Hashing a Small Board
+  <a class="anchor" href="#example-hashing-a-small-board">#</a>
+</h2>
+<p>Suppose we hash the toy board: <code>XO-X</code> (4 slots).</p>
+<p>
+  <img src="/images/knowledge/stairs.png" alt="Stair-step buckets" /></p>
+<ol>
+<li>
+<p><strong>Bias:</strong><br>
+If <code>X = 2</code>, <code>O = 1</code>, <code>S = 4</code>, count how many boards come before this layer<br>
+Example: <code>1 + 4 + 12 = 17</code></p>
+</li>
+<li>
+<p><strong>Rearrangement:</strong><br>
+Count how many legal rearrangements come before <code>XO-X</code> inside its layer<br>
+Example: <code>3 + 3 + 2 = 8</code></p>
+</li>
+</ol>
+<p>Final hash:</p>
+<p>hash = bias + rearrangement = 17 + 8 = 25</p>
+<h2 id="practical-considerations">
+  Practical Considerations
+  <a class="anchor" href="#practical-considerations">#</a>
+</h2>
+<p>Combinatorially optimal hash functions are powerful, but they can be expensive for larger games. In practice, we often use simpler hashes that are:</p>
+<ul>
+<li>Easy to compute</li>
+<li>Well-distributed</li>
+<li>Low-collision</li>
+</ul>
+<p>We can also use <strong>symmetry</strong> (rotations and reflections) to reduce the total number of stored positions.</p>
+<h2 id="summary">
+  Summary
+  <a class="anchor" href="#summary">#</a>
+</h2>
+<ul>
+<li><strong>Memoization</strong> saves time by remembering solved positions</li>
+<li><strong>Hash functions</strong> map complex positions to integers</li>
+<li><strong>Combinatorial hashing</strong> packs only legal boards into small ranges</li>
+<li><strong>Bias + rearrangement</strong> builds optimal hashes</li>
+<li>In practice, we balance optimality with efficiency</li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/gamescrafters/gamescrafters.github.io/edit/main/content/main/knowledge/hashing.md" target="_blank" rel="noopener">
+      <img src="/svg/edit.svg" class="book-icon" alt="" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#big-idea-memoization">Big Idea: Memoization</a></li>
+    <li><a href="#what-is-a-hash-function">What Is a Hash Function?</a></li>
+    <li><a href="#writing-a-tic-tac-toe-hash-function">Writing a Tic-Tac-Toe Hash Function</a></li>
+    <li><a href="#optimizing-the-hash-function">Optimizing the Hash Function</a>
+      <ul>
+        <li><a href="#using-combinations">Using Combinations</a></li>
+        <li><a href="#blur-method">Blur Method</a></li>
+        <li><a href="#overcount-method">Overcount Method</a></li>
+      </ul>
+    </li>
+    <li><a href="#finding-a-new-hash-function">Finding a New Hash Function</a></li>
+    <li><a href="#example-hashing-a-small-board">Example: Hashing a Small Board</a></li>
+    <li><a href="#practical-considerations">Practical Considerations</a></li>
+    <li><a href="#summary">Summary</a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

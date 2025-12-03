@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="
+  Solving a Game
+  #
+
+With the foundation now laid out, we have all the tools available to solve a game. Once again, let&rsquo;s consider 10-to-0-by-1-or-2 and its game tree:
+
+  
+In order to assign values to each position in the game tree, we can work our way up from the primitive positions using the rules we defined earlier for assigning position values. Remember that the only primitive position in this game is the position with a count of 0, which we assigned a value of LOSE.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/main/knowledge/solving/">
+  <meta property="og:site_name" content="GamesCrafters">
+  <meta property="og:title" content="Solving a Game">
+  <meta property="og:description" content="Solving a Game # With the foundation now laid out, we have all the tools available to solve a game. Once again, let’s consider 10-to-0-by-1-or-2 and its game tree:
+In order to assign values to each position in the game tree, we can work our way up from the primitive positions using the rules we defined earlier for assigning position values. Remember that the only primitive position in this game is the position with a count of 0, which we assigned a value of LOSE.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="main">
+<title>Solving a Game | GamesCrafters</title>
+<link rel="icon" href="/favicon.png" >
+
+
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/main/knowledge/solving/">
+<link rel="stylesheet" href="/book.min.85ec2cfa9e5f1bbd3e69532dcb571ebdaab64df1d4bd1848727ba6fe02e9ff99.css" integrity="sha256-hews&#43;p5fG70&#43;aVMty1cevaq2TfHUvRhIcnum/gLp/5k=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.06d19fa7afe6b4a225f7dc0ebd99fef7d52a68b30f46f1cc48720d6176226c8f.js" integrity="sha256-BtGfp6/mtKIl99wOvZn&#43;99UqaLMPRvHMSHINYXYibI8=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+    <a
+        class="flex align-center"
+        href="/"
+    ><img src="/logo.png" alt="Logo" /><span>GamesCrafters</span>
+    </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+   
+<ul>
+     
+    <li class="book-section-flat" >
+           
+<span>Overview</span>
+  
+<ul>
+     
+    <li>
+           
+<a href="/main/overview/course/" class="">About the Course</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/overview/group/" class="">About the Group</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/overview/misc/" class="">Miscellaneous</a>
+ 
+    </li>
+     
+</ul>
+
+    </li>
+      
+    <li class="book-section-flat" >
+           
+<span>People</span>
+  
+<ul>
+     
+    <li>
+           
+<a href="/main/people/organizers/" class="">Course Organizers</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/people/alumni/" class="">Group Alumni</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/people/groups/" class="">Past Groups</a>
+ 
+    </li>
+     
+</ul>
+
+    </li>
+      
+    <li class="book-section-flat" >
+           
+<span>Knowledge</span>
+  
+<ul>
+     
+    <li>
+           
+<a href="/main/knowledge/intro/" class="">Intro to Game Theory</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/knowledge/game-trees/" class="">Game Trees</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/knowledge/position-value/" class="">Position Values</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/knowledge/solving/" class="active">Solving a Game</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/knowledge/hashing/" class="">Hashing Positions</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/knowledge/overall-infrastructure/" class="">Overall Infrastructure</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/knowledge/games/" class="">Ruleset Explainers</a>
+ 
+    </li>
+      
+    <li>
+           
+<a
+    href="/articles"
+    class=""
+    rel="noopener"
+>Technical Articles</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/knowledge/analyses/" class="">Game Measurements</a>
+ 
+    </li>
+     
+</ul>
+
+    </li>
+      
+    <li class="book-section-flat" >
+           
+<span>Links</span>
+  
+<ul>
+     
+    <li>
+           
+<a
+    href="https://github.com/GamesCrafters"
+    class=""
+    rel="noopener"
+>GitHub Organization</a>
+ 
+    </li>
+      
+    <li>
+           
+<a
+    href="https://nyc.cs.berkeley.edu/uni/"
+    class=""
+    rel="noopener"
+>GamesmanUni</a>
+ 
+    </li>
+     
+</ul>
+
+    </li>
+      
+    <li class="book-section-flat" >
+           
+<input
+    type="checkbox"
+    id="section-13cc82cb423ec147fad6b058f9d60e0f"
+    class="toggle"
+    
+/>
+<label for="section-13cc82cb423ec147fad6b058f9d60e0f" class="flex justify-between">
+    <a
+        role="button"
+        
+        class=""
+    >Course Assignments</a>
+</label>
+  
+<ul>
+     
+    <li>
+           
+<a href="/main/assignments/game-homefun-p1/" class="">Homefun Pt. 1</a>
+ 
+    </li>
+     
+</ul>
+
+    </li>
+      
+    <li class="book-section-flat" >
+           
+<input
+    type="checkbox"
+    id="section-954f0b784a633dff9d97d5e365bbbefd"
+    class="toggle"
+    
+/>
+<label for="section-954f0b784a633dff9d97d5e365bbbefd" class="flex justify-between">
+    <a
+        role="button"
+        
+        class=""
+    >Ongoing Projects</a>
+</label>
+  
+<ul>
+    
+</ul>
+
+    </li>
+     
+</ul>
+   
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>Solving a Game</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#remoteness">Remoteness</a></li>
+    <li><a href="#perfect-play-under-remoteness">Perfect Play Under Remoteness</a></li>
+    <li><a href="#solving-10-to-0-by-1-or-2-with-remoteness">Solving <code>10-to-0-by-1-or-2</code> with Remoteness</a></li>
+    <li><a href="#summary">Summary</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="solving-a-game">
+  Solving a Game
+  <a class="anchor" href="#solving-a-game">#</a>
+</h1>
+<p>With the foundation now laid out, we have all the tools available to solve a game. Once again, let&rsquo;s consider <code>10-to-0-by-1-or-2</code> and its game tree:</p>
+<p>
+  <img src="/images/knowledge/full_tree.png" alt="Full game tree" /></p>
+<p>In order to assign values to each position in the game tree, we can work our way up from the primitive positions using the rules we defined earlier for assigning position values. Remember that the only primitive position in this game is the position with a count of 0, which we assigned a value of <code>LOSE</code>.</p>
+<p>
+  <img src="/images/knowledge/primitive.png" alt="Primitive position" /></p>
+<p>From here, we can assign values to the positions with counts of 1 and 2.</p>
+<p>As it was defined previously, a winning position is any position that has a losing position as one of its children, hence we attribute positions <code>1</code> and <code>2</code> as winning. You can imagine the reasoning behind this:</p>
+<ul>
+<li>You are at a state with 1. By removing 1, you win the game. You are giving your opponent a losing position (0); they can’t make any moves from here.</li>
+<li>You are at a state with 2. You only remove 1. The arrow is red because you are letting your opponent win in this case. Notice that because we have at least one losing child, we are in a winning state.</li>
+</ul>
+<p>
+  <img src="/images/knowledge/partly.png" alt="Partially solved positions" /></p>
+<p>We continue with position <code>3</code>. Since all of its children have been solved and are winning positions, it implies that it is a losing position. If you are at a state with 3 items, you can only take away 1 or take away 2. Either way, your opponent can win from either of these positions.</p>
+<p>
+  <img src="/images/knowledge/include_three.png" alt="Including position 3" /></p>
+<p>This same pattern applies recursively up the tree. Since <code>3</code> is a losing position, <code>4</code> and <code>5</code> are winning positions. Since all children of <code>6</code> are winning positions, <code>6</code> is a losing position. Since <code>6</code> is a losing position, <code>7</code> and <code>8</code> are winning positions. Since both children of <code>9</code> are winning positions, <code>9</code> is a losing position. Finally, our starting position, <code>10</code>, has one losing child, hence <code>10</code> is a winning position.</p>
+<p>
+  <img src="/images/knowledge/solved.png" alt="Solved game tree" /></p>
+<p>We explored the entire state space, and attributed each position a value. We did it! We solved our first game!</p>
+<h2 id="remoteness">
+  Remoteness
+  <a class="anchor" href="#remoteness">#</a>
+</h2>
+<p>Having now understood how to represent and solve a game, we arrive at the concept of <strong>remoteness</strong>. Knowing a position’s value tells us the ultimate outcome of the game, assuming perfect play. But in practice, especially for us imperfect humans, that’s not always enough. The more decisions a player makes to reach the end of the game, the more chances there are to make mistakes.</p>
+<p>To further illustrate this, consider the game tree below. Suppose you&rsquo;re the player at position <code>S</code>, a winning position, with two options: move <code>A</code>, which leads to a long and complex branch, or move <code>B</code>, which forces a win in just one move. Which would you choose?</p>
+<p>
+  <img src="/images/knowledge/remote.png" alt="Remoteness example 1" /></p>
+<p>Now, imagine the values are flipped: <code>S</code> is now a losing position. Which move would you make now? Which move would give you a better fighting chance?</p>
+<p>
+  <img src="/images/knowledge/other-remote.png" alt="Remoteness example 2" /></p>
+<p>This is the motivation behind remoteness: assuming perfect play, we’re measuring how far a position is from the end of the game. Before defining remoteness formally, it&rsquo;s helpful to revisit what we really mean by perfect play.</p>
+<h2 id="perfect-play-under-remoteness">
+  Perfect Play Under Remoteness
+  <a class="anchor" href="#perfect-play-under-remoteness">#</a>
+</h2>
+<p>Instead of redefining perfect play, we will define perfect play under remoteness such that players will always act optimally based on the value of positions and follow this priority order (Cheung, 2023):</p>
+<ul>
+<li>If forcing a win is possible, then force a win in as few moves as possible.</li>
+<li>Otherwise, if forcing a tie is possible, then force a tie in as few moves as possible.</li>
+<li>Otherwise, force a lose in as many moves as possible.</li>
+</ul>
+<p>Essentially, if we are winning or tying, we want to win or tie as fast as possible. If a draw is possible, then we want to stay in the draw. Otherwise, we want to delay the loss as much as possible.</p>
+<p>With the formal definition of perfect play out of the way, let&rsquo;s (finally) define remoteness:</p>
+<blockquote>
+<p>A position’s remoteness is the number of moves until the end of the game assuming perfect play (Cheung, 2023).</p>
+</blockquote>
+<p>In game tree terms, remoteness is the number of edges along the directed path from the current position to a primitive position, as determined by perfect play.</p>
+<h2 id="solving-10-to-0-by-1-or-2-with-remoteness">
+  Solving <code>10-to-0-by-1-or-2</code> with Remoteness
+  <a class="anchor" href="#solving-10-to-0-by-1-or-2-with-remoteness">#</a>
+</h2>
+<p>As an example, let&rsquo;s calculate the remoteness of the positions of our go-to game <code>10-to-0-by-1-or-2</code>. Similar to how we solved the game, we start with our primitive positions. By definition, since a primitive position indicates the end of the game and has no available moves, the position <code>0</code> is attributed the remoteness of 0.</p>
+<p>
+  <img src="/images/knowledge/r0.png" alt="Remoteness at 0" /></p>
+<p>After establishing the remoteness of <code>0</code>, we propagate remoteness backward through the game tree. Since both <code>1</code> and <code>2</code> are winning positions, as per the perfect play assumption, they take the lowest remoteness of their losing children + 1.</p>
+<p>
+  <img src="/images/knowledge/r2.png" alt="Remoteness at 1 and 2" /></p>
+<p>Position <code>3</code> is a losing position, hence it takes the maximum remoteness of its children + 1 (which is 2). Consequently, positions <code>4</code> and <code>5</code> take remoteness 3. This pattern is replicated until visiting all positions.</p>
+<p>
+  <img src="/images/knowledge/r3.png" alt="Remoteness across the tree" /></p>
+<h2 id="summary">
+  Summary
+  <a class="anchor" href="#summary">#</a>
+</h2>
+<p>To summarize how remoteness is computed under perfect play, GamesCrafter Cameron Cheung provides the following rules in his master’s technical report:</p>
+<ul>
+<li>The remoteness of a primitive position is 0.</li>
+<li>The remoteness of a non-primitive win position is 1 + the remoteness of the <strong>minimum-remoteness losing child</strong> position.</li>
+<li>The remoteness of a non-primitive lose position is 1 + the remoteness of the <strong>maximum-remoteness child</strong> position.</li>
+<li>The remoteness of a non-primitive tie position is 1 + the remoteness of the <strong>minimum-remoteness tying child</strong> position.</li>
+</ul>
+<p>We abide by the following convention:</p>
+<blockquote>
+<p>“We define the following ordering of value-remoteness pairs as worst to best: low-remoteness lose &lt; high-remoteness lose &lt; draw &lt; high-remoteness tie &lt; low-remoteness tie &lt; high-remoteness win &lt; low-remoteness win” (Cheung, 2023).</p>
+</blockquote>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/gamescrafters/gamescrafters.github.io/edit/main/content/main/knowledge/solving.md" target="_blank" rel="noopener">
+      <img src="/svg/edit.svg" class="book-icon" alt="" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#remoteness">Remoteness</a></li>
+    <li><a href="#perfect-play-under-remoteness">Perfect Play Under Remoteness</a></li>
+    <li><a href="#solving-10-to-0-by-1-or-2-with-remoteness">Solving <code>10-to-0-by-1-or-2</code> with Remoteness</a></li>
+    <li><a href="#summary">Summary</a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

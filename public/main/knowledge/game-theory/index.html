@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="
+  Intro to GamesCrafters
+  #
+
+A student-led research and development group at UC Berkeley that explores perfect play
+for abstract strategy games and makes those games explorable on the web.
+
+  What Is GamesCrafters?
+  #
+
+GamesCrafters is a long-running undergraduate research and development group at
+UC Berkeley. The project centers on abstract strategy games—think Tic-Tac-Toe,
+Connect Four, and countless original puzzles—and asks a simple but powerful question:
+What happens if a computer explores every position and both players play perfectly?">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/main/knowledge/game-theory/">
+  <meta property="og:site_name" content="GamesCrafters">
+  <meta property="og:title" content="Intro to GamesCrafters">
+  <meta property="og:description" content="Intro to GamesCrafters # A student-led research and development group at UC Berkeley that explores perfect play for abstract strategy games and makes those games explorable on the web.
+What Is GamesCrafters? # GamesCrafters is a long-running undergraduate research and development group at UC Berkeley. The project centers on abstract strategy games—think Tic-Tac-Toe, Connect Four, and countless original puzzles—and asks a simple but powerful question:
+What happens if a computer explores every position and both players play perfectly?">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="main">
+<title>Intro to GamesCrafters | GamesCrafters</title>
+<link rel="icon" href="/favicon.png" >
+
+
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/main/knowledge/game-theory/">
+<link rel="stylesheet" href="/book.min.85ec2cfa9e5f1bbd3e69532dcb571ebdaab64df1d4bd1848727ba6fe02e9ff99.css" integrity="sha256-hews&#43;p5fG70&#43;aVMty1cevaq2TfHUvRhIcnum/gLp/5k=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.06d19fa7afe6b4a225f7dc0ebd99fef7d52a68b30f46f1cc48720d6176226c8f.js" integrity="sha256-BtGfp6/mtKIl99wOvZn&#43;99UqaLMPRvHMSHINYXYibI8=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+    <a
+        class="flex align-center"
+        href="/"
+    ><img src="/logo.png" alt="Logo" /><span>GamesCrafters</span>
+    </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+   
+<ul>
+     
+    <li class="book-section-flat" >
+           
+<span>Overview</span>
+  
+<ul>
+     
+    <li>
+           
+<a href="/main/overview/course/" class="">About the Course</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/overview/group/" class="">About the Group</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/overview/misc/" class="">Miscellaneous</a>
+ 
+    </li>
+     
+</ul>
+
+    </li>
+      
+    <li class="book-section-flat" >
+           
+<span>People</span>
+  
+<ul>
+     
+    <li>
+           
+<a href="/main/people/organizers/" class="">Course Organizers</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/people/alumni/" class="">Group Alumni</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/people/groups/" class="">Past Groups</a>
+ 
+    </li>
+     
+</ul>
+
+    </li>
+      
+    <li class="book-section-flat" >
+           
+<span>Knowledge</span>
+  
+<ul>
+     
+    <li>
+           
+<a href="/main/knowledge/game-theory/" class="active">Intro to GamesCrafters</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/knowledge/game-trees/" class="">Game Trees</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/knowledge/intro/" class="">Intro to Game Theory</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/knowledge/position-value/" class="">Position Values</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/knowledge/solving/" class="">Solving a Game</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/knowledge/hashing/" class="">Hashing Positions</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/knowledge/overall-infrastructure/" class="">Overall Infrastructure</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/knowledge/games/" class="">Ruleset Explainers</a>
+ 
+    </li>
+      
+    <li>
+           
+<a
+    href="/articles"
+    class=""
+    rel="noopener"
+>Technical Articles</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/knowledge/analyses/" class="">Game Measurements</a>
+ 
+    </li>
+     
+</ul>
+
+    </li>
+      
+    <li class="book-section-flat" >
+           
+<span>Links</span>
+  
+<ul>
+     
+    <li>
+           
+<a
+    href="https://github.com/GamesCrafters"
+    class=""
+    rel="noopener"
+>GitHub Organization</a>
+ 
+    </li>
+      
+    <li>
+           
+<a
+    href="https://nyc.cs.berkeley.edu/uni/"
+    class=""
+    rel="noopener"
+>GamesmanUni</a>
+ 
+    </li>
+     
+</ul>
+
+    </li>
+      
+    <li class="book-section-flat" >
+           
+<input
+    type="checkbox"
+    id="section-13cc82cb423ec147fad6b058f9d60e0f"
+    class="toggle"
+    
+/>
+<label for="section-13cc82cb423ec147fad6b058f9d60e0f" class="flex justify-between">
+    <a
+        role="button"
+        
+        class=""
+    >Course Assignments</a>
+</label>
+  
+<ul>
+     
+    <li>
+           
+<a href="/main/assignments/game-homefun-p1/" class="">Homefun Pt. 1</a>
+ 
+    </li>
+     
+</ul>
+
+    </li>
+      
+    <li class="book-section-flat" >
+           
+<input
+    type="checkbox"
+    id="section-954f0b784a633dff9d97d5e365bbbefd"
+    class="toggle"
+    
+/>
+<label for="section-954f0b784a633dff9d97d5e365bbbefd" class="flex justify-between">
+    <a
+        role="button"
+        
+        class=""
+    >Ongoing Projects</a>
+</label>
+  
+<ul>
+    
+</ul>
+
+    </li>
+     
+</ul>
+   
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>Intro to GamesCrafters</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#what-is-gamescrafters">What Is GamesCrafters?</a></li>
+    <li><a href="#what-does-it-mean-to-solve-a-game">What Does It Mean to “Solve” a Game?</a></li>
+    <li><a href="#the-gamesman-ecosystem">The Gamesman Ecosystem</a>
+      <ul>
+        <li><a href="#the-pipeline">The Pipeline</a></li>
+      </ul>
+    </li>
+    <li><a href="#why-students-join-gamescrafters">Why Students Join GamesCrafters</a></li>
+    <li><a href="#how-this-textbook-fits-in">How This Textbook Fits In</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="intro-to-gamescrafters">
+  Intro to GamesCrafters
+  <a class="anchor" href="#intro-to-gamescrafters">#</a>
+</h1>
+<p>A student-led research and development group at UC Berkeley that explores perfect play
+for abstract strategy games and makes those games explorable on the web.</p>
+<h2 id="what-is-gamescrafters">
+  What Is GamesCrafters?
+  <a class="anchor" href="#what-is-gamescrafters">#</a>
+</h2>
+<p><strong>GamesCrafters</strong> is a long-running undergraduate research and development group at
+UC Berkeley. The project centers on <em>abstract strategy games</em>—think Tic-Tac-Toe,
+Connect Four, and countless original puzzles—and asks a simple but powerful question:</p>
+<p><strong>What happens if a computer explores every position and both players play perfectly?</strong></p>
+<blockquote class="book-hint info">
+<p><strong>Core idea:</strong> We don&rsquo;t just play games; we <em>solve</em> them. Once a game is solved,
+we can show players exactly which positions are winning, losing, or tied—right inside a web interface.</p>
+</blockquote>
+<p>Students in GamesCrafters work on everything from designing new games and writing solvers,
+to building web frontends and infrastructure that let anyone explore those games online.</p>
+<h2 id="what-does-it-mean-to-solve-a-game">
+  What Does It Mean to “Solve” a Game?
+  <a class="anchor" href="#what-does-it-mean-to-solve-a-game">#</a>
+</h2>
+<p>When we say a game is <strong>solved</strong>, we mean we know the outcome of every position assuming
+both players play optimally. For each position, we can answer:</p>
+<ul>
+<li>Is this position a WIN, LOSE, or TIE for the player to move?</li>
+<li>What are the best moves from here?</li>
+<li>How can the opponent respond if I play optimally?</li>
+</ul>
+<p>Behind the scenes, this is done by exploring the entire <em>game tree</em> of possible moves and
+working backwards from terminal positions. Later chapters will walk through game trees,
+position values, and solving in detail.</p>
+<h2 id="the-gamesman-ecosystem">
+  The Gamesman Ecosystem
+  <a class="anchor" href="#the-gamesman-ecosystem">#</a>
+</h2>
+<p>GamesCrafters uses a family of tools often referred to as the <strong>Gamesman</strong> ecosystem
+to turn a solved game into an interactive website. At a high level:</p>
+<h3 id="the-pipeline">
+  The Pipeline
+  <a class="anchor" href="#the-pipeline">#</a>
+</h3>
+<ol>
+<li><strong>Solver:</strong> You write a solver that explores the game tree and assigns values to positions.</li>
+<li><strong>Backend:</strong> The results are stored in a backend that can answer queries like “What is the value of this position?”</li>
+<li><strong>UWAPI (Middleware):</strong> A small service routes web requests to the correct backend and handles different versions or formats.</li>
+<li><strong>Frontend (GamesmanUni):</strong> A web interface where players can make moves, see perfect-play hints, and explore the game.</li>
+</ol>
+<p>The rest of this textbook walks through how to go from a game idea in your head to a live, deployed
+game on the web, built on this pipeline.</p>
+<h2 id="why-students-join-gamescrafters">
+  Why Students Join GamesCrafters
+  <a class="anchor" href="#why-students-join-gamescrafters">#</a>
+</h2>
+<p>GamesCrafters is both a learning environment and a research project. Students are drawn to it because it
+blends theory, implementation, and creativity:</p>
+<ul>
+<li>Learn recursion, search, and algorithms by implementing real solvers.</li>
+<li>Work with hashing, databases, and infrastructure.</li>
+<li>Design TUIs and GUIs that make perfect play approachable and fun.</li>
+<li>Contribute to software that other students and players actually use.</li>
+</ul>
+<p>If you like games, teaching, algorithms, or systems—and especially if you like combining them—you’re
+in exactly the right place.</p>
+<h2 id="how-this-textbook-fits-in">
+  How This Textbook Fits In
+  <a class="anchor" href="#how-this-textbook-fits-in">#</a>
+</h2>
+<p>This textbook is your guide from “I have a game idea” to “my game is online and people are playing it.”
+The upcoming chapters cover:</p>
+<ul>
+<li><strong>Game Trees &amp; Position Values</strong>: the theory of perfect play.</li>
+<li><strong>Solving &amp; Hashing</strong>: how to systematically explore and store game states.</li>
+<li><strong>Building TUIs &amp; GUIs</strong>: how players will interact with your game.</li>
+<li><strong>Infrastructure &amp; Deployment</strong>: how to plug into the Gamesman ecosystem and ship.</li>
+</ul>
+<p>You don’t need to understand everything now. This page is just to give you a sense of where you’re headed
+and why each part of the pipeline exists.</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/gamescrafters/gamescrafters.github.io/edit/main/content/main/knowledge/game-theory.md" target="_blank" rel="noopener">
+      <img src="/svg/edit.svg" class="book-icon" alt="" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#what-is-gamescrafters">What Is GamesCrafters?</a></li>
+    <li><a href="#what-does-it-mean-to-solve-a-game">What Does It Mean to “Solve” a Game?</a></li>
+    <li><a href="#the-gamesman-ecosystem">The Gamesman Ecosystem</a>
+      <ul>
+        <li><a href="#the-pipeline">The Pipeline</a></li>
+      </ul>
+    </li>
+    <li><a href="#why-students-join-gamescrafters">Why Students Join GamesCrafters</a></li>
+    <li><a href="#how-this-textbook-fits-in">How This Textbook Fits In</a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
