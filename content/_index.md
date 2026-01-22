@@ -26,13 +26,11 @@ We are an applied research group under the supervision of [Prof. Dan Garcia](htt
 
 <div>
 <ul>
-  <li>Session attendance form: <a href="https://forms.gle/89xuNuLGVwkovnRZ7"><code>here</code></a></li>
-  <li>General sign-up form: <a href="https://forms.gle/AmL3j1de9XDTSRrQ9"><code>here</code></a></li>
-  <li>Submissions form: <a href="https://forms.gle/M2RYf3aVRL4cmZLeA"><code>here</code></a></li>
+  <li>General sign-up form: <a href="https://forms.gle/ok732PzHfrLcwkWa7"><code>here</code></a></li>
 </ul>
 </div>
 
 {{% /columns %}}
 
-![Group photo](/images/groups/fall-2024.jpg)
-*- Fall 2024 GamesCrafters*
+![Group photo](GamesCrafters2025Sp.jpg)
+*- Spring 2025 GamesCrafters*
