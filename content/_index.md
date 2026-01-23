@@ -32,5 +32,5 @@ We are an applied research group under the supervision of [Prof. Dan Garcia](htt
 
 {{% /columns %}}
 
-![Group photo](GamesCrafters2025Sp.jpg)
+![Group photo](/images/groups/GamesCrafters2025Sp.jpg)
 *- Spring 2025 GamesCrafters*
