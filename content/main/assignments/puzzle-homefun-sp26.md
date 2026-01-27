@@ -7,7 +7,7 @@ math: true
 
 # **HomeFun 1**
 
-Due: `10:59 AM 2025-02-02`
+Due: `10:59 AM 2026-02-02`
 
 ## Summary
 
