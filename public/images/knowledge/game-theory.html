@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Intro to GamesCrafters — Displaying Games on the Web</title>
+  <style>
+    :root {
+      --bg: #f9fafb;              /* light neutral background */
+      --panel: #ffffff;           /* clean white cards */
+      --ink: #001f33;             /* Berkeley Blue dark ink */
+      --muted: #4b5563;           /* neutral muted text */
+      --accent: #003262;          /* Berkeley Blue */
+      --accent-2: #FDB515;        /* California Gold */
+      --line: #e5e7eb;
+      --radius: 14px;
+      --sidebar-w: 300px;
+    }
+
+    html, body { height: 100%; }
+
+    body {
+      margin: 0;
+      font: 20px/1.65 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", 
+        Roboto, Helvetica, Arial, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+    }
+
+    /* Layout */
+    .layout {
+      display: grid;
+      grid-template-columns: var(--sidebar-w) 1fr;
+      min-height: 100dvh;
+    }
+    @media (max-width: 980px) {
+      .layout { grid-template-columns: 1fr; }
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100dvh;
+      overflow: auto;
+      background: #ffffff;
+      border-right: 2px solid var(--accent);
+      padding: 18px 16px 24px;
+    }
+    @media (max-width: 980px) {
+      .sidebar {
+        position: fixed;
+        inset: 0 auto 0 0;
+        width: min(90vw, 360px);
+        translate: -100% 0;
+        transition: translate .25s ease;
+        background: #ffffff;
+        border-right: 2px solid var(--accent);
+        z-index: 60;
+      }
+      .sidebar.open { translate: 0 0; }
+      .backdrop { 
+        position: fixed; inset: 0;
+        background: rgba(0,0,0,0.35);
+        display: none;
+        z-index: 50;
+      }
+      .backdrop.show { display: block; }
+    }
+
+    .brand {
+      font-weight: 800;
+      font-size: 1.4rem;
+      color: var(--accent);
+      letter-spacing: 0.5px;
+      margin: 4px 6px 14px;
+    }
+
+    /* Chapters */
+    .chapters {
+      list-style: none;
+      padding-left: 10px;
+      margin-top: 6px;
+    }
+    .chapters li {
+      margin: 4px 0;
+    }
+    .chapters a {
+      color: var(--ink);
+      text-decoration: none;
+      padding: 4px 2px;
+    }
+    .chapters a:hover {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+    .chapters a[aria-current="page"] {
+      font-weight: bold;
+      color: var(--accent);
+    }
+
+    /* Topbar */
+    .topbar {
+      display: none;
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: #ffffff;
+      border-bottom: 2px solid var(--accent);
+      padding: 10px 14px;
+    }
+    @media (max-width: 980px) {
+      .topbar { display: flex; justify-content: space-between; align-items: center; }
+    }
+
+    .menu-toggle {
+      border: 1px solid var(--accent);
+      background: var(--accent);
+      color: white;
+      border-radius: 8px;
+      padding: 8px 12px;
+    }
+
+    /* Content */
+    .content {
+      padding: 40px 28px 80px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    header.hero {
+      background: var(--panel);
+      padding: 24px;
+      border-radius: var(--radius);
+      border-left: 6px solid var(--accent);
+      margin-bottom: 28px;
+    }
+
+    h1, h2 {
+      color: var(--accent);
+      letter-spacing: 0.5px;
+    }
+
+    .callout {
+      background: #f0f6ff;
+      border-left: 6px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      margin: 20px 0;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin: 16px 0;
+    }
+
+    footer {
+      margin-top: 40px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Mobile topbar with sidebar toggle -->
+  <div class="topbar">
+    <strong class="brand">GamesCrafters
+    </strong>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="sidebar">☰ Chapters</button>
+  </div>
+
+  <div class="layout">
+    <!-- Left Sidebar -->
+    <aside id="sidebar" class="sidebar" aria-label="Site chapters">
+      <div class="side-actions">
+        <div class="brand">GamesCrafters</div>
+      </div>
+
+      <!-- TOP NAV / META PAGES -->
+      <ul class="chapters">
+        <li><a href="reference.html">Common Bugs and Debugging Tips</a></li>
+      </ul>
+
+      <ul class="chapters">
+        <li><a href="intro.html" aria-current="page">Intro to Game Theory</a></li>
+        <li><a href="game-trees.html">Game Trees</a></li>
+        <li><a href="position-value.html">Position Values</a></li>
+        <li><a href="solving.html">Solving a Game</a></li>
+        <li><a href="hashing.html">Hashing Positions</a></li>
+        <li><a href="overall_infrastructure.html">Overall Infrastructure</a></li>
+        <li><a href="solving-a-new-game.html">Solving a New Game</a></li>
+        <li><a href="adding_to_web.html">Using AutoGUI</a></li>
+        <li><a href="deploying_game.html">Deploying the Game</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main chapter content -->
+    <main class="content">
+      <header class="hero">
+        <h1>Intro to GamesCrafters</h1>
+        <p>
+          A student-led research and development group at UC&nbsp;Berkeley that explores perfect play
+          for abstract strategy games and makes those games explorable on the web.
+        </p>
+      </header>
+
+      <section id="what-is">
+        <h2>What Is GamesCrafters?</h2>
+        <p>
+          <strong>GamesCrafters</strong> is a long-running undergraduate research and development group at
+          UC&nbsp;Berkeley. The project centers on <em>abstract strategy games</em>—think Tic-Tac-Toe,
+          Connect Four, and countless original puzzles—and asks a simple but powerful question:
+        </p>
+        <p>
+          <strong>What happens if a computer explores every position and both players play perfectly?</strong>
+        </p>
+        <div class="callout">
+          <div>🎮</div>
+          <div>
+            <strong>Core idea:</strong> We don't just play games; we <em>solve</em> them. Once a game is solved,
+            we can show players exactly which positions are winning, losing, or tied—right inside a web interface.
+          </div>
+        </div>
+        <p>
+          Students in GamesCrafters work on everything from designing new games and writing solvers,
+          to building web frontends and infrastructure that let anyone explore those games online.
+        </p>
+      </section>
+
+      <section id="perfect-play">
+        <h2>What Does It Mean to “Solve” a Game?</h2>
+        <p>
+          When we say a game is <strong>solved</strong>, we mean we know the outcome of every position assuming
+          both players play optimally. For each position, we can answer:
+        </p>
+        <ul>
+          <li>Is this position a WIN, LOSE, or TIE for the player to move?</li>
+          <li>What are the best moves from here?</li>
+          <li>How can the opponent respond if I play optimally?</li>
+        </ul>
+        <p>
+          Behind the scenes, this is done by exploring the entire <em>game tree</em> of possible moves and
+          working backwards from terminal positions. Later chapters will walk through game trees,
+          position values, and solving in detail.
+        </p>
+      </section>
+
+      <section id="ecosystem">
+        <h2>The Gamesman Ecosystem</h2>
+        <p>
+          GamesCrafters uses a family of tools often referred to as the <strong>Gamesman</strong> ecosystem
+          to turn a solved game into an interactive website. At a high level:
+        </p>
+
+        <div class="card">
+          <h3>The Pipeline</h3>
+          <ol>
+            <li><strong>Solver:</strong> You write a solver that explores the game tree and assigns values to positions.</li>
+            <li><strong>Backend:</strong> The results are stored in a backend that can answer queries like “What is the value of this position?”</li>
+            <li><strong>UWAPI (Middleware):</strong> A small service routes web requests to the correct backend and handles different versions or formats.</li>
+            <li><strong>Frontend (GamesmanUni):</strong> A web interface where players can make moves, see perfect-play hints, and explore the game.</li>
+          </ol>
+        </div>
+
+        <p>
+          The rest of this textbook walks through how to go from a game idea in your head to a live, deployed
+          game on the web, built on this pipeline.
+        </p>
+      </section>
+
+      <section id="why-join">
+        <h2>Why Students Join GamesCrafters</h2>
+        <p>
+          GamesCrafters is both a learning environment and a research project. Students are drawn to it because it
+          blends theory, implementation, and creativity:
+        </p>
+        <ul>
+          <li>Learn recursion, search, and algorithms by implementing real solvers.</li>
+          <li>Work with hashing, databases, and infrastructure.</li>
+          <li>Design TUIs and GUIs that make perfect play approachable and fun.</li>
+          <li>Contribute to software that other students and players actually use.</li>
+        </ul>
+        <p>
+          If you like games, teaching, algorithms, or systems—and especially if you like combining them—you’re
+          in exactly the right place.
+        </p>
+      </section>
+
+      <section id="how-this-textbook-fits">
+        <h2>How This Textbook Fits In</h2>
+        <p>
+          This textbook is your guide from “I have a game idea” to “my game is online and people are playing it.”
+          The upcoming chapters cover:
+        </p>
+        <ul>
+          <li><strong>Game Trees &amp; Position Values</strong> — the theory of perfect play.</li>
+          <li><strong>Solving &amp; Hashing</strong> — how to systematically explore and store game states.</li>
+          <li><strong>Building TUIs &amp; GUIs</strong> — how players will interact with your game.</li>
+          <li><strong>Infrastructure &amp; Deployment</strong> — how to plug into the Gamesman ecosystem and ship.</li>
+        </ul>
+        <p>
+          You don’t need to understand everything now. This page is just to give you a sense of where you’re headed
+          and why each part of the pipeline exists.
+        </p>
+      </section>
+
+    </main>
+  </div>
+
+  <div class="backdrop" hidden></div>
+
+  <script>
+    // Sidebar toggle for mobile
+    const sidebar = document.getElementById('sidebar');
+    const toggles = document.querySelectorAll('.menu-toggle');
+    const backdrop = document.querySelector('.backdrop');
+    function setOpen(isOpen){
+      if (!sidebar) return;
+      sidebar.classList.toggle('open', isOpen);
+      if (backdrop){
+        backdrop.classList.toggle('show', isOpen);
+        backdrop.hidden = !isOpen;
+      }
+      toggles.forEach(btn => btn.setAttribute('aria-expanded', String(isOpen)));
+    }
+    toggles.forEach(btn => btn.addEventListener('click', () => setOpen(!sidebar.classList.contains('open'))));
+    if (backdrop) backdrop.addEventListener('click', () => setOpen(false));
+
+    // Mark current chapter link (this page) as active
+    const current = Array.from(document.querySelectorAll('.chapters a')).find(
+      a => a.getAttribute('href') === 'intro-gamescrafters.html'
+    );
+    if (current) current.setAttribute('aria-current','page');
+  </script>
+</body>
+</html>

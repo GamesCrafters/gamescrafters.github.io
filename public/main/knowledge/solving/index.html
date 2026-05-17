@@ -1,501 +1,574 @@
 <!DOCTYPE html>
-<html lang="en-us" dir="ltr">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="
-  Solving a Game
-  #
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Solving a Game</title>
 
-With the foundation now laid out, we have all the tools available to solve a game. Once again, let&rsquo;s consider 10-to-0-by-1-or-2 and its game tree:
+  <style>
+    :root {
+      --bg: #f9fafb;
+      --panel: #ffffff;
+      --ink: #001f33;
+      --muted: #4b5563;
+      --accent: #003262;
+      --accent-2: #FDB515;
+      --line: #e5e7eb;
+      --radius: 14px;
+      --sidebar-w: 300px;
+    }
 
-  
-In order to assign values to each position in the game tree, we can work our way up from the primitive positions using the rules we defined earlier for assigning position values. Remember that the only primitive position in this game is the position with a count of 0, which we assigned a value of LOSE.">
-<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
-<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/main/knowledge/solving/">
-  <meta property="og:site_name" content="GamesCrafters">
-  <meta property="og:title" content="Solving a Game">
-  <meta property="og:description" content="Solving a Game # With the foundation now laid out, we have all the tools available to solve a game. Once again, let’s consider 10-to-0-by-1-or-2 and its game tree:
-In order to assign values to each position in the game tree, we can work our way up from the primitive positions using the rules we defined earlier for assigning position values. Remember that the only primitive position in this game is the position with a count of 0, which we assigned a value of LOSE.">
-  <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="main">
-<title>Solving a Game | GamesCrafters</title>
-<link rel="icon" href="/favicon.png" >
+    body {
+      margin: 0;
+      font: 20px/1.65 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Helvetica, Arial, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+    }
 
+    .layout {
+      display: grid;
+      grid-template-columns: var(--sidebar-w) 1fr;
+      min-height: 100dvh;
+    }
+    @media (max-width: 980px) {
+      .layout { grid-template-columns: 1fr; }
+    }
 
-<link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="http://localhost:1313/main/knowledge/solving/">
-<link rel="stylesheet" href="/book.min.85ec2cfa9e5f1bbd3e69532dcb571ebdaab64df1d4bd1848727ba6fe02e9ff99.css" integrity="sha256-hews&#43;p5fG70&#43;aVMty1cevaq2TfHUvRhIcnum/gLp/5k=" crossorigin="anonymous">
-  <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.06d19fa7afe6b4a225f7dc0ebd99fef7d52a68b30f46f1cc48720d6176226c8f.js" integrity="sha256-BtGfp6/mtKIl99wOvZn&#43;99UqaLMPRvHMSHINYXYibI8=" crossorigin="anonymous"></script>
+    /* Sidebar */
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100dvh;
+      overflow: auto;
+      background: #003262;
+      border-right: none;
+      padding: 18px 16px 24px;
+    }
+    @media (max-width: 980px) {
+      .sidebar {
+        position: fixed;
+        inset: 0 auto 0 0;
+        width: min(90vw, 360px);
+        translate: -100% 0;
+        transition: translate .25s ease;
+        background: #ffffff;
+        border-right: 2px solid var(--accent);
+        z-index: 60;
+      }
+      .sidebar.open { translate: 0 0; }
+      .backdrop {
+        position: fixed; inset: 0;
+        background: rgba(0,0,0,0.35);
+        display: none;
+        z-index: 50;
+      }
+      .backdrop.show { display: block; }
+    }
 
-  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
-<!--
-Made with Book Theme
-https://github.com/alex-shpak/hugo-book
--->
-  
+    .brand {
+      font-weight: 800;
+      font-size: 1.4rem;
+      color: #ffffff;
+      letter-spacing: 0.5px;
+      margin: 4px 6px 14px;
+    }
+
+    .chapters {
+      list-style: none;
+      padding-left: 10px;
+      margin-top: 6px;
+    }
+    .chapters li { margin: 4px 0; }
+    .chapters a {
+      color: #ffffff;
+      text-decoration: none;
+      padding: 4px 2px;
+    }
+    .chapters a:hover {
+      color: #FDB515;
+      text-decoration: underline;
+    }
+    .chapters a[aria-current="page"] {
+      font-weight: bold;
+      color: #FDB515;
+    }
+
+    /* Topbar */
+    .topbar {
+      display: none;
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: #ffffff;
+      border-bottom: 2px solid var(--accent);
+      padding: 10px 14px;
+    }
+    @media (max-width: 980px) {
+      .topbar { display: flex; justify-content: space-between; align-items: center; }
+    }
+    .menu-toggle {
+      border: 1px solid var(--accent);
+      background: var(--accent);
+      color: white;
+      border-radius: 8px;
+      padding: 8px 12px;
+    }
+
+    /* Content */
+    .content {
+      padding: 40px 28px 80px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    header.hero {
+      background: var(--panel);
+      padding: 24px;
+      border-radius: var(--radius);
+      border-left: 6px solid var(--accent);
+      margin-bottom: 28px;
+    }
+
+    h1, h2 { color: var(--accent); }
+
+    .callout {
+      background: #f0f6ff;
+      border-left: 6px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      margin: 20px 0;
+      display: flex;
+      gap: 10px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin: 20px 0;
+    }
+
+    /* ── Quiz styles ── */
+    .quiz-section {
+      margin-top: 48px;
+      border-top: 2px solid var(--line);
+      padding-top: 32px;
+    }
+
+    .quiz-section h2 { color: var(--accent); margin-bottom: 8px; }
+
+    .quiz-item {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      margin: 24px 0;
+    }
+
+    .quiz-meta {
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .quiz-question {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: var(--ink);
+    }
+
+    .quiz-options {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .quiz-options li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: background 0.15s, border-color 0.15s;
+      font-size: 0.97rem;
+    }
+
+    .quiz-options li:hover:not(.disabled) {
+      background: #f0f6ff;
+      border-color: #b3ccee;
+    }
+
+    .quiz-options li .opt-letter {
+      font-weight: 700;
+      min-width: 20px;
+      color: var(--accent);
+    }
+
+    .quiz-options li.correct {
+      background: #e8f5e9;
+      border-color: #4caf50;
+    }
+    .quiz-options li.correct .opt-letter { color: #2e7d32; }
+
+    .quiz-options li.incorrect {
+      background: #ffebee;
+      border-color: #ef5350;
+    }
+    .quiz-options li.incorrect .opt-letter { color: #c62828; }
+
+    .quiz-options li.reveal-correct {
+      background: #e8f5e9;
+      border-color: #4caf50;
+      opacity: 0.75;
+    }
+
+    .quiz-options li.disabled {
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .quiz-explanation {
+      display: none;
+      margin-top: 14px;
+      background: #f6f8fa;
+      border-left: 5px solid var(--accent-2);
+      border-radius: 0 10px 10px 0;
+      padding: 12px 16px;
+      font-size: 0.93rem;
+      color: var(--muted);
+    }
+    .quiz-explanation.show { display: block; }
+    .quiz-explanation strong {
+      display: block;
+      color: #7a5800;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+  </style>
 </head>
-<body dir="ltr">
-  <input type="checkbox" class="hidden toggle" id="menu-control" />
-  <input type="checkbox" class="hidden toggle" id="toc-control" />
-  <main class="container flex">
-    <aside class="book-menu">
-      <div class="book-menu-content">
-        
-  <nav>
-<h2 class="book-brand">
-    <a
-        class="flex align-center"
-        href="/"
-    ><img src="/logo.png" alt="Logo" /><span>GamesCrafters</span>
-    </a>
-</h2>
 
-
-<div class="book-search hidden">
-  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
-  <div class="book-search-spinner hidden"></div>
-  <ul id="book-search-results"></ul>
-</div>
-<script>document.querySelector(".book-search").classList.remove("hidden")</script>
-
-
-
-
-
-
-
-
-
-
-
-   
-<ul>
-     
-    <li class="book-section-flat" >
-           
-<span>Overview</span>
-  
-<ul>
-     
-    <li>
-           
-<a href="/main/overview/course/" class="">About the Course</a>
- 
-    </li>
-      
-    <li>
-           
-<a href="/main/overview/group/" class="">About the Group</a>
- 
-    </li>
-      
-    <li>
-           
-<a href="/main/overview/misc/" class="">Miscellaneous</a>
- 
-    </li>
-     
-</ul>
-
-    </li>
-      
-    <li class="book-section-flat" >
-           
-<span>People</span>
-  
-<ul>
-     
-    <li>
-           
-<a href="/main/people/organizers/" class="">Course Organizers</a>
- 
-    </li>
-      
-    <li>
-           
-<a href="/main/people/alumni/" class="">Group Alumni</a>
- 
-    </li>
-      
-    <li>
-           
-<a href="/main/people/groups/" class="">Past Groups</a>
- 
-    </li>
-     
-</ul>
-
-    </li>
-      
-    <li class="book-section-flat" >
-           
-<span>Knowledge</span>
-  
-<ul>
-     
-    <li>
-           
-<a href="/main/knowledge/intro/" class="">Intro to Game Theory</a>
- 
-    </li>
-      
-    <li>
-           
-<a href="/main/knowledge/game-trees/" class="">Game Trees</a>
- 
-    </li>
-      
-    <li>
-           
-<a href="/main/knowledge/position-value/" class="">Position Values</a>
- 
-    </li>
-      
-    <li>
-           
-<a href="/main/knowledge/solving/" class="active">Solving a Game</a>
- 
-    </li>
-      
-    <li>
-           
-<a href="/main/knowledge/hashing/" class="">Hashing Positions</a>
- 
-    </li>
-      
-    <li>
-           
-<a href="/main/knowledge/overall-infrastructure/" class="">Overall Infrastructure</a>
- 
-    </li>
-      
-    <li>
-           
-<a href="/main/knowledge/games/" class="">Ruleset Explainers</a>
- 
-    </li>
-      
-    <li>
-           
-<a
-    href="/articles"
-    class=""
-    rel="noopener"
->Technical Articles</a>
- 
-    </li>
-      
-    <li>
-           
-<a href="/main/knowledge/analyses/" class="">Game Measurements</a>
- 
-    </li>
-     
-</ul>
-
-    </li>
-      
-    <li class="book-section-flat" >
-           
-<span>Links</span>
-  
-<ul>
-     
-    <li>
-           
-<a
-    href="https://github.com/GamesCrafters"
-    class=""
-    rel="noopener"
->GitHub Organization</a>
- 
-    </li>
-      
-    <li>
-           
-<a
-    href="https://nyc.cs.berkeley.edu/uni/"
-    class=""
-    rel="noopener"
->GamesmanUni</a>
- 
-    </li>
-     
-</ul>
-
-    </li>
-      
-    <li class="book-section-flat" >
-           
-<input
-    type="checkbox"
-    id="section-13cc82cb423ec147fad6b058f9d60e0f"
-    class="toggle"
-    
-/>
-<label for="section-13cc82cb423ec147fad6b058f9d60e0f" class="flex justify-between">
-    <a
-        role="button"
-        
-        class=""
-    >Course Assignments</a>
-</label>
-  
-<ul>
-     
-    <li>
-           
-<a href="/main/assignments/game-homefun-p1/" class="">Homefun Pt. 1</a>
- 
-    </li>
-     
-</ul>
-
-    </li>
-      
-    <li class="book-section-flat" >
-           
-<input
-    type="checkbox"
-    id="section-954f0b784a633dff9d97d5e365bbbefd"
-    class="toggle"
-    
-/>
-<label for="section-954f0b784a633dff9d97d5e365bbbefd" class="flex justify-between">
-    <a
-        role="button"
-        
-        class=""
-    >Ongoing Projects</a>
-</label>
-  
-<ul>
-    
-</ul>
-
-    </li>
-     
-</ul>
-   
-
-
-
-
-
-
-
-
-</nav>
-
-
-
-
-  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
-
-
- 
-      </div>
-    </aside>
-
-    <div class="book-page">
-      <header class="book-header">
-        
-  <div class="flex align-center justify-between">
-  <label for="menu-control">
-    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
-  </label>
-
-  <h3>Solving a Game</h3>
-
-  <label for="toc-control">
-    
-    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
-    
-  </label>
-</div>
-
-
-  
-  <aside class="hidden clearfix">
-    
-  
-<nav id="TableOfContents">
-  <ul>
-    <li><a href="#remoteness">Remoteness</a></li>
-    <li><a href="#perfect-play-under-remoteness">Perfect Play Under Remoteness</a></li>
-    <li><a href="#solving-10-to-0-by-1-or-2-with-remoteness">Solving <code>10-to-0-by-1-or-2</code> with Remoteness</a></li>
-    <li><a href="#summary">Summary</a></li>
-  </ul>
-</nav>
-
-
-
-  </aside>
-  
- 
-      </header>
-
-      
-      
-  <article class="markdown book-article"><h1 id="solving-a-game">
-  Solving a Game
-  <a class="anchor" href="#solving-a-game">#</a>
-</h1>
-<p>With the foundation now laid out, we have all the tools available to solve a game. Once again, let&rsquo;s consider <code>10-to-0-by-1-or-2</code> and its game tree:</p>
-<p>
-  <img src="/images/knowledge/full_tree.png" alt="Full game tree" /></p>
-<p>In order to assign values to each position in the game tree, we can work our way up from the primitive positions using the rules we defined earlier for assigning position values. Remember that the only primitive position in this game is the position with a count of 0, which we assigned a value of <code>LOSE</code>.</p>
-<p>
-  <img src="/images/knowledge/primitive.png" alt="Primitive position" /></p>
-<p>From here, we can assign values to the positions with counts of 1 and 2.</p>
-<p>As it was defined previously, a winning position is any position that has a losing position as one of its children, hence we attribute positions <code>1</code> and <code>2</code> as winning. You can imagine the reasoning behind this:</p>
-<ul>
-<li>You are at a state with 1. By removing 1, you win the game. You are giving your opponent a losing position (0); they can’t make any moves from here.</li>
-<li>You are at a state with 2. You only remove 1. The arrow is red because you are letting your opponent win in this case. Notice that because we have at least one losing child, we are in a winning state.</li>
-</ul>
-<p>
-  <img src="/images/knowledge/partly.png" alt="Partially solved positions" /></p>
-<p>We continue with position <code>3</code>. Since all of its children have been solved and are winning positions, it implies that it is a losing position. If you are at a state with 3 items, you can only take away 1 or take away 2. Either way, your opponent can win from either of these positions.</p>
-<p>
-  <img src="/images/knowledge/include_three.png" alt="Including position 3" /></p>
-<p>This same pattern applies recursively up the tree. Since <code>3</code> is a losing position, <code>4</code> and <code>5</code> are winning positions. Since all children of <code>6</code> are winning positions, <code>6</code> is a losing position. Since <code>6</code> is a losing position, <code>7</code> and <code>8</code> are winning positions. Since both children of <code>9</code> are winning positions, <code>9</code> is a losing position. Finally, our starting position, <code>10</code>, has one losing child, hence <code>10</code> is a winning position.</p>
-<p>
-  <img src="/images/knowledge/solved.png" alt="Solved game tree" /></p>
-<p>We explored the entire state space, and attributed each position a value. We did it! We solved our first game!</p>
-<h2 id="remoteness">
-  Remoteness
-  <a class="anchor" href="#remoteness">#</a>
-</h2>
-<p>Having now understood how to represent and solve a game, we arrive at the concept of <strong>remoteness</strong>. Knowing a position’s value tells us the ultimate outcome of the game, assuming perfect play. But in practice, especially for us imperfect humans, that’s not always enough. The more decisions a player makes to reach the end of the game, the more chances there are to make mistakes.</p>
-<p>To further illustrate this, consider the game tree below. Suppose you&rsquo;re the player at position <code>S</code>, a winning position, with two options: move <code>A</code>, which leads to a long and complex branch, or move <code>B</code>, which forces a win in just one move. Which would you choose?</p>
-<p>
-  <img src="/images/knowledge/remote.png" alt="Remoteness example 1" /></p>
-<p>Now, imagine the values are flipped: <code>S</code> is now a losing position. Which move would you make now? Which move would give you a better fighting chance?</p>
-<p>
-  <img src="/images/knowledge/other-remote.png" alt="Remoteness example 2" /></p>
-<p>This is the motivation behind remoteness: assuming perfect play, we’re measuring how far a position is from the end of the game. Before defining remoteness formally, it&rsquo;s helpful to revisit what we really mean by perfect play.</p>
-<h2 id="perfect-play-under-remoteness">
-  Perfect Play Under Remoteness
-  <a class="anchor" href="#perfect-play-under-remoteness">#</a>
-</h2>
-<p>Instead of redefining perfect play, we will define perfect play under remoteness such that players will always act optimally based on the value of positions and follow this priority order (Cheung, 2023):</p>
-<ul>
-<li>If forcing a win is possible, then force a win in as few moves as possible.</li>
-<li>Otherwise, if forcing a tie is possible, then force a tie in as few moves as possible.</li>
-<li>Otherwise, force a lose in as many moves as possible.</li>
-</ul>
-<p>Essentially, if we are winning or tying, we want to win or tie as fast as possible. If a draw is possible, then we want to stay in the draw. Otherwise, we want to delay the loss as much as possible.</p>
-<p>With the formal definition of perfect play out of the way, let&rsquo;s (finally) define remoteness:</p>
-<blockquote>
-<p>A position’s remoteness is the number of moves until the end of the game assuming perfect play (Cheung, 2023).</p>
-</blockquote>
-<p>In game tree terms, remoteness is the number of edges along the directed path from the current position to a primitive position, as determined by perfect play.</p>
-<h2 id="solving-10-to-0-by-1-or-2-with-remoteness">
-  Solving <code>10-to-0-by-1-or-2</code> with Remoteness
-  <a class="anchor" href="#solving-10-to-0-by-1-or-2-with-remoteness">#</a>
-</h2>
-<p>As an example, let&rsquo;s calculate the remoteness of the positions of our go-to game <code>10-to-0-by-1-or-2</code>. Similar to how we solved the game, we start with our primitive positions. By definition, since a primitive position indicates the end of the game and has no available moves, the position <code>0</code> is attributed the remoteness of 0.</p>
-<p>
-  <img src="/images/knowledge/r0.png" alt="Remoteness at 0" /></p>
-<p>After establishing the remoteness of <code>0</code>, we propagate remoteness backward through the game tree. Since both <code>1</code> and <code>2</code> are winning positions, as per the perfect play assumption, they take the lowest remoteness of their losing children + 1.</p>
-<p>
-  <img src="/images/knowledge/r2.png" alt="Remoteness at 1 and 2" /></p>
-<p>Position <code>3</code> is a losing position, hence it takes the maximum remoteness of its children + 1 (which is 2). Consequently, positions <code>4</code> and <code>5</code> take remoteness 3. This pattern is replicated until visiting all positions.</p>
-<p>
-  <img src="/images/knowledge/r3.png" alt="Remoteness across the tree" /></p>
-<h2 id="summary">
-  Summary
-  <a class="anchor" href="#summary">#</a>
-</h2>
-<p>To summarize how remoteness is computed under perfect play, GamesCrafter Cameron Cheung provides the following rules in his master’s technical report:</p>
-<ul>
-<li>The remoteness of a primitive position is 0.</li>
-<li>The remoteness of a non-primitive win position is 1 + the remoteness of the <strong>minimum-remoteness losing child</strong> position.</li>
-<li>The remoteness of a non-primitive lose position is 1 + the remoteness of the <strong>maximum-remoteness child</strong> position.</li>
-<li>The remoteness of a non-primitive tie position is 1 + the remoteness of the <strong>minimum-remoteness tying child</strong> position.</li>
-</ul>
-<p>We abide by the following convention:</p>
-<blockquote>
-<p>“We define the following ordering of value-remoteness pairs as worst to best: low-remoteness lose &lt; high-remoteness lose &lt; draw &lt; high-remoteness tie &lt; low-remoteness tie &lt; high-remoteness win &lt; low-remoteness win” (Cheung, 2023).</p>
-</blockquote>
-</article>
- 
-      
-
-      <footer class="book-footer">
-        
-  <div class="flex flex-wrap justify-between">
-
-
-
-
-  <div>
-    <a class="flex align-center" href="https://github.com/gamescrafters/gamescrafters.github.io/edit/main/content/main/knowledge/solving.md" target="_blank" rel="noopener">
-      <img src="/svg/edit.svg" class="book-icon" alt="" />
-      <span>Edit this page</span>
-    </a>
+<body>
+  <div class="topbar">
+    <strong class="brand">Textbook</strong>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="sidebar">☰ Chapters</button>
   </div>
 
+  <div class="layout">
+    <!-- SIDEBAR -->
+    <aside id="sidebar" class="sidebar">
+      <div class="brand">GamesCrafters</div>
 
-</div>
+      <ul class="chapters">
+        <li><a href="reference.html">Common Bugs and Debugging Tips</a></li>
+      </ul>
 
-
-
-  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
-
-
- 
-        
-      </footer>
-
-      
-  
-  <div class="book-comments">
-
-</div>
-  
- 
-
-      <label for="menu-control" class="hidden book-menu-overlay"></label>
-    </div>
-
-    
-    <aside class="book-toc">
-      <div class="book-toc-content">
-        
-  
-<nav id="TableOfContents">
-  <ul>
-    <li><a href="#remoteness">Remoteness</a></li>
-    <li><a href="#perfect-play-under-remoteness">Perfect Play Under Remoteness</a></li>
-    <li><a href="#solving-10-to-0-by-1-or-2-with-remoteness">Solving <code>10-to-0-by-1-or-2</code> with Remoteness</a></li>
-    <li><a href="#summary">Summary</a></li>
-  </ul>
-</nav>
-
-
- 
-      </div>
+      <ul class="chapters">
+        <li><a href="intro.html">Intro to Game Theory</a></li>
+        <li><a href="game-trees.html">Game Trees</a></li>
+        <li><a href="position-value.html">Position Values</a></li>
+        <li><a href="solving.html" aria-current="page">Solving a Game</a></li>
+        <li><a href="hashing.html">Hashing Positions</a></li>
+        <li><a href="ten_to_zero_guide.html">Ten to Zero: Section 1-5 Walkthrough </a></li>
+        <li><a href="overall_infrastructure.html">Overall Infrastructure</a></li>
+        <li><a href="adding_to_web.html">Using AutoGUI</a></li>
+        <li><a href="deploying_game.html">Deploying the Game</a></li>
+      </ul>
     </aside>
-    
-  </main>
 
-  
+    <!-- MAIN CONTENT -->
+    <main class="content">
+      <h1>Solving a Game</h1>
+      <p>
+        With the foundation now laid out, we have all the tools available to solve a game. Once again, let's consider 10-to-0-by-1-or-2 and its game tree:
+      </p>
+
+      <div style="text-align: center;">
+        <p><img src="full_tree.png" alt="remove diagram"
+          style="max-width: 600px; width: 100%; height: auto;" /></p>
+      </div>
+
+      <p>
+        In order to assign values to each position in the game tree, we can work our way up from the primitive positions using the rules we defined earlier for assigning position values.
+        Remember that the only primitive position in this game is the position with a count of 0, which we assigned a value of LOSE.
+      </p>
+
+      <div style="text-align: center;">
+        <p><img src="primitive.png" alt="prim diagram"
+          style="max-width: 600px; width: 100%; height: auto;" /></p>
+      </div>
+
+      <p>
+        From here, we can assign values to the positions with counts of 1 and 2.
+        As it was defined previously, a winning position is any position that has a losing position as one of its children, hence we attribute position '1' and '2' as winning.
+        You can imagine the reasoning behind this:
+        <ul>
+          <li>You are at a state with 1. By removing 1, you win the game. You are giving your opponent a losing position (0) they can't make any moves from here.</li>
+          <li>You are at a state with 2. You only remove 1. The arrow is red because you are letting your opponent win in this case. Notice that because we have at least one losing child, we are in a winning state.</li>
+        </ul>
+      </p>
+
+      <div style="text-align: center;">
+        <p><img src="partly.png" alt="prim diagram"
+          style="max-width: 600px; width: 100%; height: auto;" /></p>
+      </div>
+
+      <p>We continue with position '3.' Since all of its children have been solved and are winning positions, it implies that it is a losing position.
+        If you are at a state with 3 items, you can only take away 1 or take away 2. Either way, your opponent can win from either of these positions.
+      </p>
+
+      <div style="text-align: center;">
+        <p><img src="include_three.png" alt="prim diagram"
+          style="max-width: 600px; width: 100%; height: auto;" /></p>
+      </div>
+
+      <p>This same pattern applies recursively up the tree. Since '3' is a losing position, '4' and '5' are winning positions. Since all children of '6' are winning positions, then '6' is a losing position. Since '6' is a losing position, '7' and '8' are winning positions. Since both children of '9' are winning positions, '9' is a losing position. Finally, our starting position, '10,' has one losing child, hence '10' is a winning position.</p>
+
+      <div style="text-align: center;">
+        <p><img src="solved.png" alt="prim diagram"
+          style="max-width: 600px; width: 100%; height: auto;" /></p>
+      </div>
+
+      <p>We explored the entire state space, and attributed each position a value. We did it! We solved our first game!</p>
+
+      <!-- SECTION 1 -->
+      <section>
+        <h2>Remoteness</h2>
+        <p>
+          Having now understood how to represent and solve a game, we arrive at the concept of 'remoteness.' Knowing a position's value tells us the ultimate outcome of the game, assuming perfect play. But, in practice, especially for us imperfect humans, that's not always enough. The more decisions a player makes to reach the end of the game, the more chances there are to make mistakes. To further illustrate this, consider the game tree below. Suppose you're the player at position 'S,' a winning position, with two options: move 'A,' which leads to a long and complex branch, or move 'B,' which forces a win in just one move. Which would you choose?
+        </p>
+
+        <div style="text-align: center;">
+          <p><img src="remote.png" alt="prim diagram"
+            style="max-width: 600px; width: 100%; height: auto;" /></p>
+        </div>
+
+        <p>Now, imagine the values are flipped: 'S' is now a losing position. Which move would you make now? Which move would give you a better fighting chance?</p>
+
+        <div style="text-align: center;">
+          <p><img src="other-remote.png" alt="prim diagram"
+            style="max-width: 600px; width: 100%; height: auto;" /></p>
+        </div>
+
+        <p>This is the motivation behind remoteness: assuming perfect play, we're measuring how far a position is from the end of the game. Before defining remoteness formally, it's helpful to revisit what we really mean by perfect play.</p>
+
+        <h2>Perfect Play Under Remoteness</h2>
+        <p>
+          Instead of redefining perfect play, we will define perfect play under remoteness such that players will always act optimally based on the value of positions and follow this priority order (Cheung, 2023):
+        </p>
+        <ul>
+          <li>If forcing a win is possible, then force a win in as few moves as possible.</li>
+          <li>Otherwise, if forcing a tie is possible, then force a tie in as few moves as possible.</li>
+          <li>Otherwise, force a lose in as many moves as possible.</li>
+        </ul>
+
+        <p>Essentially, if we are winning or tying, we want to win or tie as fast as possible, if a draw is possible, then we want to stay in the draw, otherwise, we want to delay the loss as much as possible.</p>
+
+        <p>With the formal definition of perfect play out of the way, let's (finally) define remoteness. "A position's remoteness is the number of moves until the end of the game assuming perfect play" (Cheung, 2023). In game tree terms, remoteness is the number of edges along the directed path from the current position to a primitive position, as determined by perfect play.</p>
+      </section>
+
+      <!-- SECTION 2 -->
+      <section>
+        <h2>Solving 10-to-0-by-1-or-2 with Remoteness</h2>
+
+        <p>
+          As an example, let's calculate the remoteness of the positions of our go-to game 10-to-0-by-1-or-2. Similar to how we solved the game, we start with our primitive positions. By definition, since a primitive position indicates the end of the game and has no available moves, the position '0' is attributed to the remoteness of 0.
+        </p>
+
+        <div style="text-align: center;">
+          <p><img src="r0.png" alt="prim diagram"
+            style="max-width: 600px; width: 100%; height: auto;" /></p>
+        </div>
+
+        <p>
+          After establishing the remoteness of '0,' we propagate remoteness backward through the game tree. Since both '1' and '2' are winning positions, as per the perfect play assumption, they take the lowest remoteness of their losing children + 1.
+        </p>
+
+        <div style="text-align: center;">
+          <p><img src="r2.png" alt="prim diagram"
+            style="max-width: 600px; width: 100%; height: auto;" /></p>
+        </div>
+
+        <p>
+          Position '3' is a losing position, hence it takes the maximum remoteness of its children + 1 (2). Consequently, position '4' and '5' take the remoteness of 3. This pattern is replicated until visiting all positions.
+        </p>
+
+        <div style="text-align: center;">
+          <p><img src="r3.png" alt="prim diagram"
+            style="max-width: 600px; width: 100%; height: auto;" /></p>
+        </div>
+
+        <h2>Summary</h2>
+
+        <p>To summarize how remoteness is computed under perfect play, gamescrafter Cameron Cheung provides the following rules in his master's technical report:
+        </p>
+        <ul>
+          <li>The remoteness of a primitive position is 0.</li>
+          <li>The remoteness of a non-primitive win position is 1 + the remoteness of minimum-remoteness losing child position.</li>
+          <li>The remoteness of a non-primitive lose position is 1 + the remoteness of the maximum-remoteness child position.</li>
+          <li>The remoteness of a non-primitive tie position is 1 + the remoteness of the minimum-remoteness tying child position.</li>
+        </ul>
+
+        <p>
+          We abide by the following convention: "We define the following ordering of value-remoteness pairs as worst to best: low-remoteness lose &lt; high-remoteness lose &lt; draw &lt; high-remoteness tie &lt; low-remoteness tie &lt; high-remoteness win &lt; low-remoteness win" (Cheung, 2023).
+        </p>
+      </section>
+
+      <!-- ── QUIZ SECTION ── -->
+      <section class="quiz-section" id="practice">
+        <h2>Practice Questions</h2>
+        <p>Test your understanding of solving with the questions below. Click an answer to check it.</p>
+
+        <!-- Q1 -->
+        <div class="quiz-item">
+          <div class="quiz-meta">Question 1</div>
+          <div class="quiz-question">In 10-to-0-by-1-or-2, why is position 3 a losing position?</div>
+          <ul class="quiz-options" data-correct="2">
+            <li data-index="0"><span class="opt-letter">a)</span> Because 3 is a primitive position with no moves</li>
+            <li data-index="1"><span class="opt-letter">b)</span> Because at least one of its children is a losing position</li>
+            <li data-index="2"><span class="opt-letter">c)</span> Because all of its children (positions 1 and 2) are winning positions</li>
+            <li data-index="3"><span class="opt-letter">d)</span> Because the player at position 3 must remove all remaining pieces</li>
+          </ul>
+          <div class="quiz-explanation">
+            <strong>Explanation</strong>
+            From position 3, a player can move to position 2 (remove 1) or position 1 (remove 2), both of which are WIN positions. Since every possible move hands the opponent a winning position, the current player cannot avoid losing. A position is LOSE if all of its children are WIN.
+          </div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="quiz-item">
+          <div class="quiz-meta">Question 2</div>
+          <div class="quiz-question">What is the remoteness of a primitive position?</div>
+          <ul class="quiz-options" data-correct="0">
+            <li data-index="0"><span class="opt-letter">a)</span> 0</li>
+            <li data-index="1"><span class="opt-letter">b)</span> 1</li>
+            <li data-index="2"><span class="opt-letter">c)</span> It depends on whether the position is WIN or LOSE</li>
+            <li data-index="3"><span class="opt-letter">d)</span> It depends on how many children the position has</li>
+          </ul>
+          <div class="quiz-explanation">
+            <strong>Explanation</strong>
+            A primitive position is the end of the game; no more moves are made from here. Since remoteness counts the number of moves until the game ends, and the game is already over, the remoteness is 0 by definition.
+          </div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="quiz-item">
+          <div class="quiz-meta">Question 3</div>
+          <div class="quiz-question">You are in a losing position. According to perfect play under remoteness, what should you do?</div>
+          <ul class="quiz-options" data-correct="3">
+            <li data-index="0"><span class="opt-letter">a)</span> Move to the child with the lowest remoteness to end the game quickly</li>
+            <li data-index="1"><span class="opt-letter">b)</span> Move to any child; it doesn't matter since you're going to lose anyway</li>
+            <li data-index="2"><span class="opt-letter">c)</span> Move to the child with the highest WIN remoteness</li>
+            <li data-index="3"><span class="opt-letter">d)</span> Move to the child with the highest remoteness to delay the loss as long as possible</li>
+          </ul>
+          <div class="quiz-explanation">
+            <strong>Explanation</strong>
+            When a loss is unavoidable, perfect play under remoteness says to delay it as long as possible. More moves means more chances for your opponent to make a mistake. So you pick the child position with the highest remoteness, maximizing the number of moves before the game ends.
+          </div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="quiz-item">
+          <div class="quiz-meta">Question 4</div>
+          <div class="quiz-question">Position X is a WIN with two children, a LOSE position with remoteness 3 and a LOSE position with remoteness 7. What is the remoteness of position X?</div>
+          <ul class="quiz-options" data-correct="1">
+            <li data-index="0"><span class="opt-letter">a)</span> 7</li>
+            <li data-index="1"><span class="opt-letter">b)</span> 4</li>
+            <li data-index="2"><span class="opt-letter">c)</span> 8</li>
+            <li data-index="3"><span class="opt-letter">d)</span> 1</li>
+          </ul>
+          <div class="quiz-explanation">
+            <strong>Explanation</strong>
+            A WIN position takes 1 + the remoteness of its minimum-remoteness losing child. The two losing children have remoteness 3 and 7, so the minimum is 3. Therefore, the remoteness of X is 1 + 3 = 4. A winning player always prefers to win as quickly as possible.
+          </div>
+        </div>
+
+        <!-- Q5 -->
+        <div class="quiz-item">
+          <div class="quiz-meta">Question 5</div>
+          <div class="quiz-question">Which of the following correctly orders value-remoteness pairs from worst to best?</div>
+          <ul class="quiz-options" data-correct="0">
+            <li data-index="0"><span class="opt-letter">a)</span> Low-remoteness lose → high-remoteness lose → draw → high-remoteness tie → low-remoteness tie → high-remoteness win → low-remoteness win</li>
+            <li data-index="1"><span class="opt-letter">b)</span> High-remoteness lose → low-remoteness lose → draw → low-remoteness tie → high-remoteness tie → low-remoteness win → high-remoteness win</li>
+            <li data-index="2"><span class="opt-letter">c)</span> Low-remoteness lose → high-remoteness lose → low-remoteness tie → high-remoteness tie → draw → high-remoteness win → low-remoteness win</li>
+            <li data-index="3"><span class="opt-letter">d)</span> Draw → low-remoteness lose → high-remoteness lose → high-remoteness tie → low-remoteness tie → high-remoteness win → low-remoteness win</li>
+          </ul>
+          <div class="quiz-explanation">
+            <strong>Explanation</strong>
+            This ordering reflects perfect play priorities. Losing quickly is the worst outcome (low-remoteness lose), while losing slowly is slightly better (high-remoteness lose). A draw is better than any loss. Among ties, a slow tie is worse than a fast one. Among wins, a slow win is worse than a fast one; low-remoteness win is the best possible outcome.
+          </div>
+        </div>
+
+      </section><!-- end .quiz-section -->
+
+    </main>
+  </div>
+
+  <div class="backdrop" hidden></div>
+
+  <script>
+    /* ── Sidebar toggle ── */
+    const sidebar  = document.getElementById('sidebar');
+    const toggles  = document.querySelectorAll('.menu-toggle');
+    const backdrop = document.querySelector('.backdrop');
+
+    function setOpen(isOpen) {
+      sidebar.classList.toggle('open', isOpen);
+      backdrop.classList.toggle('show', isOpen);
+      backdrop.hidden = !isOpen;
+      toggles.forEach(btn => btn.setAttribute('aria-expanded', String(isOpen)));
+    }
+
+    toggles.forEach(btn =>
+      btn.addEventListener('click', () => setOpen(!sidebar.classList.contains('open')))
+    );
+    backdrop.addEventListener('click', () => setOpen(false));
+
+    const current = Array.from(document.querySelectorAll('.chapters a'))
+      .find(a => a.getAttribute('href') === 'solving.html');
+    if (current) current.setAttribute('aria-current', 'page');
+
+    /* ── Quiz logic ── */
+    document.querySelectorAll('.quiz-item').forEach(item => {
+      const optionsList  = item.querySelector('.quiz-options');
+      const options      = Array.from(optionsList.querySelectorAll('li'));
+      const explanation  = item.querySelector('.quiz-explanation');
+      const correctIndex = parseInt(optionsList.dataset.correct, 10);
+
+      options.forEach(opt => {
+        opt.addEventListener('click', () => {
+          if (opt.classList.contains('disabled')) return;
+
+          const chosen = parseInt(opt.dataset.index, 10);
+          const isCorrect = chosen === correctIndex;
+
+          // Lock all options
+          options.forEach(o => o.classList.add('disabled'));
+
+          // Mark chosen
+          opt.classList.add(isCorrect ? 'correct' : 'incorrect');
+
+          // If wrong, reveal the correct answer
+          if (!isCorrect) {
+            options[correctIndex].classList.add('reveal-correct');
+          }
+
+          // Show explanation
+          explanation.classList.add('show');
+        });
+      });
+    });
+  </script>
+
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
