@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Deploying the Game</title>
+  <style>
+    :root {
+      --bg: #f9fafb;              /* light neutral background */
+      --panel: #ffffff;           /* clean white cards */
+      --ink: #001f33;             /* Berkeley Blue dark ink */
+      --muted: #4b5563;           /* neutral muted text */
+      --accent: #003262;          /* Berkeley Blue */
+      --accent-2: #FDB515;        /* California Gold */
+      --line: #e5e7eb;
+      --radius: 14px;
+      --sidebar-w: 300px;
+    }
+
+    html, body { height: 100%; }
+
+    body {
+      margin: 0;
+      font: 17px/1.65 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Helvetica, Arial, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+    }
+
+    /* Layout */
+    .layout {
+      display: grid;
+      grid-template-columns: var(--sidebar-w) 1fr;
+      min-height: 100dvh;
+    }
+    @media (max-width: 980px) {
+      .layout { grid-template-columns: 1fr; }
+    }
+
+        /* Sidebar */
+    .sidebar {
+      position: sticky;
+        top: 0;
+        height: 100dvh;
+        overflow: auto;
+        background: #003262;          /* Berkeley blue */
+        border-right: none;           /* or keep if you like */
+        padding: 18px 16px 24px;
+    }
+    @media (max-width: 980px) {
+      .sidebar {
+        position: fixed;
+        inset: 0 auto 0 0;
+        width: min(90vw, 360px);
+        translate: -100% 0;
+        transition: translate .25s ease;
+        background: #ffffff;
+        border-right: 2px solid var(--accent);
+        z-index: 60;
+      }
+      .sidebar.open { translate: 0 0; }
+      .backdrop {
+        position: fixed; inset: 0;
+        background: rgba(0,0,0,0.35);
+        display: none;
+        z-index: 50;
+      }
+      .backdrop.show { display: block; }
+    }
+
+    .brand {
+      font-weight: 800;
+  font-size: 1.4rem;
+  color: #ffffff;               /* was var(--accent) */
+  letter-spacing: 0.5px;
+  margin: 4px 6px 14px;
+    }
+
+    .chapters {
+      list-style: none;
+      padding-left: 10px;
+      margin-top: 6px;
+    }
+    .chapters li {
+      margin: 4px 0;
+    }
+    .chapters a {
+  color: #ffffff;               /* white text */
+  text-decoration: none;
+  padding: 4px 2px;
+}
+
+.chapters a:hover {
+  color: #FDB515;               /* California gold on hover */
+  text-decoration: underline;
+}
+
+.chapters a[aria-current="page"] {
+  font-weight: bold;
+  color: #FDB515;               /* highlight current page in gold */
+}
+
+
+    /* Topbar */
+    .topbar {
+      display: none;
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: #ffffff;
+      border-bottom: 2px solid var(--accent);
+      padding: 10px 14px;
+    }
+    @media (max-width: 980px) {
+      .topbar { display: flex; justify-content: space-between; align-items: center; }
+    }
+
+    .menu-toggle {
+      border: 1px solid var(--accent);
+      background: var(--accent);
+      color: white;
+      border-radius: 8px;
+      padding: 8px 12px;
+    }
+
+    /* Content */
+    .content {
+      padding: 40px 28px 80px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    header.hero {
+      background: var(--panel);
+      padding: 24px;
+      border-radius: var(--radius);
+      border-left: 6px solid var(--accent);
+      margin-bottom: 28px;
+    }
+
+    h1, h2 {
+      color: var(--accent);
+      letter-spacing: 0.5px;
+    }
+
+    p { margin: 14px 0; }
+
+    .callout {
+      background: #f0f6ff;
+      border-left: 6px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      margin: 20px 0;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin: 20px 0;
+    }
+
+    footer {
+      margin-top: 40px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    /* Code blocks */
+    pre, code {
+      font-family: "Fira Code", Consolas, "Courier New", monospace;
+      font-size: 0.95rem;
+    }
+
+    pre {
+      background: #f4f6f8;
+      border: 1px solid #e0e0e0;
+      padding: 14px 18px;
+      border-radius: 8px;
+      overflow-x: auto;
+      line-height: 1.5;
+      margin: 18px 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- Mobile topbar with sidebar toggle -->
+  <div class="topbar">
+    <strong class="brand">Textbook</strong>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="sidebar">☰ Chapters</button>
+  </div>
+
+  <div class="layout">
+    <!-- Sidebar -->
+    <aside id="sidebar" class="sidebar" aria-label="Site chapters">
+      <div class="brand">GamesCrafters</div>
+
+      <ul class="chapters">
+        <li><a href="reference.html">Common Bugs and Debugging Tips</a></li>
+      </ul>
+
+      <ul class="chapters">
+        <li><a href="intro.html">Intro to Game Theory</a></li>
+        <li><a href="game-trees.html">Game Trees</a></li>
+        <li><a href="position-value.html">Position Values</a></li>
+        <li><a href="solving.html">Solving a Game</a></li>
+        <li><a href="hashing.html">Hashing Positions</a></li>
+        <li><a href="ten_to_zero_guide.html">Ten to Zero: Section 1-5 Walkthrough </a></li>
+        <li><a href="overall_infrastructure.html">Overall Infrastructure</a></li>
+        <li><a href="adding_to_web.html">Using AutoGUI</a></li>
+        <li><a href="deploying_game.html" aria-current="page">Deploying the Game</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main content -->
+    <main class="content">
+        <h1>Deploying the Game</h1>
+        <p>
+          Once your game is solved and plugged into the Gamesman ecosystem, the last step
+          is to actually put it on the website!
+        </p>
+
+        <p>
+          This involves:
+        </p>
+        <ul>
+          <li>Starting the appropriate game server (Classic, One, or Puzzles).</li>
+          <li>Running the GamesCraftersUWAPI server that Uni talks to.</li>
+          <li>Running the GamesmanUni web app pointing at your local UWAPI.</li>
+        </ul>
+
+        <p>
+            After doing this, you should be able to open Uni in your browser, pick your game, and
+            see your solver’s values show up through the AutoGUI.
+          </p>
+        
+
+      <section id="stack">
+        <h2>Local Setup</h2>
+        <p>
+          A typical local setup looks like this:
+        </p>
+
+          <ol>
+            <li><strong>Game server</strong>  
+              (GamesmanClassic, GamesmanOne, or GamesmanPuzzles) exposes your game’s data.</li>
+            <li><strong>GamesCraftersUWAPI</strong>  
+              wraps those backends with a unified JSON API.</li>
+            <li><strong>GamesmanUni</strong>  
+              is the frontend that players actually see.</li>
+          </ol>
+
+      </section>
+
+      <section id="classic">
+        <h2>Running GamesmanClassic Locally</h2>
+        <p>
+          If your game is implemented in GamesmanClassic, you’ll want to run the following:
+        </p>
+
+        <pre><code># Clone GamesmanClassic
+git clone https://github.com/GamesCrafters/GamesmanClassic.git
+cd GamesmanClassic
+
+# Configure and build (graphics disabled)
+./configure --disable-graphics
+make
+
+# Install any Python dependencies for helper scripts
+pip install -r requirements.txt
+
+# Run the Classic server
+python3 src/py/server.py</code></pre>
+
+        <p>
+          This starts the server on port 8083. Check the <code>README</code> in GamesmanClassic for any additional information.
+        </p>
+      </section>
+
+      <section id="one-puzzles">
+        <h2>Running GamesmanOne or GamesmanPuzzles Locally</h2>
+
+        <h3>GamesmanOne</h3>
+        <p>
+          For games written in the GamesmanOne framework:
+        </p>
+
+        <pre><code># Clone GamesmanOne
+git clone https://github.com/GamesCrafters/GamesmanOne.git
+cd GamesmanOne
+
+# Recompile your code and start the server
+bash ./gamesman_install.sh  # and follow interactive instructions
+python3 server.py</code></pre>
+
+        <p>
+          This starts the server on port 8084.
+        </p>
+
+        <h3>GamesmanPuzzles</h3>
+        <p>
+          For puzzles implemented in GamesmanPuzzles:
+        </p>
+
+        <pre><code># Clone GamesmanPuzzles
+git clone https://github.com/GamesCrafters/GamesmanPuzzles.git
+cd GamesmanPuzzles
+
+pip install -r requirements.txt
+pip install -e .
+mkdir databases
+
+# Run the Puzzles server
+python3 -m scripts.server</code></pre>
+
+       <p>
+          This starts the server on port 9001.
+        </p>
+</section>
+
+      <section id="uwapi">
+        <h2>Running GamesCraftersUWAPI Locally</h2>
+        <p>
+          <strong>GamesCraftersUWAPI</strong> is the middleware layer that speaks
+          a uniform API to Uni and forwards requests to Classic / One / Puzzles.
+        </p>
+
+        <pre><code># Clone GamesCraftersUWAPI
+git clone https://github.com/GamesCrafters/GamesCraftersUWAPI.git
+cd GamesCraftersUWAPI
+
+pip install -r requirements.txt
+</code></pre>
+
+        <p>
+          You can sanity-check it with URLs like:
+        </p>
+
+        <ul>
+          <li><code>http://127.0.0.1:8082/games/</code></li>
+          <li><code>http://127.0.0.1:8082/&lt;game&gt;/&lt;size&gt;/instructions/</code></li>
+          <li><code>http://127.0.0.1:8082/&lt;game&gt;/&lt;size&gt;/positions/?p=...</code></li>
+        </ul>
+      </section>
+
+      <section id="uni">
+        <h2>Running GamesmanUni Locally</h2>
+        <p>
+          Finally, you need GamesmanUni, the frontend web app. This is what players
+          actually use in their browser.
+        </p>
+
+        <pre><code># Clone GamesmanUni
+git clone https://github.com/GamesCrafters/GamesmanUni.git
+cd GamesmanUni
+
+# Install JS dependencies
+yarn        # or: npm install
+
+# Start a dev server (if available)
+yarn dev    # or: npm run dev</code></pre>
+
+        <p>
+          Uni needs to know where your UWAPI server lives. In older versions this is configured in a
+          small <code>config</code> or <code>settings</code> file, often something like:
+        </p>
+
+        <pre><code>const config = {
+  uniAPI:  "http://localhost:8082/universal/v1/",
+  gameAPI: "http://localhost:8082/"
+};</code></pre>
+
+        <p>
+          Once configured, open the URL printed by <code>yarn dev</code> (often
+          <code>http://localhost:5173</code> or similar) and try selecting your game.
+        </p>
+      </section>
+
+      <section id="testing">
+        <h2>Testing Your Local Deployment</h2>
+        <p>
+          A good checklist:
+        </p>
+        <ol>
+          <li>Hit your game server directly (Classic / One / Puzzles) with a simple curl/browser request.</li>
+          <li>Hit UWAPI and confirm it can see your game and return position data.</li>
+          <li>Run Uni and confirm that:
+            <ul>
+              <li>Your game appears in the game list.</li>
+              <li>Moves update the board correctly.</li>
+              <li>Values / remotenesses / winbys show up as expected.</li>
+            </ul>
+          </li>
+        </ol>
+
+        <div class="callout">
+          <div>🧪</div>
+          <div>
+            If something is broken, check from the bottom up: game server → UWAPI → Uni.
+            That makes it easier to see where data stops flowing.
+          </div>
+        </div>
+      </section>
+
+      <section id="nyc">
+        <h2>Deploying to the NYC Servers (Staff Only)</h2>
+        <p>
+          If you’re a GamesCrafters lead or staff member, you may also deploy your changes
+          to the shared NYC servers so others can use them. The high-level pattern is:
+        </p>
+
+          <ol>
+            <li><strong>SSH</strong> into <code>nyc.cs.berkeley.edu</code> as <code>gamescrafters</code>.</li>
+            <li><strong>Pull</strong> the latest code in the relevant repo.</li>
+            <li><strong>Rebuild</strong> if needed (for C/C++ projects like Classic).</li>
+            <li><strong>Restart</strong> the appropriate systemd service.</li>
+            <li>For Uni, <strong>build</strong> the frontend and <strong>rsync</strong> it into place.</li>
+          </ol>
+
+        <h3>Example: Restarting Puzzles</h3>
+        <pre><code>ssh gamescrafters@nyc.cs.berkeley.edu
+cd ~/GamesmanPuzzles
+git pull
+sudo systemctl restart gmp</code></pre>
+
+        <h3>Example: Updating Uni</h3>
+        <pre><code>ssh gamescrafters@nyc.cs.berkeley.edu
+cd ~/GamesmanUni
+yarn
+yarn build
+sudo rsync -a --delete ./dist/ /var/www/html/uni/</code></pre>
+
+        <p>
+          Exact commands and service names can change; always check current internal
+          documentation or ask a lead before touching production.
+        </p>
+      </section>
+
+      <section id="wrap-up">
+        <h2>Wrapping Up</h2>
+        <p>
+          You now know how to bring your game all the way from a solver running in isolation
+          to a full Uni + UWAPI + backend stack other people can play with.
+        </p>
+        <ul>
+          <li>Run the backend your game lives in (Classic, One, or Puzzles).</li>
+          <li>Run GamesCraftersUWAPI pointing at that backend.</li>
+          <li>Run GamesmanUni pointing at your UWAPI.</li>
+          <li>Optionally, deploy to the shared NYC servers if you’re staff.</li>
+        </ul>
+        <p>
+          In practice, you’ll repeat this loop many times as you debug, tune, and improve your game.
+        </p>
+      </section>
+
+    </main>
+  </div>
+
+  <div class="backdrop" hidden></div>
+
+  <script>
+    // Sidebar toggle for mobile
+    const sidebar = document.getElementById('sidebar');
+    const toggles = document.querySelectorAll('.menu-toggle');
+    const backdrop = document.querySelector('.backdrop');
+
+    function setOpen(isOpen){
+      if (!sidebar) return;
+      sidebar.classList.toggle('open', isOpen);
+      if (backdrop){
+        backdrop.classList.toggle('show', isOpen);
+        backdrop.hidden = !isOpen;
+      }
+      toggles.forEach(btn => btn.setAttribute('aria-expanded', String(isOpen)));
+    }
+
+    toggles.forEach(btn =>
+      btn.addEventListener('click', () => setOpen(!sidebar.classList.contains('open')))
+    );
+    if (backdrop) backdrop.addEventListener('click', () => setOpen(false));
+
+    // Mark current chapter link (defensive if sidebar HTML changes)
+    const current = Array.from(document.querySelectorAll('.chapters a'))
+      .find(a => a.getAttribute('href') === 'deploying_game.html');
+    if (current) current.setAttribute('aria-current','page');
+  </script>
+</body>
+</html>

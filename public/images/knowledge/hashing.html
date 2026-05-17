@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hashing Positions</title>
+  <style>
+    :root {
+      --bg: #f9fafb;
+      --panel: #ffffff;
+      --ink: #001f33;
+      --muted: #4b5563;
+      --accent: #003262;
+      --accent-2: #FDB515;
+      --line: #e5e7eb;
+      --radius: 14px;
+      --sidebar-w: 300px;
+    }
+
+    html, body { height: 100%; }
+
+    body {
+      margin: 0;
+      font: 20px/1.65 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", 
+        Roboto, Helvetica, Arial, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: var(--sidebar-w) 1fr;
+      min-height: 100dvh;
+    }
+    @media (max-width: 980px) {
+      .layout { grid-template-columns: 1fr; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100dvh;
+      overflow: auto;
+      background: #003262;
+      border-right: none;
+      padding: 18px 16px 24px;
+    }
+    @media (max-width: 980px) {
+      .sidebar {
+        position: fixed;
+        inset: 0 auto 0 0;
+        width: min(90vw, 360px);
+        translate: -100% 0;
+        transition: translate .25s ease;
+        background: #ffffff;
+        border-right: 2px solid var(--accent);
+        z-index: 60;
+      }
+      .sidebar.open { translate: 0 0; }
+      .backdrop {
+        position: fixed; inset: 0;
+        background: rgba(0,0,0,0.35);
+        display: none;
+        z-index: 50;
+      }
+      .backdrop.show { display: block; }
+    }
+
+    .brand {
+      font-weight: 800;
+      font-size: 1.4rem;
+      color: #ffffff;
+      letter-spacing: 0.5px;
+      margin: 4px 6px 14px;
+    }
+
+    .chapters {
+      list-style: none;
+      padding-left: 10px;
+      margin-top: 6px;
+    }
+    .chapters li { margin: 4px 0; }
+    .chapters a {
+      color: #ffffff;
+      text-decoration: none;
+      padding: 4px 2px;
+    }
+    .chapters a:hover {
+      color: #FDB515;
+      text-decoration: underline;
+    }
+    .chapters a[aria-current="page"] {
+      font-weight: bold;
+      color: #FDB515;
+    }
+
+    .topbar {
+      display: none;
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: #ffffff;
+      border-bottom: 2px solid var(--accent);
+      padding: 10px 14px;
+    }
+    @media (max-width: 980px) {
+      .topbar { display: flex; justify-content: space-between; align-items: center; }
+    }
+
+    .menu-toggle {
+      border: 1px solid var(--accent);
+      background: var(--accent);
+      color: white;
+      border-radius: 8px;
+      padding: 8px 12px;
+    }
+
+    .content {
+      padding: 40px 28px 80px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    header.hero {
+      background: var(--panel);
+      padding: 24px;
+      border-radius: var(--radius);
+      border-left: 6px solid var(--accent);
+      margin-bottom: 28px;
+    }
+
+    h1, h2 {
+      color: var(--accent);
+      letter-spacing: 0.5px;
+    }
+
+    .callout {
+      background: #f0f6ff;
+      border-left: 6px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      margin: 20px 0;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin: 20px 0;
+    }
+
+    pre, code {
+      font-family: "Fira Code", Consolas, "Courier New", monospace;
+      font-size: 0.95rem;
+    }
+
+    pre {
+      background: #f4f6f8;
+      border: 1px solid #e0e0e0;
+      padding: 14px 18px;
+      border-radius: 8px;
+      overflow-x: auto;
+      line-height: 1.5;
+      margin: 18px 0;
+    }
+
+    /* ── Quiz styles ── */
+    .quiz-section {
+      margin-top: 48px;
+      border-top: 2px solid var(--line);
+      padding-top: 32px;
+    }
+
+    .quiz-section h2 { color: var(--accent); margin-bottom: 8px; }
+
+    .quiz-item {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      margin: 24px 0;
+    }
+
+    .quiz-meta {
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .quiz-question {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: var(--ink);
+    }
+
+    .quiz-options {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .quiz-options li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: background 0.15s, border-color 0.15s;
+      font-size: 0.97rem;
+    }
+
+    .quiz-options li:hover:not(.disabled) {
+      background: #f0f6ff;
+      border-color: #b3ccee;
+    }
+
+    .quiz-options li .opt-letter {
+      font-weight: 700;
+      min-width: 20px;
+      color: var(--accent);
+    }
+
+    .quiz-options li.correct {
+      background: #e8f5e9;
+      border-color: #4caf50;
+    }
+    .quiz-options li.correct .opt-letter { color: #2e7d32; }
+
+    .quiz-options li.incorrect {
+      background: #ffebee;
+      border-color: #ef5350;
+    }
+    .quiz-options li.incorrect .opt-letter { color: #c62828; }
+
+    .quiz-options li.reveal-correct {
+      background: #e8f5e9;
+      border-color: #4caf50;
+      opacity: 0.75;
+    }
+
+    .quiz-options li.disabled {
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .quiz-explanation {
+      display: none;
+      margin-top: 14px;
+      background: #f6f8fa;
+      border-left: 5px solid var(--accent-2);
+      border-radius: 0 10px 10px 0;
+      padding: 12px 16px;
+      font-size: 0.93rem;
+      color: var(--muted);
+    }
+    .quiz-explanation.show { display: block; }
+    .quiz-explanation strong {
+      display: block;
+      color: #7a5800;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <strong class="brand">Textbook</strong>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="sidebar">☰ Chapters</button>
+  </div>
+
+  <div class="layout">
+    <aside id="sidebar" class="sidebar" aria-label="Site chapters">
+      <div class="side-actions">
+        <div class="brand">GamesCrafters</div>
+      </div>
+
+      <ul class="chapters">
+        <li><a href="reference.html">Common Bugs and Debugging Tips</a></li>
+      </ul>
+
+      <ul class="chapters">
+        <li><a href="intro.html">Intro to Game Theory</a></li>
+        <li><a href="game-trees.html">Game Trees</a></li>
+        <li><a href="position-value.html">Position Values</a></li>
+        <li><a href="solving.html">Solving a Game</a></li>
+        <li><a href="hashing.html" aria-current="page">Hashing Positions</a></li>
+        <li><a href="ten_to_zero_guide.html">Ten to Zero: Section 1-5 Walkthrough </a></li>
+        <li><a href="overall_infrastructure.html">Overall Infrastructure</a></li>
+        <li><a href="adding_to_web.html">Using AutoGUI</a></li>
+        <li><a href="deploying_game.html">Deploying the Game</a></li>
+      </ul>
+    </aside>
+
+    <main class="content">
+      <h1>Hashing Positions</h1>
+      <p>
+        Solving a game means exploring an enormous game tree. This can be computationally expensive to compute every time we want to play the game, especially for bigger games. To avoid recomputing positions over
+        and over, we need a way to <strong>name</strong> each position with a number so we can store
+        and look it up quickly. That "naming function" is our <strong>hash function</strong>.
+      </p>
+
+      <section id="memoization">
+        <h2>Big Idea: Memoization</h2>
+        <p>
+          Our solvers use <strong>memoization</strong> to be more efficient. This means that, once a position has been evaluated, we store
+          its value instead of recomputing it. This is just like caching Fibonacci values instead of
+          using recursion to find every value. We can illustrate this with a simple Fibonacci function. We can access previously computed values by storing Pairs (n, fib(n)) in a table.
+        </p>
+
+        <pre><code>int fib(int n) {
+    if (n == 0 || n == 1)
+      return n;
+    else if we've already computed fib(n):
+      return stored value;
+    else
+      int value = fib(n - 1) + fib(n - 2);
+      store(n, value);
+      return value;
+}</code></pre>
+
+        <div style="text-align: center;">
+          <p><img src="fib.png" alt="prim diagram"
+            style="max-width: 600px; width: 100%; height: auto;" /></p>
+        </div>
+
+        <p>
+          For games, we can't use a simple number to store a position's value. We need to
+          represent the entire board state, including whose turn it is, where the pieces are, and so on.
+          How do we map this data into an integer that will serve as an index into our table? This mapping function is called a <strong>hash function</strong>.
+        </p>
+      </section>
+
+      <section id="what-is-hash">
+        <h2>What Is a Hash Function?</h2>
+        <p>
+          A <strong>hash function</strong> takes a piece of data (like a board) and returns an integer.
+          We use that integer as an index into an array or as a key in a table.
+        </p>
+        <p>
+          For our solvers, a good hash function should:
+        </p>
+        <ul>
+          <li>Map each reachable position to a unique integer</li>
+          <li>Spread different positions out evenly across the table</li>
+          <li>Be fast enough to compute on every recursive call</li>
+        </ul>
+      </section>
+
+      <section id="ttt-ternary">
+        <h2>Writing a Tic-Tac-Toe Hash Function</h2>
+        <p>
+          Let's consider how we migh write a hash function for Tic-Tac-Toe. Here's how you play:
+          <ul>
+            <li>One player chooses X, the other chooses O</li>
+            <li>Two players take turns placing Xs and Os on a 3x3 grid</li>
+            <li>Assume X goes first</li>
+            <li>Once a piece is placed, it isn't moved</li>
+            <li>The first player to get three in a row wins</li>
+            <li>If the board fills up with no winner, it's a tie</li>
+          </ul>
+        </p>
+
+        <div style="text-align: center;">
+          <p><img src="Tic-Tac.png" alt="prim diagram"
+            style="max-width: 600px; width: 100%; height: auto;" /></p>
+        </div>
+
+        <p>
+          How do we convert a Tic-Tac-Toe position into a unique integer? One idea is to treat
+          turn the 2D board into a 1D array of 9 slots:
+        </p>
+
+        <div style="text-align: center;">
+          <p><img src="flat.png" alt="prim diagram"
+            style="max-width: 600px; width: 100%; height: auto;" /></p>
+        </div>
+
+        <p>
+          Each slot can be in one of three states: blank, O, or X. We can represent these as
+          3 numbers instead:
+        </p>
+
+        <ul>
+          <li><code>0</code> for blank</li>
+          <li><code>1</code> for O</li>
+          <li><code>2</code> for X</li>
+        </ul>
+
+        <div style="text-align: center;">
+          <p><img src="hashed.png" alt="prim diagram"
+            style="max-width: 600px; width: 100%; height: auto;" /></p>
+        </div>
+      </section>
+
+      <section id="optimal-size">
+        <h2>Optimizing the Hash Function</h2>
+        <p>
+          If we understand the rules of the game, we can do better than just using all 3⁹
+          possible combinations. For Tic-Tac-Toe:
+        </p>
+        <ul>
+          <li>Players alternate turns</li>
+          <li>X always goes first</li>
+          <li>You can never have more than one extra X than O on the board</li>
+        </ul>
+
+        <p>
+          This means many of the boards our hash function can encode are impossible in real play, like boards with 5 Os and 1 X.
+        </p>
+
+        <p>
+          We can count the number of <em>legal</em> boards using combinatorics. Let's say s is the number of slots.
+          Let's start with one slot. X goes first, so the board can either have nothing or an X. This means there are two possible boards we should consider.
+          What if there are two slots, which will call A and B? There could be nothing on the board, one move made by X (either in A or B), or one move made by
+          X and one made by O (arranged like XO or OX).
+        </p>
+
+        <ul>
+          <li>S=1: 2 board (- | x)</li>
+          <li>S=2: 5 boards (-- | -X, X- | XO, OX)</li>
+          <li>S=3: 13 boards (--- | --X, -X-, X-- | -OX, -XO, O-X, OX-, X-O, XO- | OXX, XOX, XXO) = (1 + 3 + 6 + 3)</li>
+        </ul>
+
+        <p>
+          Do you see the pattern now? For s=4, we had:
+          <ul>
+            <p># ways to rearrange 0 Xs, 0 Os in 4 slots +</p>
+            <p># ways to rearrange 1 Xs, 0 Os in 4 slots +</p>
+            <p># ways to rearrange 1 Xs, 1 Os in 4 slots +</p>
+            <p># ways to rearrange 2 Xs, 1 Os in 4 slots +</p>
+            <p># ways to rearrange 2 Xs, 2 Os in 4 slots</p>
+          </ul>
+        </p>
+
+        <p>
+          Then the number of ways to rearrange p pieces in s slots is:
+        </p>
+
+        <div style="text-align: center;">
+          <p><img src="better.png" alt="prim diagram"
+            style="max-width: 600px; width: 100%; height: auto;" /></p>
+        </div>
+
+        <p>
+          But what about the number of ways to rearrange x Xs and o Os in s slots?
+          Here, we can use Pascal's triangle! This triangle helps us count the number of ways
+          we can arrange a certain number of items in a certain number of spots. For example,
+          if we want to arrange 2 pieces in 5 slots, this would be 5 choose 2. The formula for 
+          N choose K is as follows: N!/K! (N-K!). We can also just find N and K on our table to determine our value.
+          For 5 choose 2, we get 10 ways.
+        </p>
+
+        c
+
+        <p>
+          Now we are ready to calculate the number of ways we can rearrange x Xs and o Os in s slots?
+        </p>
+
+        <h3>Blur method</h3>
+        <ol>
+          <li>First, blur eyes, how many ways to rearrange ALL (x+o) pieces in s slots? This gives us s choose x+o.</li>
+          <li>For EACH, how many ways to rearrange Xs in pieces? This gives us x+o choose x.</li>
+          <li>Calculate the product of the two to find our final answer!</li>
+        </ol>
+
+        <h3>Overcount method</h3>
+        <ol>
+          <li>Think of permuting all the elements: how many are there? There are s!</li>
+          <li>How many Xs, Os, and spaces were overcounted? This would be o!, x! and (s-x-o)!</li>
+          <li>Calculate the product of the two to find our final answer!</li>
+        </ol>
+
+        <p>
+          Using this method, how many possible board arrangements are there? Previously, our hash
+          covered 3^9 boards, which is 19683 boards. However, we actually only have 6046 boards!
+          We calculate this by calculating 1+9+72+252+756+1260+1680+1260+630+126. Now, how do we find
+          a hash function that takes the true number of arrangements into account?
+        </p>
+      </section>
+
+      <section id="bias-rearrange">
+        <h2>Finding a New Hash Function</h2>
+        <p>
+          With what we know now, we can try to find a combinatorially optimal hash!
+          When we calculated numboards, we see that it is actually a zig-zag pattern
+          due to the alternating moves of each player.
+        </p>
+
+        <p>
+          We can use bias + rearrangement to find a combinatorially optimal hash:
+        </p>
+
+        <ol>
+          <li>
+            <strong>Bias (offset):</strong> Count how many numbers there were in the zigzag up to the box
+          </li>
+          <li>
+            <strong>Rearrangement:</strong> Same idea as the ternary polynomial hash code
+            <ul>
+              <li>X counts for all ways to rearrange if it were O & –</li>
+              <li>O counts for all ways to rearrange if it were –</li>
+              <li>– counts for 0</li>
+            </ul>
+          </li>
+        </ol>
+      </section>
+
+      <section id="example">
+        <h2>Hashing a Small Tic-Tac-Toe Board</h2>
+        <p>
+          To keep things concrete, imagine that we are trying to hash XO-X. We know that this number
+          has to be between 0 and the max numBoards for an arrangement of 4 pieces (34).
+        </p>
+
+        <div style="text-align: center;">
+          <p><img src="stairs.png" alt="prim diagram"
+            style="max-width: 400px; width: 100%; height: auto;" /></p>
+        </div>
+
+        <ol>
+          <li>
+            <strong>Bias (offset):</strong> X=2, O=1, S=4; count buckets up to us: 1+4+12=17
+          </li>
+          <li>
+            <strong>Rearrangement #:</strong> [R(X,O,S)] = 3+3+2=8
+            <ul>
+              <li>X3 = r(2,1,3) + r(2,0,3) = 3 + 3</li>
+              <li>O2 = r(1,1,2) = 2</li>
+              <li>–1 = 0</li>
+              <li>X0 = 0</li>
+            </ul>
+          </li>
+        </ol>
+      </section>
+
+      <section id="in-practice">
+        <h2>Practical Considerations</h2>
+        <p>
+          Combinatorially optimal hash functions are useful, but, for larger games where
+          this might get too expensive, we often settle for simpler hashes that are "good enough." A good hash spreads out values and keeps collisions rare.
+          We can also use symmetry to create more optimal hash functions. It can be difficult to write a good hash function, but try your best!
+        </p>
+      </section>
+
+      <section id="summary">
+        <h2>Summary</h2>
+        <ul>
+          <li>Memoization saves time by remembering solved positions</li>
+          <li>Hash functions turn complex positions into integers we can store</li>
+          <li>Combinatorial hashing uses game rules to pack only legal boards into a smaller range</li>
+          <li>Bias + rearrangement lets us assign unique indices to positions in a way that only encodes legal boards</li>
+        </ul>
+      </section>
+
+      <!-- ── QUIZ SECTION ── -->
+      <section class="quiz-section" id="practice">
+        <h2>Practice Questions</h2>
+        <p>Test your understanding of hashing with the questions below. Click an answer to check it.</p>
+
+        <!-- Q1 -->
+        <div class="quiz-item">
+          <div class="quiz-meta">Question 1</div>
+          <div class="quiz-question">What is the purpose of memoization in a game solver?</div>
+          <ul class="quiz-options" data-correct="1">
+            <li data-index="0"><span class="opt-letter">a)</span> To generate all possible moves from a position</li>
+            <li data-index="1"><span class="opt-letter">b)</span> To store already-computed position values so they don't need to be recomputed</li>
+            <li data-index="2"><span class="opt-letter">c)</span> To compress the board state into a smaller representation</li>
+            <li data-index="3"><span class="opt-letter">d)</span> To ensure two different boards never get the same hash value</li>
+          </ul>
+          <div class="quiz-explanation">
+            <strong>Explanation</strong>
+            Memoization is about saving work. Once a position's value has been computed, it gets stored in a table indexed by its hash. Any future visit to that position returns the stored value immediately instead of re-exploring the subtree below it.
+          </div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="quiz-item">
+          <div class="quiz-meta">Question 2</div>
+          <div class="quiz-question">A naive hash for Tic-Tac-Toe assigns each of the 9 slots one of 3 values. How many total board states does this encode?</div>
+          <ul class="quiz-options" data-correct="2">
+            <li data-index="0"><span class="opt-letter">a)</span> 9 × 3 = 27</li>
+            <li data-index="1"><span class="opt-letter">b)</span> 9! = 362,880</li>
+            <li data-index="2"><span class="opt-letter">c)</span> 3⁹ = 19,683</li>
+            <li data-index="3"><span class="opt-letter">d)</span> 6,046</li>
+          </ul>
+          <div class="quiz-explanation">
+            <strong>Explanation</strong>
+            Each of the 9 slots independently takes one of 3 values (blank, O, X), giving 3⁹ = 19,683 possible encodings. This includes many illegal boards. The combinatorial hash reduces this to just the 6,046 actually reachable positions.
+          </div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="quiz-item">
+          <div class="quiz-meta">Question 3</div>
+          <div class="quiz-question">Why does a Tic-Tac-Toe board with 5 Os and 1 X not need a hash entry?</div>
+          <ul class="quiz-options" data-correct="3">
+            <li data-index="0"><span class="opt-letter">a)</span> Because it has fewer than 9 pieces on the board</li>
+            <li data-index="1"><span class="opt-letter">b)</span> Because O always goes second and can never win</li>
+            <li data-index="2"><span class="opt-letter">c)</span> Because the hash function cannot encode more than 4 pieces</li>
+            <li data-index="3"><span class="opt-letter">d)</span> Because it is unreachable</li>
+          </ul>
+          <div class="quiz-explanation">
+            <strong>Explanation</strong>
+            Players alternate turns and X always goes first. This means the number of Xs on the board is always equal to or one greater than the number of Os. A board with 5 Os and 1 X violates this constraint and can never be reached through legal play, so it doesn't need a hash entry.
+          </div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="quiz-item">
+          <div class="quiz-meta">Question 4</div>
+          <div class="quiz-question">In the bias + rearrangement hashing scheme, what does the bias (offset) represent?</div>
+          <ul class="quiz-options" data-correct="0">
+            <li data-index="0"><span class="opt-letter">a)</span> The total number of legal boards with fewer pieces than the current position</li>
+            <li data-index="1"><span class="opt-letter">b)</span> The number of Xs minus the number of Os on the board</li>
+            <li data-index="2"><span class="opt-letter">c)</span> The index of the first blank slot on the board</li>
+            <li data-index="3"><span class="opt-letter">d)</span> The number of winning positions reachable from the current state</li>
+          </ul>
+          <div class="quiz-explanation">
+            <strong>Explanation</strong>
+            The bias is an offset that skips over all the hash entries already used by boards with fewer total pieces. It counts all the legal boards in every earlier "bucket" in the zigzag pattern, so that boards with different piece counts never collide in the hash table.
+          </div>
+        </div>
+
+        <!-- Q5 -->
+        <div class="quiz-item">
+          <div class="quiz-meta">Question 5</div>
+          <div class="quiz-question">The combinatorial hash reduces Tic-Tac-Toe from 19,683 entries to 6,046. What is the main reason this reduction is possible?</div>
+          <ul class="quiz-options" data-correct="2">
+            <li data-index="0"><span class="opt-letter">a)</span> Many board states are symmetric and can be merged into one entry</li>
+            <li data-index="1"><span class="opt-letter">b)</span> The solver only visits positions reachable from the starting state</li>
+            <li data-index="2"><span class="opt-letter">c)</span> Game rules constrain which piece counts are legal, eliminating thousands of impossible boards</li>
+            <li data-index="3"><span class="opt-letter">d)</span> Tic-Tac-Toe ends before all 9 slots are filled in most games</li>
+          </ul>
+          <div class="quiz-explanation">
+            <strong>Explanation</strong>
+            The reduction comes from applying the alternating-turns rule: X always goes first, so the count of Xs is always equal to or one more than the count of Os. This eliminates all boards that violate this constraint, shrinking the table from 19,683 naive encodings down to the 6,046 boards that can actually arise in a real game.
+          </div>
+        </div>
+
+      </section><!-- end .quiz-section -->
+
+    </main>
+  </div>
+
+  <div class="backdrop" hidden></div>
+
+  <script>
+    const sidebar  = document.getElementById('sidebar');
+    const toggles  = document.querySelectorAll('.menu-toggle');
+    const backdrop = document.querySelector('.backdrop');
+
+    function setOpen(isOpen) {
+      if (!sidebar) return;
+      sidebar.classList.toggle('open', isOpen);
+      if (backdrop) {
+        backdrop.classList.toggle('show', isOpen);
+        backdrop.hidden = !isOpen;
+      }
+      toggles.forEach(btn => btn.setAttribute('aria-expanded', String(isOpen)));
+    }
+    toggles.forEach(btn =>
+      btn.addEventListener('click', () => setOpen(!sidebar.classList.contains('open')))
+    );
+    if (backdrop) backdrop.addEventListener('click', () => setOpen(false));
+
+    const current = Array.from(document.querySelectorAll('.chapters a'))
+      .find(a => a.getAttribute('href') === 'hashing.html');
+    if (current) current.setAttribute('aria-current', 'page');
+
+    /* ── Quiz logic ── */
+    document.querySelectorAll('.quiz-item').forEach(item => {
+      const optionsList  = item.querySelector('.quiz-options');
+      const options      = Array.from(optionsList.querySelectorAll('li'));
+      const explanation  = item.querySelector('.quiz-explanation');
+      const correctIndex = parseInt(optionsList.dataset.correct, 10);
+
+      options.forEach(opt => {
+        opt.addEventListener('click', () => {
+          if (opt.classList.contains('disabled')) return;
+
+          const chosen = parseInt(opt.dataset.index, 10);
+          const isCorrect = chosen === correctIndex;
+
+          options.forEach(o => o.classList.add('disabled'));
+          opt.classList.add(isCorrect ? 'correct' : 'incorrect');
+
+          if (!isCorrect) {
+            options[correctIndex].classList.add('reveal-correct');
+          }
+
+          explanation.classList.add('show');
+        });
+      });
+    });
+  </script>
+</body>
+</html>

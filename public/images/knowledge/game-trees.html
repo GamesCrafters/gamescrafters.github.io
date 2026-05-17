@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Game Trees — GamesCrafters</title>
+  <style>
+    :root {
+      --bg: #f9fafb;
+      --panel: #ffffff;
+      --ink: #001f33;
+      --muted: #4b5563;
+      --accent: #003262;
+      --accent-2: #FDB515;
+      --line: #e5e7eb;
+      --radius: 14px;
+      --sidebar-w: 300px;
+    }
+
+    body {
+      margin: 0;
+      font: 20px/1.65 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Helvetica, Arial, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: var(--sidebar-w) 1fr;
+      min-height: 100dvh;
+    }
+    @media (max-width: 980px) {
+      .layout { grid-template-columns: 1fr; }
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100dvh;
+      overflow: auto;
+      background: #003262;
+      border-right: none;
+      padding: 18px 16px 24px;
+    }
+    @media (max-width: 980px) {
+      .sidebar {
+        position: fixed;
+        inset: 0 auto 0 0;
+        width: min(90vw, 360px);
+        translate: -100% 0;
+        transition: translate .25s ease;
+        background: #ffffff;
+        border-right: 2px solid var(--accent);
+        z-index: 60;
+      }
+      .sidebar.open { translate: 0 0; }
+      .backdrop {
+        position: fixed; inset: 0;
+        background: rgba(0,0,0,0.35);
+        display: none;
+        z-index: 50;
+      }
+      .backdrop.show { display: block; }
+    }
+
+    .brand {
+      font-weight: 800;
+      font-size: 1.4rem;
+      color: #ffffff;
+      letter-spacing: 0.5px;
+      margin: 4px 6px 14px;
+    }
+
+    .chapters {
+      list-style: none;
+      padding-left: 10px;
+      margin-top: 6px;
+    }
+    .chapters li {
+      margin: 4px 0;
+    }
+    .chapters a {
+      color: #ffffff;
+      text-decoration: none;
+      padding: 4px 2px;
+    }
+    .chapters a:hover {
+      color: #FDB515;
+      text-decoration: underline;
+    }
+    .chapters a[aria-current="page"] {
+      font-weight: bold;
+      color: #FDB515;
+    }
+
+    /* Topbar */
+    .topbar {
+      display: none;
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: #ffffff;
+      border-bottom: 2px solid var(--accent);
+      padding: 10px 14px;
+    }
+    @media (max-width: 980px) {
+      .topbar { display: flex; justify-content: space-between; align-items: center; }
+    }
+    .menu-toggle {
+      border: 1px solid var(--accent);
+      background: var(--accent);
+      color: white;
+      border-radius: 8px;
+      padding: 8px 12px;
+    }
+
+    pre, code {
+      font-family: "Fira Code", Consolas, monospace;
+    }
+
+    pre {
+      background: #f4f6f8;
+      border: 1px solid #e0e0e0;
+      padding: 14px 18px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    /* Content */
+    .content {
+      padding: 40px 28px 80px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    header.hero {
+      background: var(--panel);
+      padding: 24px;
+      border-radius: var(--radius);
+      border-left: 6px solid var(--accent);
+      margin-bottom: 28px;
+    }
+
+    h1, h2 { color: var(--accent); }
+
+    .callout {
+      background: #f0f6ff;
+      border-left: 6px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      margin: 20px 0;
+      display: flex;
+      gap: 10px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin: 20px 0;
+    }
+
+    /* ── Quiz styles ── */
+    .quiz-section {
+      margin-top: 48px;
+      border-top: 2px solid var(--line);
+      padding-top: 32px;
+    }
+
+    .quiz-section h2 {
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .quiz-item {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      margin: 24px 0;
+    }
+
+    .quiz-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .quiz-tag {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+    .quiz-tag.conceptual  { background: #e0edff; color: #003262; }
+    .quiz-tag.application { background: #fff3cd; color: #7a5800; }
+    .quiz-tag.recall      { background: #e8f5e9; color: #1b5e20; }
+
+    .quiz-question {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: var(--ink);
+    }
+
+    .quiz-options {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .quiz-options li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: background 0.15s, border-color 0.15s;
+      font-size: 0.97rem;
+    }
+
+    .quiz-options li:hover {
+      background: #f0f6ff;
+      border-color: #b3ccee;
+    }
+
+    .quiz-options li .opt-letter {
+      font-weight: 700;
+      min-width: 20px;
+      color: var(--accent);
+    }
+
+    /* State classes applied via JS */
+    .quiz-options li.correct {
+      background: #e8f5e9;
+      border-color: #4caf50;
+    }
+    .quiz-options li.correct .opt-letter { color: #2e7d32; }
+
+    .quiz-options li.incorrect {
+      background: #ffebee;
+      border-color: #ef5350;
+    }
+    .quiz-options li.incorrect .opt-letter { color: #c62828; }
+
+    .quiz-options li.reveal-correct {
+      background: #e8f5e9;
+      border-color: #4caf50;
+      opacity: 0.75;
+    }
+
+    .quiz-options li.disabled {
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .quiz-explanation {
+      display: none;
+      margin-top: 14px;
+      background: #f6f8fa;
+      border-left: 5px solid var(--accent-2);
+      border-radius: 0 10px 10px 0;
+      padding: 12px 16px;
+      font-size: 0.93rem;
+      color: var(--muted);
+    }
+    .quiz-explanation.show { display: block; }
+    .quiz-explanation strong {
+      display: block;
+      color: #7a5800;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <strong class="brand">GamesCrafters</strong>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="sidebar">☰ Chapters</button>
+  </div>
+
+  <div class="layout">
+    <!-- SIDEBAR -->
+    <aside id="sidebar" class="sidebar">
+      <div class="brand">GamesCrafters</div>
+
+      <ul class="chapters">
+        <li><a href="reference.html">Common Bugs and Debugging Tips</a></li>
+      </ul>
+
+      <ul class="chapters">
+        <li><a href="intro.html">Intro to Game Theory</a></li>
+        <li><a href="game-trees.html" aria-current="page">Game Trees</a></li>
+        <li><a href="position-value.html">Position Values</a></li>
+        <li><a href="solving.html">Solving a Game</a></li>
+        <li><a href="hashing.html">Hashing Positions</a></li>
+        <li><a href="ten_to_zero_guide.html">Ten to Zero: Section 1-5 Walkthrough </a></li>
+        <li><a href="overall_infrastructure.html">Overall Infrastructure</a></li>
+        <li><a href="adding_to_web.html">Using AutoGUI</a></li>
+        <li><a href="deploying_game.html">Deploying the Game</a></li>
+      </ul>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="content">
+
+      <h1>Game Trees</h1>
+      <p>
+        To solve a game, we need to be able to know every possible position and move. This allows us to find winning and losing strategies by exploring all possible outcomes. In this chapter, we'll introduce the concept of <strong>game trees</strong>, which provide a structured way to visualize and analyze all possible game states and moves.
+      </p>
+
+      <section id="what-is">
+        <h2>What Is a Game Tree?</h2>
+
+        <div class="callout">
+          <div>💡</div>
+          <div>
+            If you are new to the concept of trees, consider checking out <strong>CS61A</strong> and <strong>CS61B</strong>'s materials on the topic! We will briefly cover the necessary concepts here, but a deeper understanding will be very helpful.
+            We recommend watching <a href="https://youtu.be/wkkCVWn7au4?si=D7nl7VQ-jAncMpP6" target="_blank">Introduction to Trees and Traversals</a> before continuing.
+          </div>
+        </div>
+
+        <p>
+          A game tree helps us visualize our game's <strong>state space</strong>, the set of all possible states and actions. A <strong>tree</strong> is a connected graph (a collection of points and lines where there is a path between every pair of vertices) with no cycles (loops). In a game tree, the <strong>nodes</strong> represent the different positions of the game and the <strong>edges</strong> represent the moves between the different positions.
+          Below is an example of a game tree for Tic-Tac-Toe:
+        </p>
+
+        <div style="text-align: center;">
+          <p><img src="ttt_game_tree.svg" alt="Game tree diagram" /></p>
+        </div>
+
+        <h2>Positions</h2>
+
+        <p>
+          The various ways we can arrange the pieces on our board are our game states or <strong>positions</strong>. In the tree, these positions are represented by vertices or the <strong>nodes</strong> that form the graph. The <strong>start position</strong> is the starting arrangement of our board is the single node at the top of the tree and is represented by a <strong>single source vertex</strong>. By definition, we can trace any vertex or position in our tree back to the single source vertex! When we finish playing a game, we can't make any more moves. These terminal or <strong>primitive positions</strong> live at the bottom of our tree are represented by <strong>leaf nodes</strong>, nodes with no outgoing arrows.
+        </p>
+
+        <div style="text-align: center;">
+          <p><img src="position.svg" alt="pos diagram"/></p>
+        </div>
+
+        <h2>Moves</h2>
+
+        <p>
+          The <strong>moves</strong> the player makes to go from position A to position B is represented by an <strong>edge</strong> connection between vertex A and vertex B. Even though edges can represent movement in both directions, the edges for games are one-way arrows to represent the forward motion of time as we go from one game position to the next. This is why game trees are <strong>directed</strong> graphs, or graphs with edges that point in a specific direction.
+        </p>
+
+        <div class="callout">
+          <div>💡</div>
+          <div>
+            Check out the chapter Tree Traversals and Graphs in <strong>CS61B</strong> for a deeper dive into the difference between undirected and directed graphs!
+          </div>
+        </div>
+
+        <div style="text-align: center;">
+          <p><img src="move.svg" alt="move diagram"/></p>
+        </div>
+
+        <p>
+          Putting this all together, we get our game tree! We are able to represent the state space (the game's set of all possible states and actions) as a directed Graph G = (P, M), where P is the set of positions (vertices) and M is the set of moves (edges) in a game.
+        </p>
+
+      </section>
+
+      <section id="terminology">
+        <h2>Summary</h2>
+        <ul>
+          <li>The nodes are all the possible positions of the game.</li>
+          <li>The single source vertex is the first node in our tree and the game's initial position.</li>
+          <li>The leaf nodes are the terminal states or the states from which we can no longer make a move (ex. win, lose, tie).</li>
+          <li>The edges are all the possible moves from one game state to the next. We make a move in the direction of the arrow.</li>
+        </ul>
+      </section>
+
+      <section id="building">
+        <h2>Solving a Game</h2>
+        <p>
+          Now that we have a way to represent all the possible positions and moves in our game, we can use this structure to analyze and solve the game. In the next chapter, we will explore how to assign values to each position in the game tree, which will help us determine the best strategies for winning the game.
+        </p>
+      </section>
+
+      <!-- ── QUIZ SECTION ── -->
+      <section class="quiz-section" id="practice">
+        <h2>Practice Questions</h2>
+        <p>Test your understanding of game trees with the questions below. Click an answer to check it.</p>
+
+        <!-- Q1 -->
+        <div class="quiz-item">
+          <div class="quiz-meta">
+            <span>Q1</span>
+          </div>
+          <div class="quiz-question">In a game tree, what does a leaf node represent?</div>
+          <ul class="quiz-options" data-correct="1">
+            <li data-index="0"><span class="opt-letter">A</span> A position where the current player has the most moves</li>
+            <li data-index="1"><span class="opt-letter">B</span> A terminal position where no further moves can be made</li>
+            <li data-index="2"><span class="opt-letter">C</span> The starting position of the game</li>
+            <li data-index="3"><span class="opt-letter">D</span> A position that only one player can reach</li>
+          </ul>
+          <div class="quiz-explanation">
+            <strong>Explanation</strong>
+            Leaf nodes are terminal positions, wins, losses, or ties, where the game ends and no outgoing edges exist. They sit at the bottom of the tree.
+          </div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="quiz-item">
+          <div class="quiz-meta">
+            <span>Q2</span>
+          </div>
+          <div class="quiz-question">Why are the edges in a game tree directed (one-way arrows) rather than undirected?</div>
+          <ul class="quiz-options" data-correct="2">
+            <li data-index="0"><span class="opt-letter">A</span> To show which player made the move</li>
+            <li data-index="1"><span class="opt-letter">B</span> Because the game board can only be set up in one orientation</li>
+            <li data-index="2"><span class="opt-letter">C</span> To represent the forward motion of time; each move leads to a new game state</li>
+            <li data-index="3"><span class="opt-letter">D</span> To ensure the tree has no cycles</li>
+          </ul>
+          <div class="quiz-explanation">
+            <strong>Explanation</strong>
+            Directed edges capture the irreversibility of moves over time. You go from position A to position B by making a move; you don't travel backwards in a game.
+          </div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="quiz-item">
+          <div class="quiz-meta">
+            <span>Q3</span>
+          </div>
+          <div class="quiz-question">Tic-Tac-Toe has 9 squares. In the game tree, what does the source vertex (root node) represent?</div>
+          <ul class="quiz-options" data-correct="1">
+            <li data-index="0"><span class="opt-letter">A</span> X winning with three in a row</li>
+            <li data-index="1"><span class="opt-letter">B</span> The empty board before any move is made</li>
+            <li data-index="2"><span class="opt-letter">C</span> The position after X plays in the center</li>
+            <li data-index="3"><span class="opt-letter">D</span> The position with the most possible next moves</li>
+          </ul>
+          <div class="quiz-explanation">
+            <strong>Explanation</strong>
+            The source vertex is the single starting position, which is the empty 3×3 board. Every other node in the tree is reachable from this root by following directed edges.
+          </div>
+        </div>
+
+      </section><!-- end .quiz-section -->
+
+    </main>
+  </div>
+
+  <div class="backdrop" hidden></div>
+
+  <script>
+    /* ── Sidebar toggle ── */
+    const sidebar  = document.getElementById('sidebar');
+    const toggles  = document.querySelectorAll('.menu-toggle');
+    const backdrop = document.querySelector('.backdrop');
+
+    function setOpen(isOpen) {
+      sidebar.classList.toggle('open', isOpen);
+      backdrop.classList.toggle('show', isOpen);
+      backdrop.hidden = !isOpen;
+      toggles.forEach(btn => btn.setAttribute('aria-expanded', String(isOpen)));
+    }
+
+    toggles.forEach(btn =>
+      btn.addEventListener('click', () => setOpen(!sidebar.classList.contains('open')))
+    );
+    backdrop.addEventListener('click', () => setOpen(false));
+
+    const current = Array.from(document.querySelectorAll('.chapters a'))
+      .find(a => a.getAttribute('href') === 'game-trees.html');
+    if (current) current.setAttribute('aria-current', 'page');
+
+    /* ── Quiz logic ── */
+    document.querySelectorAll('.quiz-item').forEach(item => {
+      const optionsList  = item.querySelector('.quiz-options');
+      const options      = Array.from(optionsList.querySelectorAll('li'));
+      const explanation  = item.querySelector('.quiz-explanation');
+      const correctIndex = parseInt(optionsList.dataset.correct, 10);
+
+      options.forEach(opt => {
+        opt.addEventListener('click', () => {
+          // Prevent re-answering
+          if (opt.classList.contains('disabled')) return;
+
+          const chosen = parseInt(opt.dataset.index, 10);
+          const isCorrect = chosen === correctIndex;
+
+          // Disable all options
+          options.forEach(o => o.classList.add('disabled'));
+
+          // Mark chosen
+          opt.classList.add(isCorrect ? 'correct' : 'incorrect');
+
+          // If wrong, also reveal the correct answer
+          if (!isCorrect) {
+            options[correctIndex].classList.add('reveal-correct');
+          }
+
+          // Show explanation
+          explanation.classList.add('show');
+        });
+      });
+    });
+  </script>
+</body>
+</html>

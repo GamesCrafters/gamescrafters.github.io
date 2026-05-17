@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="
+  Intro to Game Theory
+  #
+
+Game theory studies how players make strategic decisions. GamesCrafters applies these ideas
+to non-random two-player games, using computers to discover perfect play and build interactive tools that let
+anyone explore those strategies.
+
+A 19-year project led by Prof Jonathan Schaeffer used dozens (sometimes hundreds) of computers and AI to
+prove that Checkers is, in perfect play, a draw. This means that if two perfect players were to play, nobody would ever win!">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/main/knowledge/intro/">
+  <meta property="og:site_name" content="GamesCrafters">
+  <meta property="og:title" content="Intro to Game Theory">
+  <meta property="og:description" content="Intro to Game Theory # Game theory studies how players make strategic decisions. GamesCrafters applies these ideas to non-random two-player games, using computers to discover perfect play and build interactive tools that let anyone explore those strategies.
+A 19-year project led by Prof Jonathan Schaeffer used dozens (sometimes hundreds) of computers and AI to prove that Checkers is, in perfect play, a draw. This means that if two perfect players were to play, nobody would ever win!">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="main">
+<title>Intro to Game Theory | GamesCrafters</title>
+<link rel="icon" href="/favicon.png" >
+
+
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/main/knowledge/intro/">
+<link rel="stylesheet" href="/book.min.85ec2cfa9e5f1bbd3e69532dcb571ebdaab64df1d4bd1848727ba6fe02e9ff99.css" integrity="sha256-hews&#43;p5fG70&#43;aVMty1cevaq2TfHUvRhIcnum/gLp/5k=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.06d19fa7afe6b4a225f7dc0ebd99fef7d52a68b30f46f1cc48720d6176226c8f.js" integrity="sha256-BtGfp6/mtKIl99wOvZn&#43;99UqaLMPRvHMSHINYXYibI8=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+    <a
+        class="flex align-center"
+        href="/"
+    ><img src="/logo.png" alt="Logo" /><span>GamesCrafters</span>
+    </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+   
+<ul>
+     
+    <li class="book-section-flat" >
+           
+<span>Overview</span>
+  
+<ul>
+     
+    <li>
+           
+<a href="/main/overview/course/" class="">About the Course</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/overview/group/" class="">About the Group</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/overview/misc/" class="">Miscellaneous</a>
+ 
+    </li>
+     
+</ul>
+
+    </li>
+      
+    <li class="book-section-flat" >
+           
+<span>People</span>
+  
+<ul>
+     
+    <li>
+           
+<a href="/main/people/organizers/" class="">Course Organizers</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/people/alumni/" class="">Group Alumni</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/people/groups/" class="">Past Groups</a>
+ 
+    </li>
+     
+</ul>
+
+    </li>
+      
+    <li class="book-section-flat" >
+           
+<span>Knowledge</span>
+  
+<ul>
+     
+    <li>
+           
+<a href="/main/knowledge/intro/" class="active">Intro to Game Theory</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/knowledge/game-trees/" class="">Game Trees</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/knowledge/position-value/" class="">Position Values</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/knowledge/solving/" class="">Solving a Game</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/knowledge/hashing/" class="">Hashing Positions</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/knowledge/overall-infrastructure/" class="">Overall Infrastructure</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/knowledge/games/" class="">Ruleset Explainers</a>
+ 
+    </li>
+      
+    <li>
+           
+<a
+    href="/articles"
+    class=""
+    rel="noopener"
+>Technical Articles</a>
+ 
+    </li>
+      
+    <li>
+           
+<a href="/main/knowledge/analyses/" class="">Game Measurements</a>
+ 
+    </li>
+     
+</ul>
+
+    </li>
+      
+    <li class="book-section-flat" >
+           
+<span>Links</span>
+  
+<ul>
+     
+    <li>
+           
+<a
+    href="https://github.com/GamesCrafters"
+    class=""
+    rel="noopener"
+>GitHub Organization</a>
+ 
+    </li>
+      
+    <li>
+           
+<a
+    href="https://nyc.cs.berkeley.edu/uni/"
+    class=""
+    rel="noopener"
+>GamesmanUni</a>
+ 
+    </li>
+     
+</ul>
+
+    </li>
+      
+    <li class="book-section-flat" >
+           
+<input
+    type="checkbox"
+    id="section-13cc82cb423ec147fad6b058f9d60e0f"
+    class="toggle"
+    
+/>
+<label for="section-13cc82cb423ec147fad6b058f9d60e0f" class="flex justify-between">
+    <a
+        role="button"
+        
+        class=""
+    >Course Assignments</a>
+</label>
+  
+<ul>
+     
+    <li>
+           
+<a href="/main/assignments/game-homefun-p1/" class="">Homefun Pt. 1</a>
+ 
+    </li>
+     
+</ul>
+
+    </li>
+      
+    <li class="book-section-flat" >
+           
+<input
+    type="checkbox"
+    id="section-954f0b784a633dff9d97d5e365bbbefd"
+    class="toggle"
+    
+/>
+<label for="section-954f0b784a633dff9d97d5e365bbbefd" class="flex justify-between">
+    <a
+        role="button"
+        
+        class=""
+    >Ongoing Projects</a>
+</label>
+  
+<ul>
+    
+</ul>
+
+    </li>
+     
+</ul>
+   
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>Intro to Game Theory</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#what-is-game-theory">What Is Game Theory?</a></li>
+    <li><a href="#three-categories-of-game-theory">Three Categories of Game Theory</a>
+      <ul>
+        <li><a href="#economic-game-theory">Economic Game Theory</a></li>
+        <li><a href="#computational-game-theory">Computational Game Theory</a></li>
+        <li><a href="#combinatorial-game-theory">Combinatorial Game Theory</a></li>
+      </ul>
+    </li>
+    <li><a href="#what-kind-of-board-games-do-we-study">What Kind of Board Games Do We Study?</a></li>
+    <li><a href="#strong-solutions-and-perfect-play">Strong Solutions and Perfect Play</a></li>
+    <li><a href="#what-is-gamescrafters">What Is GamesCrafters?</a></li>
+    <li><a href="#looking-ahead">Looking Ahead</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="intro-to-game-theory">
+  Intro to Game Theory
+  <a class="anchor" href="#intro-to-game-theory">#</a>
+</h1>
+<p>Game theory studies how players make strategic decisions. GamesCrafters applies these ideas
+to non-random two-player games, using computers to discover perfect play and build interactive tools that let
+anyone explore those strategies.</p>
+<blockquote class="book-hint info">
+<p>A 19-year project led by Prof Jonathan Schaeffer used dozens (sometimes hundreds) of computers and AI to
+prove that Checkers is, in perfect play, a draw. This means that if two perfect players were to play, nobody would ever win!</p>
+</blockquote>
+<h2 id="what-is-game-theory">
+  What Is Game Theory?
+  <a class="anchor" href="#what-is-game-theory">#</a>
+</h2>
+<p>Game theory is the study of strategic decision-making. The outcome for each player depends not only on their own choices, but also on the choices of others.
+Game theory appears in many fields including economics, political science, psychology, and computer science.
+In GamesCrafters, we focus on how <strong>computational game theory</strong> helps us understand and <em>solve</em> games.</p>
+<h2 id="three-categories-of-game-theory">
+  Three Categories of Game Theory
+  <a class="anchor" href="#three-categories-of-game-theory">#</a>
+</h2>
+<h3 id="economic-game-theory">
+  Economic Game Theory
+  <a class="anchor" href="#economic-game-theory">#</a>
+</h3>
+<p>Originating with von Neumann and Morgenstern’s <em>Theory of Games and Economic Behavior</em> (1944),
+this branch models auctions, negotiations, and strategic dilemmas like the Prisoner’s Dilemma.</p>
+<ul>
+<li>Often involves <strong>simultaneous</strong> moves</li>
+<li>Information can be <strong>incomplete</strong> or hidden</li>
+<li>Players try to <strong>maximize payoff</strong></li>
+</ul>
+<p>
+  <img src="/images/knowledge/prison.png" alt="Prisoner’s dilemma payoff matrix" /></p>
+<h3 id="computational-game-theory">
+  Computational Game Theory
+  <a class="anchor" href="#computational-game-theory">#</a>
+</h3>
+<p>Computational game theory studies games like Tic-Tac-Toe, Connect 4, Othello, or Checkers using algorithms
+and computing power. This is what we do in GamesCrafters!</p>
+<ul>
+<li>Involves <strong>no chance</strong> (no dice or shuffled cards)</li>
+<li><strong>Complete information</strong>, which means all players know all available information</li>
+<li>Two players <strong>alternate moves</strong></li>
+<li>The goal depends on the game (win, avoid losing, make the last move, etc.)</li>
+</ul>
+<p>
+  <img src="/images/knowledge/tree.jpg" alt="Game tree example" /></p>
+<h3 id="combinatorial-game-theory">
+  Combinatorial Game Theory
+  <a class="anchor" href="#combinatorial-game-theory">#</a>
+</h3>
+<p>Combinatorial game theory is the mathematical side of games like Nim, Domineering, and Dots-and-Boxes.</p>
+<ul>
+<li><strong>Complete information, alternating moves</strong></li>
+<li>Often, the goal is to make the <strong>last move</strong></li>
+<li>Strong connections to number theory and discrete math</li>
+</ul>
+<p>
+  <img src="/images/knowledge/nim.jpg" alt="Nim example" /></p>
+<h2 id="what-kind-of-board-games-do-we-study">
+  What Kind of Board Games Do We Study?
+  <a class="anchor" href="#what-kind-of-board-games-do-we-study">#</a>
+</h2>
+<p>In GamesCrafters, we focus on a specific class of games:</p>
+<ul>
+<li>No chance, such as dice or shuffled cards</li>
+<li>Both players have <strong>complete information</strong>; nothing is hidden (unlike Stratego or many card games)</li>
+<li>Two players (sometimes called Left and Right) usually alternate moves (repeat and skip moves are okay; no simultaneous moves)</li>
+<li>The game can end when a pattern is formed, a capture happens, someone runs out of moves, or the board fills</li>
+</ul>
+<h2 id="strong-solutions-and-perfect-play">
+  Strong Solutions and Perfect Play
+  <a class="anchor" href="#strong-solutions-and-perfect-play">#</a>
+</h2>
+<p>What the program does in the clip below is a bit like what we do in GamesCrafters: it explores all possible moves and ways a game could play out to find the best strategy.</p>
+<div style="display:flex; justify-content:center; margin:20px 0;">
+  <iframe 
+    src="https://player.vimeo.com/video/291483545" 
+    width="640" 
+    height="360" 
+    frameborder="0" 
+    allow="autoplay; fullscreen; picture-in-picture" 
+    allowfullscreen>
+  </iframe>
+</div>
+<p>To <strong>solve</strong> a game, we want to know the outcome of every position under
+<strong>perfect play</strong> from both sides. For each position, we assign a value for the player
+whose turn it is:</p>
+<ul>
+<li><strong>WIN</strong>: this player can force a win, no matter what the opponent does</li>
+<li><strong>LOSE</strong>: if the opponent plays optimally, this player is doomed</li>
+<li><strong>TIE / DRAW</strong>: neither player can force a win with perfect play</li>
+</ul>
+<p>
+  <img src="/images/knowledge/all_three.png" alt="WIN / LOSE / TIE examples" /></p>
+<p>We can also track <strong>remoteness</strong>, which looks at how many moves remain until the game ends, assuming
+optimal play from both sides.</p>
+<blockquote class="book-hint info">
+<p>Some games that can be strongly solved easily include <code>10-to-0-by-1-or-2</code> and Tic-Tac-Toe! We will see how to do this in later chapters.</p>
+</blockquote>
+<h2 id="what-is-gamescrafters">
+  What Is GamesCrafters?
+  <a class="anchor" href="#what-is-gamescrafters">#</a>
+</h2>
+<p><strong>GamesCrafters</strong> is UC Berkeley’s undergraduate research and development group in
+computational game theory. Since 2001, over <strong>400 students</strong> have participated.
+We now average about <strong>20 students per semester</strong>, working in teams of 2 or more, and
+many students return to take on senior roles and lead sub-teams.</p>
+<p>The group focuses on <strong>strongly solving</strong> abstract strategy games and puzzles.<br>
+We add them to the Gamesman system (GamesmanClassic, GamesmanPy, GamesmanUni), which allows
+anyone to play against perfect strategy and provides tools for post-game analysis and visualization.</p>
+<p>Play our games and puzzles here! So far, we have over 70 puzzles and games in our system.</p>
+<div style="display: flex; justify-content: center; margin: 20px 0;">
+  <iframe
+    src="https://nyc.cs.berkeley.edu/uni/"
+    style="width: 100%; max-width: 900px; height: 600px; border: 1px solid #ccc; border-radius: 8px;">
+  </iframe>
+</div>
+<h2 id="looking-ahead">
+  Looking Ahead
+  <a class="anchor" href="#looking-ahead">#</a>
+</h2>
+<p>This textbook will walk you from core game theory concepts to a fully deployed game in the Gamesman ecosystem.
+In the upcoming chapters, you will learn how to:</p>
+<ul>
+<li>Represent games as <strong>game trees</strong></li>
+<li>Assign and compute <strong>position values</strong> (WIN/LOSE/TIE)</li>
+<li><strong>Solve</strong> a game by exploring its tree efficiently</li>
+<li><strong>Hash</strong> positions and store them in a database</li>
+<li>Build <strong>TUI</strong> and <strong>GUI</strong> frontends</li>
+<li>Plug everything into the Gamesman infrastructure and deploy</li>
+</ul>
+<p>Through this process, you will gain hands-on experience with many computer science concepts, including:</p>
+<ul>
+<li>Software engineering practices</li>
+<li>Human-computer interaction</li>
+<li>Data structures and search algorithms</li>
+<li>Discrete math (hashing)</li>
+<li>And much more!</li>
+</ul>
+<p>By the end, you’ll have solved a game no one has ever solved before and have a live interactive version online that anyone can explore!</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/gamescrafters/gamescrafters.github.io/edit/main/content/main/knowledge/intro.md" target="_blank" rel="noopener">
+      <img src="/svg/edit.svg" class="book-icon" alt="" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#what-is-game-theory">What Is Game Theory?</a></li>
+    <li><a href="#three-categories-of-game-theory">Three Categories of Game Theory</a>
+      <ul>
+        <li><a href="#economic-game-theory">Economic Game Theory</a></li>
+        <li><a href="#computational-game-theory">Computational Game Theory</a></li>
+        <li><a href="#combinatorial-game-theory">Combinatorial Game Theory</a></li>
+      </ul>
+    </li>
+    <li><a href="#what-kind-of-board-games-do-we-study">What Kind of Board Games Do We Study?</a></li>
+    <li><a href="#strong-solutions-and-perfect-play">Strong Solutions and Perfect Play</a></li>
+    <li><a href="#what-is-gamescrafters">What Is GamesCrafters?</a></li>
+    <li><a href="#looking-ahead">Looking Ahead</a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

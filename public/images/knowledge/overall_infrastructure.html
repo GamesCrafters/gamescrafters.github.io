@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Overall Infrastructure &amp; Architecture — GamesCrafters Textbook</title>
+  <style>
+    :root {
+      --bg: #f9fafb;              /* light neutral background */
+      --panel: #ffffff;           /* clean white cards */
+      --ink: #001f33;             /* Berkeley Blue dark ink */
+      --muted: #4b5563;           /* neutral muted text */
+      --accent: #003262;          /* Berkeley Blue */
+      --accent-2: #FDB515;        /* California Gold */
+      --line: #e5e7eb;
+      --radius: 14px;
+      --sidebar-w: 300px;
+    }
+
+    html, body { height: 100%; }
+
+    body {
+      margin: 0;
+      font: 20px/1.65 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Helvetica, Arial, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+    }
+
+    /* Layout */
+    .layout {
+      display: grid;
+      grid-template-columns: var(--sidebar-w) 1fr;
+      min-height: 100dvh;
+    }
+    @media (max-width: 980px) {
+      .layout { grid-template-columns: 1fr; }
+    }
+
+        /* Sidebar */
+    .sidebar {
+      position: sticky;
+        top: 0;
+        height: 100dvh;
+        overflow: auto;
+        background: #003262;          /* Berkeley blue */
+        border-right: none;           /* or keep if you like */
+        padding: 18px 16px 24px;
+    }
+    @media (max-width: 980px) {
+      .sidebar {
+        position: fixed;
+        inset: 0 auto 0 0;
+        width: min(90vw, 360px);
+        translate: -100% 0;
+        transition: translate .25s ease;
+        background: #ffffff;
+        border-right: 2px solid var(--accent);
+        z-index: 60;
+      }
+      .sidebar.open { translate: 0 0; }
+      .backdrop {
+        position: fixed; inset: 0;
+        background: rgba(0,0,0,0.35);
+        display: none;
+        z-index: 50;
+      }
+      .backdrop.show { display: block; }
+    }
+
+    .brand {
+      font-weight: 800;
+  font-size: 1.4rem;
+  color: #ffffff;               /* was var(--accent) */
+  letter-spacing: 0.5px;
+  margin: 4px 6px 14px;
+    }
+
+    .chapters {
+      list-style: none;
+      padding-left: 10px;
+      margin-top: 6px;
+    }
+    .chapters li {
+      margin: 4px 0;
+    }
+    .chapters a {
+  color: #ffffff;               /* white text */
+  text-decoration: none;
+  padding: 4px 2px;
+}
+
+.chapters a:hover {
+  color: #FDB515;               /* California gold on hover */
+  text-decoration: underline;
+}
+
+.chapters a[aria-current="page"] {
+  font-weight: bold;
+  color: #FDB515;               /* highlight current page in gold */
+}
+
+
+    /* Topbar */
+    .topbar {
+      display: none;
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: #ffffff;
+      border-bottom: 2px solid var(--accent);
+      padding: 10px 14px;
+    }
+    @media (max-width: 980px) {
+      .topbar { display: flex; justify-content: space-between; align-items: center; }
+    }
+
+    .menu-toggle {
+      border: 1px solid var(--accent);
+      background: var(--accent);
+      color: white;
+      border-radius: 8px;
+      padding: 8px 12px;
+    }
+
+    /* Content */
+    .content {
+      padding: 40px 28px 80px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    header.hero {
+      background: var(--panel);
+      padding: 24px;
+      border-radius: var(--radius);
+      border-left: 6px solid var(--accent);
+      margin-bottom: 28px;
+    }
+
+    h1, h2, h3 {
+      color: var(--accent);
+      letter-spacing: 0.5px;
+    }
+
+    p { margin: 14px 0; }
+
+    .callout {
+      background: #f0f6ff;
+      border-left: 6px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      margin: 20px 0;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin: 20px 0;
+    }
+
+    .grid {
+      display: grid;
+      gap: 18px;
+    }
+    @media (min-width: 720px) {
+      .grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+      .grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    footer {
+      margin-top: 40px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    /* Code blocks */
+    pre, code {
+      font-family: "Fira Code", Consolas, "Courier New", monospace;
+      font-size: 0.95rem;
+    }
+
+    pre {
+      background: #f4f6f8;
+      border: 1px solid #e0e0e0;
+      padding: 14px 18px;
+      border-radius: 8px;
+      overflow-x: auto;
+      line-height: 1.5;
+      margin: 18px 0;
+    }
+
+    .muted { color: var(--muted); font-size: 0.96rem; }
+  </style>
+</head>
+<body>
+  <!-- Mobile topbar with sidebar toggle -->
+  <div class="topbar">
+    <strong class="brand">Textbook</strong>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="sidebar">☰ Chapters</button>
+  </div>
+
+  <div class="layout">
+    <!-- Sidebar -->
+    <aside id="sidebar" class="sidebar" aria-label="Site chapters">
+      <div class="brand">GamesCrafters</div>
+
+      <ul class="chapters">
+        <li><a href="reference.html">Common Bugs and Debugging Tips</a></li>
+      </ul>
+
+      <ul class="chapters">
+        <li><a href="intro.html">Intro to Game Theory</a></li>
+        <li><a href="game-trees.html">Game Trees</a></li>
+        <li><a href="position-value.html">Position Values</a></li>
+        <li><a href="solving.html">Solving a Game</a></li>
+        <li><a href="hashing.html">Hashing Positions</a></li>
+        <li><a href="ten_to_zero_guide.html">Ten to Zero: Section 1-5 Walkthrough </a></li>
+        <li><a href="overall_infrastructure.html" aria-current="page">Overall Infrastructure</a></li>
+        <li><a href="adding_to_web.html">Using AutoGUI</a></li>
+        <li><a href="deploying_game.html">Deploying the Game</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main content -->
+    <main class="content">
+        <h1>Overall Infrastructure &amp; Architecture</h1>
+        <p>
+          The GamesCrafters system is built as a small <strong>microservices architecture</strong>.
+          The system is divided into the frontend, middleware, and backends, but they all
+          work together to let users play, explore, and analyze strongly solved games in the browser.
+        </p>
+
+      <section id="architecture-overview">
+        <h2>Architecture Overview</h2>
+        <p>
+          At a high level, the system is divided into three layers:
+        </p>
+        <ul>
+          <li><strong>Frontend</strong>: GamesmanUni, the web interface users see</li>
+          <li><strong>Middleware</strong>: GamesCraftersUWAPI, a Python HTTP server that translates
+            frontend requests into backend calls</li>
+          <li><strong>Backends</strong>: game-solving engines like GamesmanClassic, GamesmanPuzzles,
+            GamesmanOne, and newer systems like GamesmanPy</li>
+        </ul>
+
+         <div style="text-align: center;">
+          <p><img src="arch.png" alt="remove diagram"
+            style="max-width: 600px; width: 100%; height: auto;" /></p>
+        </div>
+
+        <div class="callout">
+          <div>💡</div>
+          <div>
+            Uni never talks directly to the solvers. It always goes through UWAPI, which knows
+            how to reach each backend and how to translate between their internal formats and
+            the web API.
+          </div>
+        </div>
+      </section>
+
+      <section id="frontend">
+        <h2>Frontend</h2>
+        <p>
+          <strong>GamesmanUni</strong> is our website, the part of the system that lives in the browser
+          and that players actually interact with.  Uni provides a visual and interactive interface for users to play, analyze, and explore games.
+          It's written in TypeScript using the Vue.js framework and was developed by former GamesCrafter Shein Lin Phyo.
+        </p>
+
+        <p>
+          Uni’s job is to:
+        </p>
+        <ul>
+          <li>Render boards, pieces, move buttons, and analysis tools using Image AutoGUI</li>
+          <li>Send HTTP requests to UWAPI (e.g., “give me the value of this position”)</li>
+          <li>Display values, remotenesses, winbys, and other metadata returned from the backend</li>
+          <li>Provide a smooth, interactive UI for exploring games and puzzles</li>
+        </ul>
+
+          <p>
+            Uni does <em>not</em> know how to solve games itself. Instead, it gets the list of games and variants from UWAPI,
+            requests position data and move lists via UWAPI’s JSON API, and uses AutoGUI JSON to decide how to draw the game.</p>
+      </section>
+
+      <section id="middleware">
+        <h2>Middleware</h2>
+        <p>
+          The <strong>Universal Web Application Programming Interface (UWAPI)</strong> is the middleware layer that connects the frontend (e.g., GamesmanUni) to the appropriate backend service (e.g., GamesmanClassic, GamesmanPuzzles, or GamesmanOne). UWAPI serves as the single point of communication between the frontend and backend. When a user interacts with a game on Uni, such as making a move, undoing an action, or loading a game’s instructions, UWAPI translates and routes that request into the correct backend service.
+        </p>
+
+        <p>
+          UWAPI’s responsibilities include:
+        </p>
+        <ul>
+          <li>Listing available games and variants for Uni to display.</li>
+          <li>Forwarding position and move requests to the appropriate backend (Classic, Puzzles, One, Py, etc.).</li>
+          <li>Translating between backend-specific encodings and a common JSON format.</li>
+          <li>Providing Image AutoGUI configuration for each game (board layout, images, sounds, themes).</li>
+        </ul>
+
+        <p>Instead of having multiple frontends talk directly to multiple backends, UWAPI gives us one stable interface. That means
+            you can write new frontends that just call UWAPI. You can also swap out or upgrade backends without changing the frontend.
+            All games share a consistent way to fetch instructions, positions, and values.
+        </p>
+      </section>
+
+      <section id="backend">
+        <h2>Backends</h2>
+        <p>
+          The backend is the data and logic backbone of a computer application. Each of our backend services have a preferred purpose and set of limitations.
+        </p>
+
+        <div class="grid cols-3">
+            <div>
+            <h3>GamesmanClassic</h3>
+            <p>
+              The original <strong>C</strong>-based solver framework. It supports many two-player, perfect-information abstract strategy games.
+            </p>
+            </div>
+            <div>
+            <h3>GamesmanPuzzles</h3>
+            <p>
+              A <strong>Python</strong> project focused on one-player puzzles (like Lights Out and various
+              sliding puzzles).
+            </p>
+            </div>
+            <div>
+            <h3>GamesmanOne</h3>
+            <p>
+              A <strong>multithreaded C solver</strong> for two-player, perfect-information abstract strategy games,
+              designed to tackle larger games.
+            </p>
+            </div>
+        </div>
+      </section>
+
+      <section id="classic">
+        <h2>GamesmanClassic</h2>
+        <p>
+          GamesmanClassic is our traditional two-player game-solving framework written in C first developed by Professor Dan Garcia. Since it is single-threaded, Classic is commonly used for solving small-to-medium-sized games. Classic has many solving algorithms available, the following non-exhaustive list is provided:
+        </p>
+
+        <ul>
+          <li><strong>Vanilla non-loopy solver</strong>: standard depth-first search through the game tree</li>
+          <li><strong>Loopy solver</strong>: handles positions that can repeat or cycle</li>
+          <li><strong>Retrograde solver</strong> and <strong>bottom-up solver</strong></li>
+        </ul>
+
+        <p>
+          Many of the classic GamesCrafters showcase games (like Connect 4 variants, Quarto projects, and
+          other two-player games) are implemented in Classic and then exposed to Uni via UWAPI.
+        </p>
+      </section>
+
+      <section id="puzzles">
+        <h2>GamesmanPuzzles</h2>
+        <p>
+          GamesmanPuzzles, or Puzzles for short, is our one-player (puzzles) game-solving framework written in Python. Given its reduced scope and lower-barrier of entry, it is a perfect introduction to our systems and algorithms. However, it will soon be deprecated by GamesmanPy, so we will omit the description for now.
+        </p>
+        </ul>
+      </section>
+
+      <section id="one">
+        <h2>GamesmanOne</h2>
+        <p>
+          GamesmanOne is our multithreaded two-player game-solving framework written in C developed as a master project by gamescrafter Robert Shi. It's perfect for solving large games!
+        </p>
+      </section>
+
+      <section id="flow">
+        <h2>Putting the Layers Together</h2>
+        <p>
+          Let’s walk through what happens when a player makes a move in Uni:
+        </p>
+
+        <ol>
+          <li>
+            The player clicks on a move button on the Uni board. AutoGUI maps that click to a move string.
+          </li>
+          <li>
+            Uni sends an HTTP request to UWAPI with the game, variant, position, and move.
+          </li>
+          <li>
+            UWAPI looks up the game and variant and forwards the
+            request to the appropriate backend (Classic, One, Puzzles, or Py).
+          </li>
+          <li>
+            The backend computes the child position, value, and remoteness and returns that
+            to UWAPI in its own internal format.
+          </li>
+          <li>
+            UWAPI converts this into a JSON structure, including:
+            <ul>
+              <li>The new position</li>
+              <li>The AutoGUI position string for drawing</li>
+              <li>The position’s value and remoteness</li>
+              <li>A list of legal moves</li>
+            </ul>
+          </li>
+          <li>
+            Uni receives the JSON, updates the board via AutoGUI, and re-renders the page—without reloading.
+          </li>
+        </ol>
+      </section>
+
+      <section id="summary">
+        <h2>Summary</h2>
+        <ul>
+          <li>
+            The GamesCrafters system is organized into a <strong>frontend</strong> (Uni),
+            <strong>middleware</strong> (UWAPI), and multiple <strong>backends</strong> (Classic, Puzzles,
+            One, Py, etc.).
+          </li>
+          <li>
+            Uni is the website that renders boards with Image AutoGUI and talks to UWAPI
+            over HTTP.
+          </li>
+          <li>
+            UWAPI is serves as the single point of communication between the frontend and backend.
+          </li>
+          <li>
+            Backends like GamesmanClassic, GamesmanPuzzles, GamesmanOne, and GamesmanPy explore game trees, compute values and remotenesses, and store solutions.
+          </li>
+          <li>
+            This separation of systems makes it easier to add new games, experiment with new solvers, and
+            build new frontends over time.
+          </li>
+        </ul>
+
+        <p>
+          In the next chapters, you’ll dive deeper into how to plug your own game into this architecture by solving it, wiring it into UWAPI and Uni, and finally by deploying it so others
+          can play!
+        </p>
+      </section>
+
+    </main>
+  </div>
+
+  <div class="backdrop" hidden></div>
+
+  <script>
+    // Sidebar toggle for mobile
+    const sidebar = document.getElementById('sidebar');
+    const toggles = document.querySelectorAll('.menu-toggle');
+    const backdrop = document.querySelector('.backdrop');
+
+    function setOpen(isOpen){
+      if (!sidebar) return;
+      sidebar.classList.toggle('open', isOpen);
+      if (backdrop){
+        backdrop.classList.toggle('show', isOpen);
+        backdrop.hidden = !isOpen;
+      }
+      toggles.forEach(btn => btn.setAttribute('aria-expanded', String(isOpen)));
+    }
+
+    toggles.forEach(btn =>
+      btn.addEventListener('click', () => setOpen(!sidebar.classList.contains('open')))
+    );
+    if (backdrop) backdrop.addEventListener('click', () => setOpen(false));
+
+    // Mark current chapter link (defensive if sidebar HTML changes)
+    const current = Array.from(document.querySelectorAll('.chapters a'))
+      .find(a => a.getAttribute('href') === 'overall_infrastructure.html');
+    if (current) current.setAttribute('aria-current','page');
+  </script>
+</body>
+</html>

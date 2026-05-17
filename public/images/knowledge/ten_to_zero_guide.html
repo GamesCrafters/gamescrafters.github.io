@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ten to Zero: A GamesmanPy Walkthrough — GamesCrafters Textbook</title>
+  <style>
+    :root {
+      --bg: #f9fafb;
+      --panel: #ffffff;
+      --ink: #001f33;
+      --muted: #4b5563;
+      --accent: #003262;
+      --accent-2: #FDB515;
+      --line: #e5e7eb;
+      --radius: 14px;
+      --sidebar-w: 300px;
+    }
+
+    html, body { height: 100%; }
+
+    body {
+      margin: 0;
+      font: 17px/1.65 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Helvetica, Arial, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: var(--sidebar-w) 1fr;
+      min-height: 100dvh;
+    }
+    @media (max-width: 980px) {
+      .layout { grid-template-columns: 1fr; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100dvh;
+      overflow: auto;
+      background: #003262;
+      border-right: none;
+      padding: 18px 16px 24px;
+    }
+    @media (max-width: 980px) {
+      .sidebar {
+        position: fixed;
+        inset: 0 auto 0 0;
+        width: min(90vw, 360px);
+        translate: -100% 0;
+        transition: translate .25s ease;
+        background: #ffffff;
+        border-right: 2px solid var(--accent);
+        z-index: 60;
+      }
+      .sidebar.open { translate: 0 0; }
+      .backdrop {
+        position: fixed; inset: 0;
+        background: rgba(0,0,0,0.35);
+        display: none;
+        z-index: 50;
+      }
+      .backdrop.show { display: block; }
+    }
+
+    .brand {
+      font-weight: 800;
+      font-size: 1.4rem;
+      color: #ffffff;
+      letter-spacing: 0.5px;
+      margin: 4px 6px 14px;
+    }
+
+    .chapters {
+      list-style: none;
+      padding-left: 10px;
+      margin-top: 6px;
+    }
+    .chapters li { margin: 4px 0; }
+    .chapters a {
+      color: #ffffff;
+      text-decoration: none;
+      padding: 4px 2px;
+    }
+    .chapters a:hover {
+      color: #FDB515;
+      text-decoration: underline;
+    }
+    .chapters a[aria-current="page"] {
+      font-weight: bold;
+      color: #FDB515;
+    }
+
+    .topbar {
+      display: none;
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: #ffffff;
+      border-bottom: 2px solid var(--accent);
+      padding: 10px 14px;
+    }
+    @media (max-width: 980px) {
+      .topbar { display: flex; justify-content: space-between; align-items: center; }
+    }
+
+    .menu-toggle {
+      border: 1px solid var(--accent);
+      background: var(--accent);
+      color: white;
+      border-radius: 8px;
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+
+    .content {
+      padding: 40px 28px 80px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    h1, h2, h3 { color: var(--accent); letter-spacing: 0.5px; }
+    p { margin: 14px 0; }
+
+    .callout {
+      background: #f0f6ff;
+      border-left: 6px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      margin: 20px 0;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .callout-gold {
+      background: #fffbea;
+      border-left: 6px solid var(--accent-2);
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      margin: 20px 0;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin: 20px 0;
+    }
+
+    footer {
+      margin-top: 40px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    pre, code {
+      font-family: "Fira Code", Consolas, "Courier New", monospace;
+      font-size: 0.95rem;
+    }
+    pre {
+      background: #f4f6f8;
+      border: 1px solid #e0e0e0;
+      padding: 14px 18px;
+      border-radius: 8px;
+      overflow-x: auto;
+      line-height: 1.5;
+      margin: 18px 0;
+    }
+
+    /* Number line diagram */
+    .number-line {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      margin: 22px 0;
+      overflow-x: auto;
+    }
+    .nl-cell {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 52px;
+    }
+    .nl-box {
+      width: 46px;
+      height: 46px;
+      border: 2px solid var(--accent);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Fira Code", monospace;
+      font-size: 1.1rem;
+      font-weight: bold;
+      background: var(--panel);
+    }
+    .nl-box.win  { background: #d4edda; border-color: #28a745; color: #155724; }
+    .nl-box.lose { background: #f8d7da; border-color: #dc3545; color: #721c24; }
+    .nl-box.start { background: var(--accent); color: white; }
+    .nl-label {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 5px;
+      font-family: "Fira Code", monospace;
+      text-align: center;
+    }
+    .nl-arrow {
+      display: flex;
+      align-items: center;
+      padding: 0 2px;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    /* Move arrows below number line */
+    .nl-moves {
+      display: flex;
+      gap: 0;
+      margin-top: 4px;
+      overflow-x: auto;
+    }
+
+    /* Value table */
+    .val-table {
+      border-collapse: collapse;
+      margin: 18px 0;
+      font-family: "Fira Code", monospace;
+      font-size: 0.95rem;
+      width: 100%;
+    }
+    .val-table th, .val-table td {
+      border: 1px solid var(--line);
+      padding: 8px 14px;
+      text-align: center;
+    }
+    .val-table th {
+      background: var(--accent);
+      color: white;
+    }
+    .val-table .win  { background: #d4edda; color: #155724; font-weight: bold; }
+    .val-table .lose { background: #f8d7da; color: #721c24; font-weight: bold; }
+    .val-table tr:nth-child(even) td:not(.win):not(.lose) { background: #f4f6f8; }
+
+    .step-badge {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      font-weight: 700;
+      font-size: 0.8rem;
+      border-radius: 50%;
+      width: 26px;
+      height: 26px;
+      line-height: 26px;
+      text-align: center;
+      margin-right: 8px;
+      flex-shrink: 0;
+    }
+    .step-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin: 14px 0;
+    }
+
+    .bit-table {
+      border-collapse: collapse;
+      margin: 18px 0;
+      font-size: 0.95rem;
+      width: 100%;
+    }
+    .bit-table th, .bit-table td {
+      border: 1px solid var(--line);
+      padding: 8px 14px;
+      text-align: left;
+    }
+    .bit-table th {
+      background: var(--accent);
+      color: white;
+    }
+    .bit-table tr:nth-child(even) td { background: #f4f6f8; }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <strong class="brand">Textbook</strong>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="sidebar">☰ Chapters</button>
+  </div>
+
+  <div class="layout">
+    <aside id="sidebar" class="sidebar" aria-label="Site chapters">
+      <div class="brand">GamesCrafters</div>
+
+      <ul class="chapters">
+        <li><a href="reference.html">Common Bugs and Debugging Tips</a></li>
+      </ul>
+
+      <ul class="chapters">
+        <li><a href="intro.html">Intro to Game Theory</a></li>
+        <li><a href="game-trees.html">Game Trees</a></li>
+        <li><a href="position-value.html">Position Values</a></li>
+        <li><a href="solving.html">Solving a Game</a></li>
+        <li><a href="hashing.html">Hashing Positions</a></li>
+        <li><a href="ten_to_zero_guide.html" aria-current="page">Ten to Zero: Section 1-5 Walkthrough </a></li>
+        <li><a href="overall_infrastructure.html">Overall Infrastructure</a></li>
+        <li><a href="adding_to_web.html">Using AutoGUI</a></li>
+        <li><a href="deploying_game.html">Deploying the Game</a></li>
+      </ul>
+    </aside>
+
+    <main class="content">
+      <h1>10-to-0-by-1-or-2 (GamesmanPy Example)</h1>
+      <p>
+        Here, we will walk through how to implement a game in 
+        GamesmanPy! The game we will be implementing is 10-to-0-by-1-or-2, which
+        is a 2-player game that starts at 10 and have players alternate subtracting 1 or 2. The player who reaches 0
+        loses.
+      </p>
+
+      <!-- ================================================================ -->
+      <section id="game-overview">
+        <h2>1. Game Overview</h2>
+        <p>
+          Check out the <a href="solving.html">Solving a Game</a> chapter of the textbook, which includes a full analysis of the game and its optimal strategy. 
+        </p>
+
+        <img src="solved.png" alt="Solved positions for 10-to-0-by-1-or-2">
+
+        <p>
+          The implementation of this game in GamesmanPy will require implementing several key methods. The required methods are:
+        </p>
+        <ul>
+          <li>__init__ : should be mostly done for you, just update class name and create additional instance variables if needed.</li>
+          <li>start : returns the starting position of the game, as an integer.</li>
+          <li>generate_moves : returns a list of valid moves from the given (integer) position. Moves should also be encoded as integers.</li>
+          <li>do_move : applies the given move to the given position, and returns the resulting position as an integer.</li>
+          <li>primitive : returns the value (Value.Loss, Value.Tie, Value.Win) of a position if it is primitive, else returns None.</li>
+          <li>to_string : transform and return the given integer position into a string representation, based on the given mode.</li>
+          <li>from_string : transform and return the given StringMode.Readable position string into the integer representation.</li>
+          <li>move_to_string : transform and return the given integer move into a string representation, based on the given mode.</li>
+          <li>hash_ext : given a position, return a number representing the hash number of the position. If you decide not to implement this function, the default behavior is returning position. Therefore, position will have to be an integer.</li>
+        </ul>
+      </section>
+
+      <!-- ================================================================ -->
+      <section id="position-encoding">
+        <h2>2. Position Encoding</h2>
+        <p>
+          For this game, the position values are values between 0 and 10. We start
+          at 10, so the <code>start</code> method simply returns 10 as an integer:
+        </p>
+
+        <img src="remove.png" alt="10 is the start position">
+
+        <pre><code>def start(self) -> int:
+    return 10    # game begins with the counter at 10</code></pre>
+
+        <p>
+          This is the simplest possible position representation in GamesmanPy, since 
+          we are not doing any additional encoding or hashing. Here, the "encoding" is just
+          the game state itself.
+        </p>
+
+
+      </section>
+
+      <!-- ================================================================ -->
+      <section id="generate-moves">
+        <h2>3. Generating Moves</h2>
+        <p>
+          The only legal moves are subtracting 1 or subtracting 2, provided the result
+          doesn't go below 0. This is expressed as a one-liner list comprehension. This captures
+          every legal move at each position and excludes illegal moves that would produce negative numbers:
+        </p>
+
+        <pre><code>def generate_moves(self, position: int) -> list[int]:
+    return [x for x in [1, 2] if position - x >= 0]</code></pre>
+
+        <p>The moves available at each position are:</p>
+
+        <table class="val-table">
+          <thead>
+            <tr>
+              <th>Position</th>
+              <th>Available moves</th>
+              <th>Resulting positions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>10</td><td>1, 2</td><td>9, 8</td></tr>
+            <tr><td>9</td><td>1, 2</td><td>8, 7</td></tr>
+            <tr><td>…</td><td>1, 2</td><td>…</td></tr>
+            <tr><td>2</td><td>1, 2</td><td>1, 0</td></tr>
+            <tr><td>1</td><td>1</td><td>0 &nbsp;(can't subtract 2)</td></tr>
+            <tr><td>0</td><td><em>none</em></td><td><em>terminal</em></td></tr>
+          </tbody>
+        </table>
+
+        <p>Here is a visual representation of the moves from each position:</p>
+
+        <img src="full_tree.png" alt="Moves available from each position">
+
+      </section>
+
+      <!-- ================================================================ -->
+      <section id="do-move">
+        <h2>4. Doing a Move</h2>
+        <p>
+          Doing a move means moving to the next position given the current position and the move from that position.
+          In this game, this means subtracting the move value from the current position value:
+        </p>
+
+        <pre><code>def do_move(self, position: int, move: int) -> int:
+    return position - move</code></pre>
+
+        <p>
+          Here are few example outputs:
+        </p>
+        <pre><code>do_move(10, 1)  →  9
+do_move(10, 2)  →  8
+do_move(3,  1)  →  2
+do_move(3,  2)  →  1
+do_move(1,  1)  →  0</code></pre>
+
+      </section>
+
+      <!-- ================================================================ -->
+      <section id="primitive">
+        <h2>5. Primitive</h2>
+        <p>
+          The primitive is the state at which no more moves are available from 
+          that position and we can assign a value (win, lose, or tie). In this game, the
+          only terminal position is 0. When a player faces 0, there are no legal
+          moves available, so that player loses:
+        </p>
+
+        <pre><code>def primitive(self, position: int) -> Optional[Value]:
+    if position == 0:
+        return Value.Loss
+    else:
+        return None</code></pre>
+
+        <h3>How the solver propagates values</h3>
+        <p>
+          When the solver is run, the algorithm starts at the primitive position and works backwards to assign values to every position.
+          The value of a position is Win if it has at least one move to a Lose position and Lose if all moves lead to Win positions.
+          Please see the <a href="solving.html">Solving a Game</a> chapter of the textbook, which includes a full analysis of the game and its optimal strategy. Here is the full value table for all positions 0–10:
+        </p>
+
+        <table class="val-table">
+          <thead>
+            <tr>
+              <th>Position</th>
+              <th>Moves to</th>
+              <th>Reasoning</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>0</td>
+              <td>—</td>
+              <td>Primitive terminal</td>
+              <td class="lose">Lose</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>0 (Lose)</td>
+              <td>Can move to a Lose position</td>
+              <td class="win">Win</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>1 (Win), 0 (Lose)</td>
+              <td>Can move to a Lose position</td>
+              <td class="win">Win</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>2 (Win), 1 (Win)</td>
+              <td>All moves lead to Win positions</td>
+              <td class="lose">Lose</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>3 (Lose), 2 (Win)</td>
+              <td>Can move to a Lose position</td>
+              <td class="win">Win</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>4 (Win), 3 (Lose)</td>
+              <td>Can move to a Lose position</td>
+              <td class="win">Win</td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>5 (Win), 4 (Win)</td>
+              <td>All moves lead to Win positions</td>
+              <td class="lose">Lose</td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td>6 (Lose), 5 (Win)</td>
+              <td>Can move to a Lose position</td>
+              <td class="win">Win</td>
+            </tr>
+            <tr>
+              <td>8</td>
+              <td>7 (Win), 6 (Lose)</td>
+              <td>Can move to a Lose position</td>
+              <td class="win">Win</td>
+            </tr>
+            <tr>
+              <td>9</td>
+              <td>8 (Win), 7 (Win)</td>
+              <td>All moves lead to Win positions</td>
+              <td class="lose">Lose</td>
+            </tr>
+            <tr>
+              <td>10</td>
+              <td>9 (Lose), 8 (Win)</td>
+              <td>Can move to a Lose position</td>
+              <td class="win">Win</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>
+          Here is a visual representation of the values of each position, with winning positions in green and losing positions in red:
+        </p>
+
+        <img src="solved.png" alt="Values of each position, with winning positions in green and losing positions in red">
+
+      </section>
+
+      <!-- ================================================================ -->
+      <section id="string-methods">
+        <h2>6. String Methods</h2>
+        <p>
+          Ten to Zero has really simple string conversions, since the position and
+          move are both just their integer values printed as strings.
+        </p>
+
+        <h3>Position string</h3>
+        <pre><code>def to_string(self, pos: int, mode) -> str:
+    return str(pos)</code></pre>
+
+<pre><code>def from_string(self, stringpos: str) -> int:
+    return int(stringpos)</code></pre>
+
+        <h3>Move string</h3>
+        <pre><code>def move_to_string(self, move: int, mode) -> str:
+    return str(move)</code></pre>
+
+        <p>
+          The purpose of these functions is to produce a human-readable string for each position and move, which is used for display in the TUI.
+        </p>
+      </section>
+
+      <!-- ================================================================ -->
+      <section id="full-class">
+        <h2>Putting it All Together</h2>
+        <p>
+          We're done! Here is the full implementation in GamesmanPy!
+        </p>
+
+        <pre><code>from models import Game, Value
+from typing import Optional
+
+class TenToZero(Game):
+    id        = 'ten-to-zero'
+    variants  = ['default']
+    n_players = 2
+    cyclic    = False
+
+    def start(self) -> int:
+        return 10
+
+    def generate_moves(self, position: int) -> list[int]:
+        return [x for x in [1, 2] if position - x >= 0]
+
+    def do_move(self, position: int, move: int) -> int:
+        return position - move
+
+    def primitive(self, position: int) -> Optional[Value]:
+        if position == 0:
+            return Value.Loss
+        return None
+
+    def from_string(self, stringpos: str) -> int:
+        return int(stringpos)
+
+    def move_to_string(self, move: int, mode) -> str:
+        return str(move)
+
+    def to_string(self, pos: int, mode) -> str:
+        return str(pos)</code></pre>
+
+        <p>
+          This is most likely the simplest possible game you could implement in GamesmanPy,
+          so it's a great starting point for understanding the methods. However, your game/puzzle will most likely
+          be a lot more complex.
+      </section>
+
+      <!-- ================================================================ -->
+      <section id="gamesmanpy-structure">
+        <h2>GamesmanPy Game Class Structure</h2>
+
+        <table class="bit-table">
+          <thead>
+            <tr>
+              <th>Field / Method</th>
+              <th>Type</th>
+              <th>Purpose</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>id</code></td><td>class str</td><td>Unique game identifier used by the server and UWAPI routing</td></tr>
+            <tr><td><code>variants</code></td><td>class list</td><td>List of supported variant IDs (at least one required)</td></tr>
+            <tr><td><code>n_players</code></td><td>class int</td><td>Number of players (2 for all standard two-player games)</td></tr>
+            <tr><td><code>cyclic</code></td><td>class bool</td><td>Whether the game graph can have cycles; affects solver strategy</td></tr>
+            <tr><td><code>start()</code></td><td>returns int</td><td>Returns the initial position</td></tr>
+            <tr><td><code>generate_moves(pos)</code></td><td>returns list[int]</td><td>Returns all legal moves from this position</td></tr>
+            <tr><td><code>do_move(pos, move)</code></td><td>returns int</td><td>Returns the position resulting from applying move to pos</td></tr>
+            <tr><td><code>primitive(pos)</code></td><td>returns Optional[Value]</td><td>Returns <code>Value.Loss</code>, <code>Value.Win</code>, <code>Value.Tie</code>, or <code>None</code></td></tr>
+            <tr><td><code>to_string(pos, mode)</code></td><td>returns str</td><td>Encodes position as a string (readable or AutoGUI format)</td></tr>
+            <tr><td><code>from_string(s)</code></td><td>returns int</td><td>Decodes a string back to a position integer</td></tr>
+            <tr><td><code>move_to_string(move, mode)</code></td><td>returns str</td><td>Encodes a move as a string (readable or AutoGUI format)</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Running the Solver</h3>
+        <p> To run the solver, use uv run solver <game_id>, or if you want to solve everything, uv run solver (this might take a while). You can also use -v <variant_id> to solve a specific variant of the game, and -o to overwrite the existing database, if it exists.
+          To run the tui, use uv run interfaces tui. This will open up a text user interface where you can play the games in the system.
+        </p>
+      </section>
+
+      <!-- ================================================================ -->
+
+  <div class="backdrop" hidden></div>
+
+  <script>
+    const sidebar  = document.getElementById('sidebar');
+    const toggles  = document.querySelectorAll('.menu-toggle');
+    const backdrop = document.querySelector('.backdrop');
+
+    function setOpen(isOpen) {
+      if (!sidebar) return;
+      sidebar.classList.toggle('open', isOpen);
+      if (backdrop) {
+        backdrop.classList.toggle('show', isOpen);
+        backdrop.hidden = !isOpen;
+      }
+      toggles.forEach(btn => btn.setAttribute('aria-expanded', String(isOpen)));
+    }
+
+    toggles.forEach(btn =>
+      btn.addEventListener('click', () => setOpen(!sidebar.classList.contains('open')))
+    );
+    if (backdrop) backdrop.addEventListener('click', () => setOpen(false));
+  </script>
+</body>
+</html>
