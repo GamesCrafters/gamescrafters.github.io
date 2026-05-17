@@ -19,6 +19,8 @@ When you play a game in GamesmanUni with an Image AutoGUI, Uni needs three thing
 
 Your backend (Classic/One/Puzzles) decides what the state is and what moves exist. The AutoGUI decides how to draw that state and those moves on the screen.
 
+![AutoGUI system overview](/images/knowledge/autogui_intro.png)
+
 ## AutoGUI JSON Structure
 
 Every game variant has an Image AutoGUI JSON object that lives in `GamesCraftersUWAPI`.
@@ -84,6 +86,8 @@ GamesmanUni/src/models/images/svg/
 - Characters here represent pieces.
 - `scale` is relative to `space`.
 
+![Position string examples](/images/knowledge/position_strs.png)
+
 ### Move Button Styling & Text
 
 - `circleButtonRadius`: radius for default circular A-type buttons.
@@ -129,6 +133,8 @@ GamesmanUni/src/models/images/svg/
 ```
 
 Whenever possible, reuse existing SVGs in `general/`, `chess/`, or other game directories to keep the repo small.
+
+![SVG file structure](/images/knowledge/fileloc.png)
 
 ## UWAPI Files to Edit
 
@@ -272,11 +278,15 @@ AutoGUI knows how to draw several built-in kinds of move buttons based on the pr
 - Default circle button: `A_-_5_x`: circle at center 5, plays sound `'x'`.
 - Custom button using an image from `charImages`: `A_B_3_-`.
 
+![Custom move button examples](/images/knowledge/custom_move.png)
+
 ### M-Type: Arrow Buttons
 
 `M_center1_center2_sound`
 
 - Arrow from center 1 to center 4: `M_1_4_x`.
+
+![M-type arrow button examples](/images/knowledge/mtype.png)
 
 ### L-Type: Line Buttons
 
@@ -284,12 +294,16 @@ AutoGUI knows how to draw several built-in kinds of move buttons based on the pr
 
 - Line between centers 29 and 45: `L_29_45_x`.
 
+![L-type line button examples](/images/knowledge/ltype.png)
+
 ### T-Type: Text Buttons
 
 `T_text_center_sound`
 
 - Button that says "3" at center 10: `T_3_10_x`.
 - Button that says "hello" at center 4: `T_hello_4_-`.
+
+![T-type text button examples](/images/knowledge/ttype.png)
 
 There are also more advanced "LX" miscellaneous line types (Bezier curves, arcs, etc.), and if your move strings don't match any of these formats, AutoGUI will fall back to drawing a list of text buttons below the board labeled by the move names.
 
