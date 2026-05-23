@@ -107,10 +107,10 @@ We are now ready to solve our first game!
 <details>
 <summary>Q1: Position A has two children, one WIN and one LOSE. What is the value of position A?
 
-- A) WIN
-- B) LOSE
-- C) TIE
-- D) Cannot be determined
+A) WIN
+B) LOSE
+C) TIE
+D) Cannot be determined
 </summary>
 
 **Answer: A** — Position A can move to a LOSE position for the opponent, so the current player takes that move and wins. A position is WIN if at least one child is LOSE.
@@ -120,10 +120,10 @@ We are now ready to solve our first game!
 <details>
 <summary>Q2: Position B has three children, all of which are WIN positions. What is the value of position B?
 
-- A) WIN
-- B) LOSE
-- C) TIE
-- D) DRAW
+A) WIN
+B) LOSE
+C) TIE
+D) DRAW
 </summary>
 
 **Answer: B** — Every move from B puts the opponent in a WIN position, meaning the opponent can always win. Since all children are WIN, the current player is stuck in a losing position.
@@ -133,10 +133,10 @@ We are now ready to solve our first game!
 <details>
 <summary>Q3: A move is called a "winning move" if it leads to which type of position for the opponent?
 
-- A) A WIN position
-- B) A LOSE position
-- C) A TIE position
-- D) A primitive position
+A) A WIN position
+B) A LOSE position
+C) A TIE position
+D) A primitive position
 </summary>
 
 **Answer: B** — A winning move sends the opponent to a LOSE position. Move values are defined by what the resulting position means for the opponent, not for you.

@@ -53,10 +53,10 @@ Now that we have a way to represent all the possible positions and moves in our 
 <details>
 <summary>Q1: In a game tree, what does a leaf node represent?
 
-- A) A position where the current player has the most moves
-- B) A terminal position where no further moves can be made
-- C) The starting position of the game
-- D) A position that only one player can reach
+A) A position where the current player has the most moves
+B) A terminal position where no further moves can be made
+C) The starting position of the game
+D) A position that only one player can reach
 </summary>
 
 **Answer: B** — Leaf nodes are terminal positions where the game ends and no outgoing edges exist. They sit at the bottom of the tree.
@@ -66,10 +66,10 @@ Now that we have a way to represent all the possible positions and moves in our 
 <details>
 <summary>Q2: Why are the edges in a game tree directed (one-way arrows) rather than undirected?
 
-- A) To show which player made the move
-- B) Because the game board can only be set up in one orientation
-- C) To represent the forward motion of time; each move leads to a new game state
-- D) To ensure the tree has no cycles
+A) To show which player made the move
+B) Because the game board can only be set up in one orientation
+C) To represent the forward motion of time; each move leads to a new game state
+D) To ensure the tree has no cycles
 </summary>
 
 **Answer: C** — Directed edges capture the irreversibility of moves over time. You go from position A to position B by making a move; you don't travel backwards in a game.
@@ -79,10 +79,10 @@ Now that we have a way to represent all the possible positions and moves in our 
 <details>
 <summary>Q3: In the game tree for Tic-Tac-Toe, what does the source vertex (root node) represent?
 
-- A) X winning with three in a row
-- B) The empty board before any move is made
-- C) The position after X plays in the center
-- D) The position with the most possible next moves
+A) X winning with three in a row
+B) The empty board before any move is made
+C) The position after X plays in the center
+D) The position with the most possible next moves
 </summary>
 
 **Answer: B** — The source vertex is the single starting position, the empty 3x3 board. Every other node in the tree is reachable from this root by following directed edges.
