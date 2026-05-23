@@ -51,37 +51,40 @@ Now that we have a way to represent all the possible positions and moves in our 
 ## Practice Questions
 
 <details>
-<summary><strong>Q1: In a game tree, what does a leaf node represent?</strong></summary>
+<summary>Q1: In a game tree, what does a leaf node represent?
 
 - A) A position where the current player has the most moves
-- B) **A terminal position where no further moves can be made** ✅
+- B) A terminal position where no further moves can be made
 - C) The starting position of the game
 - D) A position that only one player can reach
+</summary>
 
-**Explanation:** Leaf nodes are terminal positions — wins, losses, or ties — where the game ends and no outgoing edges exist. They sit at the bottom of the tree.
+**Answer: B** — Leaf nodes are terminal positions where the game ends and no outgoing edges exist. They sit at the bottom of the tree.
 
 </details>
 
 <details>
-<summary><strong>Q2: Why are the edges in a game tree directed (one-way arrows) rather than undirected?</strong></summary>
+<summary>Q2: Why are the edges in a game tree directed (one-way arrows) rather than undirected?
 
 - A) To show which player made the move
 - B) Because the game board can only be set up in one orientation
-- C) **To represent the forward motion of time; each move leads to a new game state** ✅
+- C) To represent the forward motion of time; each move leads to a new game state
 - D) To ensure the tree has no cycles
+</summary>
 
-**Explanation:** Directed edges capture the irreversibility of moves over time. You go from position A to position B by making a move; you don't travel backwards in a game.
+**Answer: C** — Directed edges capture the irreversibility of moves over time. You go from position A to position B by making a move; you don't travel backwards in a game.
 
 </details>
 
 <details>
-<summary><strong>Q3: In the game tree for Tic-Tac-Toe, what does the source vertex (root node) represent?</strong></summary>
+<summary>Q3: In the game tree for Tic-Tac-Toe, what does the source vertex (root node) represent?
 
 - A) X winning with three in a row
-- B) **The empty board before any move is made** ✅
+- B) The empty board before any move is made
 - C) The position after X plays in the center
 - D) The position with the most possible next moves
+</summary>
 
-**Explanation:** The source vertex is the single starting position — the empty 3×3 board. Every other node in the tree is reachable from this root by following directed edges.
+**Answer: B** — The source vertex is the single starting position, the empty 3x3 board. Every other node in the tree is reachable from this root by following directed edges.
 
 </details>
