@@ -56,7 +56,7 @@ Now that we have a way to represent all the possible positions and moves in our 
 A) A position where the current player has the most moves<br>
 B) A terminal position where no further moves can be made<br>
 C) The starting position of the game<br>
-D) A position that only one player can reach<br>
+D) A position that only one player can reach
 </summary>
 
 **Answer: B** — Leaf nodes are terminal positions where the game ends and no outgoing edges exist. They sit at the bottom of the tree.
@@ -69,7 +69,7 @@ D) A position that only one player can reach<br>
 A) To show which player made the move<br>
 B) Because the game board can only be set up in one orientation<br>
 C) To represent the forward motion of time; each move leads to a new game state<br>
-D) To ensure the tree has no cycles<br>
+D) To ensure the tree has no cycles
 </summary>
 
 **Answer: C** — Directed edges capture the irreversibility of moves over time. You go from position A to position B by making a move; you don't travel backwards in a game.
@@ -82,7 +82,7 @@ D) To ensure the tree has no cycles<br>
 A) X winning with three in a row<br>
 B) The empty board before any move is made<br>
 C) The position after X plays in the center<br>
-D) The position with the most possible next moves<br>
+D) The position with the most possible next moves
 </summary>
 
 **Answer: B** — The source vertex is the single starting position, the empty 3x3 board. Every other node in the tree is reachable from this root by following directed edges.

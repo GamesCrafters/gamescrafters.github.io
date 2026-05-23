@@ -110,7 +110,7 @@ We are now ready to solve our first game!
 A) WIN<br>
 B) LOSE<br>
 C) TIE<br>
-D) Cannot be determined<br>
+D) Cannot be determined
 </summary>
 
 **Answer: A** — Position A can move to a LOSE position for the opponent, so the current player takes that move and wins. A position is WIN if at least one child is LOSE.
@@ -123,7 +123,7 @@ D) Cannot be determined<br>
 A) WIN<br>
 B) LOSE<br>
 C) TIE<br>
-D) DRAW<br>
+D) DRAW
 </summary>
 
 **Answer: B** — Every move from B puts the opponent in a WIN position, meaning the opponent can always win. Since all children are WIN, the current player is stuck in a losing position.
@@ -136,7 +136,7 @@ D) DRAW<br>
 A) A WIN position<br>
 B) A LOSE position<br>
 C) A TIE position<br>
-D) A primitive position<br>
+D) A primitive position
 </summary>
 
 **Answer: B** — A winning move sends the opponent to a LOSE position. Move values are defined by what the resulting position means for the opponent, not for you.
