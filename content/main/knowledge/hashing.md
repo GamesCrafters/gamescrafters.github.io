@@ -161,10 +161,10 @@ We can also use **symmetry** (rotations and reflections) to reduce the total num
 <details>
 <summary>Q1: What is the purpose of memoization in a game solver?
 
-A) To generate all possible moves from a position  
-B) To store already-computed position values so they don't need to be recomputed  
-C) To compress the board state into a smaller representation  
-D) To ensure two different boards never get the same hash value  
+A) To generate all possible moves from a position<br>
+B) To store already-computed position values so they don't need to be recomputed<br>
+C) To compress the board state into a smaller representation<br>
+D) To ensure two different boards never get the same hash value<br> 
 </summary>
 
 **Answer: B** — Once a position's value has been computed, it gets stored in a table indexed by its hash. Any future visit to that position returns the stored value immediately instead of re-exploring the subtree below it.
@@ -174,10 +174,10 @@ D) To ensure two different boards never get the same hash value
 <details>
 <summary>Q2: A naive hash for Tic-Tac-Toe assigns each of the 9 slots one of 3 values. How many total board states does this encode?
 
-A) 9 × 3 = 27  
-B) 9! = 362,880  
-C) 3^9 = 19,683  
-D) 6,046  
+A) 9 × 3 = 27<br>
+B) 9! = 362,880<br>
+C) 3^9 = 19,683<br>
+D) 6,046<br>
 </summary>
 
 **Answer: C** — Each of the 9 slots independently takes one of 3 values (blank, O, X), giving 3^9 = 19,683 possible encodings. This includes many illegal boards. The combinatorial hash reduces this to just the 6,046 actually reachable positions.
@@ -187,10 +187,10 @@ D) 6,046
 <details>
 <summary>Q3: Why does a Tic-Tac-Toe board with 5 Os and 1 X not need a hash entry?
 
-A) Because it has fewer than 9 pieces on the board  
-B) Because O always goes second and can never win  
-C) Because the hash function cannot encode more than 4 pieces  
-D) Because it is unreachable  
+A) Because it has fewer than 9 pieces on the board<br>
+B) Because O always goes second and can never win<br>
+C) Because the hash function cannot encode more than 4 pieces<br>
+D) Because it is unreachable<br>
 </summary>
 
 **Answer: D** — Players alternate turns and X always goes first, so the number of Xs on the board is always equal to or one greater than the number of Os. A board with 5 Os and 1 X violates this constraint and can never be reached through legal play.
@@ -200,10 +200,10 @@ D) Because it is unreachable
 <details>
 <summary>Q4: In the bias + rearrangement hashing scheme, what does the bias (offset) represent?
 
-A) The total number of legal boards with fewer pieces than the current position  
-B) The number of Xs minus the number of Os on the board  
-C) The index of the first blank slot on the board  
-D) The number of winning positions reachable from the current state  
+A) The total number of legal boards with fewer pieces than the current position<br>  
+B) The number of Xs minus the number of Os on the board<br>
+C) The index of the first blank slot on the board<br>
+D) The number of winning positions reachable from the current state<br>
 </summary>
 
 **Answer: A** — The bias is an offset that skips over all the hash entries already used by boards with fewer total pieces. It counts all the legal boards in every earlier bucket in the zigzag pattern, so that boards with different piece counts never collide in the hash table.
@@ -213,10 +213,10 @@ D) The number of winning positions reachable from the current state
 <details>
 <summary>Q5: The combinatorial hash reduces Tic-Tac-Toe from 19,683 entries to 6,046. What is the main reason this reduction is possible?
 
-A) Many board states are symmetric and can be merged into one entry  
-B) The solver only visits positions reachable from the starting state  
-C) Game rules constrain which piece counts are legal, eliminating thousands of impossible boards  
-D) Tic-Tac-Toe ends before all 9 slots are filled in most games  
+A) Many board states are symmetric and can be merged into one entry<br>
+B) The solver only visits positions reachable from the starting state<br> 
+C) Game rules constrain which piece counts are legal, eliminating thousands of impossible boards<br>  
+D) Tic-Tac-Toe ends before all 9 slots are filled in most games<br> 
 </summary>
 
 **Answer: C** — The reduction comes from applying the alternating-turns rule: X always goes first, so the count of Xs is always equal to or one more than the count of Os. This eliminates all boards that violate this constraint, shrinking the table from 19,683 naive encodings down to the 6,046 boards that can actually arise in a real game.
