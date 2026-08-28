@@ -16,7 +16,7 @@ We are an applied research group under the supervision of [Prof. Dan Garcia](htt
 <ul>
   <li>Schedule: <code>MWF 10:00AM to 11:00AM</code></li>
   <li>Facilitator: <a href="https://people.eecs.berkeley.edu/~ddgarcia/"><code>Prof. Dan Garcia</code></a></li>
-  <li>Location: <a href="https://www.google.com/maps/place/EECS+Computer+Science+Division+Soda+Hall/@37.8753164,-122.2589183,19.48z/data=!4m6!3m5!1s0x80857c23cec17a61:0xd6e1f085d0308711!8m2!3d37.8756714!4d-122.2585253!16s%2Fg%2F12hl2qncc?entry=ttu"><code>To be defined. For the time being: Monday B1022 Gateway, Wednesday ?, Friday ?</code></a></li>
+  <li>Location: <a href="https://www.google.com/maps/place/EECS+Computer+Science+Division+Soda+Hall/@37.8753164,-122.2589183,19.48z/data=!4m6!3m5!1s0x80857c23cec17a61:0xd6e1f085d0308711!8m2!3d37.8756714!4d-122.2585253!16s%2Fg%2F12hl2qncc?entry=ttu"><code>To be defined. For the time being: Monday B1012 Gateway, Wednesday B1023 Gateway, Friday 240 Mulford </code></a></li>
 </ul>
 </div>
 
